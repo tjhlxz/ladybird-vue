@@ -1,5 +1,5 @@
 <template>
-  <div class="tpl-content-wrapper"">
+  <div class="tpl-content-wrapper">
             
             <div class="tpl-portlet-components">
                 <div class="portlet-title">
