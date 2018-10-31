@@ -88,7 +88,7 @@ export default {
     }
   },
   mounted() {
-    this.axios.get(_global.baseUrl + 'history?staff_id=2015025541').then(body => {
+    this.axios.get(_global.baseUrl + 'history?staff_id=2002803437').then(body => {
       this.content = body.data.data;
       console.log(this.content)
     })

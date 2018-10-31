@@ -24,9 +24,9 @@
            </a>
          </router-link>
        </li>
-
+      
+      <!-- 下面是我的督学模块，别动喔 -->
        <li class="tpl-left-nav-item"><a href="#"></a>
-
         <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
           <i class="am-icon-graduation-cap"></i>
           <span>督学管理</span>
@@ -58,7 +58,33 @@
               </a></router-link>
             </li>
           </ul>
-        </router-link>
+        </li>
+        <!-- 下面是冲突，我没解决。上面是我督学管理模块 -->
+=======
+            <router-link to='/approving'>
+            <a href="待审核">
+              <i class="am-icon-angle-right"></i>
+              <span>待审核</span>
+              <i class="am-icon-star tpl-left-nav-content-ico am-fr am-margin-right"></i>
+            </a></router-link>
+
+            <router-link to='/approved'>
+             <a href="已审核">
+              <i class="am-icon-angle-right"></i>
+              <span>已审核</span>
+              <i class="tpl-left-nav-content tpl-badge-primary">
+               5
+             </i></a></router-link>
+
+            <router-link to='/all-approved'>
+             <a href="form-news-list.html">
+              <i class="am-icon-angle-right"></i>
+              <span>文字列表</span>
+
+            </a></router-link>
+          </li>
+        </ul>
+>>>>>>> 1b79cad691f7e7d7aea08bab0a776fa816687dae
       </li>
 
       <li class="tpl-left-nav-item">

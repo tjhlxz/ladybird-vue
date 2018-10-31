@@ -7,7 +7,7 @@ import Approving from '@/pages/Approving'
 import Approved from '@/pages/Approved'
 import ApprovingDetail from '@/pages/ApprovingDetail'
 import ApprovedDetail from '@/pages/ApprovedDetail'
-import FormNewsList from '@/pages/FormNewsList'
+import AllApproved from '@/pages/AllApproved'
 import FormAmazeui from '@/pages/FormAmazeui'
 import Supervise from '@/pages/Supervise'
 import Supervise_add from '@/pages/Supervise_add'
@@ -51,9 +51,9 @@ export default new Router({
       component: ApprovedDetail
     },
     {
-      path: '/form-news-list',
-      name: 'FormNewsList',
-      component: FormNewsList
+      path: '/all-approved',
+      name: 'AllApproved',
+      component: AllApproved
     },
     {
       path: '/form-amazeui',
