@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import Header from '@/components/Header'
-import Sider from '@/components/Sider'
+import Header from '@/components/Header';
+import Sider from '@/components/Sider';
 // import Login from '@/components/Login'
 
 export default {
@@ -20,7 +20,7 @@ export default {
   methods: {
     
   }
-}
+};
 </script>
 
 <style>
