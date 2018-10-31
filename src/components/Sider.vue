@@ -48,7 +48,7 @@
                5
              </i></a></router-link>
 
-            <router-link to='/form-news-list'>
+            <router-link to='/all-approved'>
              <a href="form-news-list.html">
               <i class="am-icon-angle-right"></i>
               <span>文字列表</span>
