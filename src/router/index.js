@@ -3,17 +3,22 @@ import Router from 'vue-router'
 
 import Home from '@/pages/Home'
 import Chart from '@/pages/Chart'
-import Approving from '@/pages/Approving'
-import Approved from '@/pages/Approved'
-import ApprovingDetail from '@/pages/ApprovingDetail'
-import ApprovedDetail from '@/pages/ApprovedDetail'
+import Approving from '@/pages/Approved/Approving'
+import Approved from '@/pages/Approved/Approved'
+import ApprovingDetail from '@/pages/Approved/ApprovingDetail'
+import ApprovedDetail from '@/pages/Approved/ApprovedDetail'
 import AllApproved from '@/pages/AllApproved'
 import FormAmazeui from '@/pages/FormAmazeui'
-import Supervise from '@/pages/Supervise'
-import Supervise_add from '@/pages/Supervise_add'
-import Supervise_detail from '@/pages/Supervise_detail'
-import Supervise_setting from '@/pages/Supervise_setting'
-import Supervise_wait from '@/pages/Supervise_wait'
+
+import Supervise_people from '@/pages/Supervise/Supervise_people'
+import Supervise_task from '@/pages/Supervise/Supervise_task'
+import Supervise_form from '@/pages/Supervise/Supervise_form'
+
+import College_teacher from '@/pages/College/College_teacher'
+import College_room from '@/pages/College/College_room'
+import College_staff from '@/pages/College/College_staff'
+import College_form from '@/pages/College/College_form'
+
 import Login from '@/pages/Login'
 
 Vue.use(Router)
@@ -61,29 +66,39 @@ export default new Router({
       component: FormAmazeui
     },
     {
-      path: '/supervise',
-      name: 'Supervise',
-      component: Supervise
+      path: '/supervise-people',
+      name: 'Supervise_people',
+      component: Supervise_people
     },
     {
-      path: '/supervise_add',
-      name: 'Supervise_add',
-      component: Supervise_add
+      path: '/supervise-task',
+      name: 'Supervise_task',
+      component: Supervise_task
     },
     {
-      path: '/supervise_detail',
-      name: 'Supervise_detail',
-      component: Supervise_detail
+      path: '/supervise-form',
+      name: 'Supervise_form',
+      component: Supervise_form
     },
     {
-      path: '/supervise_setting',
-      name: 'Supervise_setting',
-      component: Supervise_setting
+      path: '/college-teacher',
+      name: 'College_teacher',
+      component: College_teacher
     },
     {
-      path: '/supervise_wait',
-      name: 'Supervise_wait',
-      component: Supervise_wait
+      path: '/college-room',
+      name: 'College_room',
+      component: College_room
+    },
+    {
+      path: '/college-staff',
+      name: 'College_staff',
+      component: College_staff
+    },
+    {
+      path: '/college-form',
+      name: 'College_form',
+      component: College_form
     }
   ]
 })

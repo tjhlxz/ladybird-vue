@@ -7,11 +7,11 @@
     <div class="tpl-portlet-components">
       <div class="portlet-title">
         <div class="caption font-green bold">
-          <span class="am-icon-code"></span> 查看详情
+          <span class="am-icon-code"></span> 选择老师
         </div>
         <div class="am-u-md-3">
           <button type="button" @click="back" class="am-btn am-btn-default am-btn-secondary"><span class="am-icon-undo"></span> 返回</button>
-          <button type="button" @click="checkok" class="am-btn am-btn-danger"><span class="am-icon-trash-o"></span>  移除</button>
+          <button type="button" @click="checkok" class="am-btn am-btn-success am-btn-secondary"><span class="am-icon-check"></span> 选好了</button>
         </div>
       </div>
       <div class="portlet-title">
@@ -22,24 +22,31 @@
           <label class="font-green">{{edu.staff_name}}&nbsp;{{edu.id}}&nbsp;{{edu.college}}&nbsp;&nbsp;&nbsp;&nbsp;</label>
         </div>
         <div class="caption  bold">
-          <label class="font-black">负责学院:</label>
-          <label class="font-green" v-for='(item, index) in teacher_college'>{{item}}&nbsp;</label>
-        </div>
-        <div class="caption  bold">
-          <label class="font-black">&nbsp;&nbsp;&nbsp;&nbsp;共负责<label class="font-green">{{content.length}}</label>人</label>
+          <label>选择学院:</label>
+          <select data-am-selected="{maxHeight: 200}" v-model="teacher_college" @change="select">
+            <option value="矿业学院" name="teacher_college">矿业学院</option>
+            <option value="环化学院" name="teacher_college">环化学院</option>
+            <option value="安全工程学院" name="teacher_college">安全工程学院</option>
+            <option value="电气学院" name="teacher_college">电气学院</option>
+            <option value="电信学院" name="teacher_college">电信学院</option>
+            <option value="机械学院" name="teacher_college">机械学院</option>
+            <option value="材料学院" name="teacher_college">材料学院</option>
+            <option value="建筑工程学院" name="teacher_college">建筑工程学院</option>
+            <option value="计算机与信息工程学院" name="teacher_college">计算机与信息工程学院</option>
+            <option value="管理学院" name="teacher_college">管理学院</option>
+            <option value="经济学院" name="teacher_college">经济学院</option>
+            <option value="人文学院" name="teacher_college">人文学院</option>
+            <option value="马克思主义学院" name="teacher_college">马克思主义学院</option>
+            <option value="理学院" name="teacher_college">理学院</option>
+            <option value="外国语学院" name="teacher_college">外国语学院</option>
+            <option value="国际教育学院" name="teacher_college">国际教育学院</option>
+            <option value="体育部" name="teacher_college">体育部</option>
+            <option value="实训中心" name="teacher_college">实训中心</option>
+          </select>
         </div>
       </div>
+
       <div class="tpl-block">
-
-        <div class="am-g">
-
-        </div>
-        <div class="am-g">
-          <div class="am-u-sm-12">
-
-          </div>
-        </div>
-        
         <div class="am-g">
           <div class="am-u-sm-12">
             <form class="am-form" >
@@ -84,8 +91,8 @@
   </div>
 </template>
 
-<script> 
-import _global from '../components/Global'
+<script>
+import _global from '../../components/Global'
 export default {
   name: 'Supervise_setting',
   data() {
@@ -97,25 +104,20 @@ export default {
         staff_name:'',
         college:''
       },
+      teacher_college:'计算机与信息工程学院',
       checked_id:[],
-      checked:false,
-      teacher_college:[]
+      checked:false
     }
   },
   mounted() {
     this.edu=this.$route.query;
-    this.axios.get(_global.baseUrl + 'edu_toTeacher?edu_id='+this.edu.id).then(body => {
-      if(body.status==200){
+    this.axios.get(_global.baseUrl + 'user_by_college?college='+this.teacher_college).then(body => {
+      if(body.data.status==200){
         this.content = body.data.data;
-        this.teacher_college=[];
-        this.teacher_college.push(this.content[0].college);
-        for(var i=1;i<this.content.length;i++){
-         if(this.content[i].college!==this.content[i-1].college){
-          this.teacher_college.push(this.content[i].college);
-        }
+      }else if(body.data.status==400){
+        this.content=[]
       }
-    }
-  })
+    })
   },
   methods: {
     detail: function() {
@@ -124,7 +126,19 @@ export default {
       back: function() {
         this.$router.go(-1);
       },
-      checkAll(){
+      select(){
+        this.axios.get(_global.baseUrl + 'user_by_college?college='+this.teacher_college).then(body => {
+          if(body.data.status==200){
+            this.content = body.data.data;
+          }else if(body.data.status==400){
+            AMUI.dialog.alert({
+              content: '该学院所有老师都已被分配！'
+            });
+            this.content=[]
+          }
+        })
+      },
+      checkAll(event){
         if(this.checked==false){
           this.checked=true;
           for(var i=0;i<this.content.length;i++){
@@ -136,62 +150,55 @@ export default {
           this.checked_id=[]
         }
       },
-      checkok(){   
+      checkok(){
         var that=this;
         if (that.checked_id.length==0) {
           AMUI.dialog.alert({
             content: '您还没有选择老师!'
           });
-        }
-        else{
+        }else{
           AMUI.dialog.confirm({
-            content: '移除后不可撤回，确定要移除吗？',
+            content: '确定要添加吗？',
             onConfirm: function() {
               var loading=AMUI.dialog.loading({
-                title:'正在移除，请稍等'
+                title:'正在添加，请稍等'
               });
               var params = new URLSearchParams();
-              params.append('staff_id', that.checked_id);
-              that.axios.post(_global.baseUrl + 'edu_delete_teacher',params).then(res => {
+              params.append('edu_id', that.edu.id);
+              params.append('staff_ids', that.checked_id);
+              that.axios.post(_global.baseUrl + 'edu_toAddTeacher',params).then(res => {
                 if(res.data.status==200){
                   loading.modal('close')
                   AMUI.dialog.alert({
-                    content:'移除成功',
+                    content:'添加成功',
                     onConfirm:function(){
-                      that.axios.get(_global.baseUrl + 'edu_toTeacher?edu_id='+that.edu.id).then(body => {
-                        if(body.status==200){
+                      that.axios.get(_global.baseUrl + 'user_by_college?college='+that.teacher_college).then(body => {
+                        if(body.data.status==200){
                           that.content = body.data.data;
-                          that.teacher_college=[];
-                          that.teacher_college.push(that.content[0].college);
-                          for(var i=1;i<that.content.length;i++){
-                           if(that.content[i].college!==that.content[i-1].college){
-                            that.teacher_college.push(that.content[i].college);
-                          }
+                        }else if(body.data.status==400){
+                          AMUI.dialog.alert({
+                            content:'该学院所有老师都已被分配！'
+                          });
+                          that.content=[]
                         }
-                      }else{
-                        AMUI.dialog.alert({
-                          content: body.data.message
-                        });
-                      }
-                    })
-                    }
-                  })
+                      })}
+                    });
                 }else if(res.data.status==400){
                   loading.modal('close')
                   AMUI.dialog.alert({
                     content: res.data.message
                   });
-                }
-                else{
+                }else{
                   loading.modal('close')
                   AMUI.dialog.alert({
                     content: '失败，请重试'
                   });
                 }
               })
-            } 
+            }
           });
         }
+        
       }
     }
   };

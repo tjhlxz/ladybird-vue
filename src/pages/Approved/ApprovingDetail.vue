@@ -111,7 +111,7 @@
 </template>
 
 <script>
-import _global from '../components/Global'
+import _global from '../../components/Global'
 
 var config = {
     Bucket: 'ladybird-1254250597',

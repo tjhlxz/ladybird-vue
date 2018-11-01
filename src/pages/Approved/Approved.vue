@@ -10,25 +10,11 @@
                         <div class="portlet-input input-small input-inline">
                             <div class="input-icon right">
                                 <i class="am-icon-search"></i>
-                                <input type="text" class="form-control form-control-solid" placeholder="搜索..."></div>
+                                <input type="text" class="form-control form-control-solid" placeholder="搜索..."> </div>
                         </div>
                     </div>
                 </div>
                 <div class="tpl-block">
-                    <div class="am-g">
-                        <div class="am-u-sm-12 am-u-md-6">
-                            <div class="am-btn-toolbar">
-                                <div class="am-btn-group am-btn-group-xs">
-                                    <button type="button" class="am-btn am-btn-default am-btn-success"><span class="am-icon-plus"></span> 新增</button>
-                                    <button type="button" class="am-btn am-btn-default am-btn-secondary"><span class="am-icon-save"></span> 保存</button>
-                                    <button type="button" class="am-btn am-btn-default am-btn-warning"><span class="am-icon-archive"></span> 审核</button>
-                                    <button type="button" class="am-btn am-btn-default am-btn-danger"><span class="am-icon-trash-o"></span> 删除</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
                     <div class="am-g">
                         <div class="am-u-sm-12">
                             <form class="am-form" >
@@ -44,7 +30,7 @@
                                             <th class="table-set">操作</th>
                                         </tr>
                                     </thead>
-                                    <tbody v-for='(item, key) in content.approve_forms_deal'>
+                                    <tbody v-for='(item, key) in content.history_form'>
                                         <tr>
                                             <td><input type="checkbox"></td>
                                             <td>{{item.form_id}}</td>
@@ -57,10 +43,9 @@
                                             <td>
                                                 <div class="am-btn-toolbar">
                                                     <div class="am-btn-group am-btn-group-xs">
-                                                        <router-link :to="{path:'/approving-detail',query:{id:item.form_id}}">
+                                                        <router-link :to="{path:'/approved-detail',query:{id:item.form_id}}">
                                                             <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 查看</button>
-                                                        
-                                                            <button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-copy"></span> 附件</button>
+                                                            <button @click="detail" class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-copy"></span> 打印</button>
                                                         </router-link>
                                                     </div>
                                                 </div>
@@ -92,25 +77,26 @@
 </template>
 
 <script>
-import _global from '../components/Global'
+import _global from '../../components/Global'
 export default {
-  name: 'Approving',
+  name: 'Approved',
   data() {
     return {
         content: {
-            sub_forms_deal: [],
-            approve_forms_deal: []
+            
         }
     }
   },
   mounted() {
-    this.axios.get(_global.baseUrl + 'onload?staff_id=2002803437').then(body => {
+    this.axios.get(_global.baseUrl + 'history?staff_id=2002803437').then(body => {
       this.content = body.data.data;
       console.log(this.content)
     })
   },
   methods: {
-    
+    detail: function() {
+        // this.$router.push({path:'/form-line',query:{id:item.form_id}})
+    }
   }
 }
 </script>
