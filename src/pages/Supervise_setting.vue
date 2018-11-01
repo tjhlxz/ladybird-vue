@@ -104,20 +104,16 @@ export default {
         staff_name:'',
         college:''
       },
-      teacher_college:'计算机与信息工程学院',
+      teacher_college:'',
       checked_id:[],
       checked:false
     }
   },
   mounted() {
     this.edu=this.$route.query;
-    this.axios.get(_global.baseUrl + 'user_by_college?college='+this.teacher_college).then(body => {
-      if(body.data.status==200){
-        this.content = body.data.data;
-      }else if(body.data.status==400){
-        this.content=[]
-      }
-    })
+    this.axios.get(_global.baseUrl + 'edu_noTeacher').then(res => {
+      this.content=res.data.data.no_edu_teacher;
+  })
   },
   methods: {
     detail: function() {

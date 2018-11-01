@@ -19,7 +19,7 @@
                                     <th class="table-id">学工号</th>
                                     <th class="table-title">姓名</th>
                                     <th class="table-author am-hide-sm-only">所属院系</th>
-                                    <th class="table-set">负责老师</th>
+                                    <th class="table-set">任务</th>
                                     <th class="table-set">删除</th>
                                 </tr>
                             </thead>
@@ -35,7 +35,7 @@
                                                     <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-file-text-o"></span> 查看详情</button>
                                                 </router-link>
                                                 <router-link :to="{path:'/supervise_setting',query:{id:item.staff_id,staff_name:item.staff_name,college:item.college}}">
-                                                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-user-plus"></span> 分配老师</button>
+                                                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-user-plus"></span> 分配任务</button>
                                                 </router-link>
                                             </div>
                                         </div>

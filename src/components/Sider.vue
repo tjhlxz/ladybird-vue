@@ -1,7 +1,7 @@
 <template>
   <div class="tpl-left-nav tpl-left-nav-hover">
     <div class="tpl-left-nav-title">
-      Amaze UI 列表
+      功能列表
     </div>
     <div class="tpl-left-nav-list">
       <ul class="tpl-left-nav-menu">
@@ -39,30 +39,20 @@
                 <i class="am-icon-angle-right"></i>
                 <span>督学列表</span>
               </a></router-link>
-            </li>
-            <li>
               <router-link to='/supervise_add'>        
                <a href="添加督学">
                 <i class="am-icon-angle-right"></i>
                 <span>添加督学</span>
               </a></router-link>
-            </li>
-            <li>
               <router-link to='/supervise_wait'>        
                <a href="暂未分配">
                 <i class="am-icon-angle-right"></i>
                 <span>暂未分配</span>
-                <i class="tpl-left-nav-content tpl-badge-danger">
-                 20
-               </i>
               </a></router-link>
             </li>
           </ul>
         </li>
         <!-- 下面是冲突，我没解决。上面是我督学管理模块 -->
-
-      </li>
-
       <li class="tpl-left-nav-item">
         <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
           <i class="am-icon-table"></i>

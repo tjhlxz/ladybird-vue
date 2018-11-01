@@ -19,12 +19,11 @@
                         <table class="am-table am-table-striped am-table-hover table-main">
                             <thead>
                                 <tr>
-                                    <th class="table-name">学工号</th>
-                                    <th class="table-name">姓名</th>
                                     <th class="table-author am-hide-sm-only">所属院系</th>
+                                    <th class="table-name">总数</th>
                                 </tr>
                             </thead>
-                            <tbody v-for='(item, index) in content'>
+                            <tbody v-for='(item, index) in college'>
                                 <tr>
                                     <td class="am-hide-sm-only">{{item.staff_id}}</td>
                                     <td class="am-hide-sm-only">{{item.staff_name}}</td>
@@ -64,13 +63,31 @@ export default {
         content: {
 
         },
-        count:''
+        count:'',
+        college:[],
+        college_count:[]
     }
 },
 mounted() {
     this.axios.get(_global.baseUrl + 'edu_noTeacher').then(res => {
       this.content=res.data.data.no_edu_teacher;
       this.count=res.data.data.count;
+      var college=[];
+      this.college.push(this.content[0].college)
+      for(var i=1;i<this.count;i++){
+        if(this.content[i].college!==this.content[i-1].college){
+            this.college.push(this.content[i].college)
+      }
+  }
+  for(var a=0;a<this.college.length;a++){
+    var count=0;
+    for(var b=0;b<this.count;b++){
+        if (this.content[b].college==this.college[a]) {
+            count++;
+        }
+    }
+    this.college_count.push(count);
+  }
   })
 },
 methods: {

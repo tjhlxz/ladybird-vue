@@ -11,9 +11,9 @@ import ECharts from 'vue-echarts/components/ECharts'
 import 'echarts/lib/chart/bar'
 import 'echarts/lib/component/tooltip'
   
-// import user from './components/Global'
+import user from './components/Global'
 
-// Vue.prototype.USER = user
+Vue.prototype.USER = user
 Vue.use(VueAxios, axios);
 Vue.use(Print);
 Vue.component('v-chart', ECharts)

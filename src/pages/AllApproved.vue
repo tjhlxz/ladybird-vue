@@ -1,5 +1,5 @@
 <template>
-  <div class="tpl-content-wrapper"">
+  <div class="tpl-content-wrapper">
             <div class="tpl-portlet-components">
                 <div class="portlet-title">
                     <div class="caption font-green bold">
@@ -384,5 +384,5 @@ export default {
         // this.$router.push({path:'/form-line',query:{id:item.form_id}})
     }
   }
-}
+};
 </script>
