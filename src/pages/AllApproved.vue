@@ -16,6 +16,32 @@
                 <div class="tpl-block">
                     <div class="am-g">
                         <div class="am-u-sm-12">
+                            <div class="portlet-title">
+                                <div class="caption  bold">
+                                  <label>选择学院:</label>
+                                  <select data-am-selected="{maxHeight: 200}" v-model="teacher_college" @change="select">
+                                    <option value="矿业学院" name="teacher_college">矿业学院</option>
+                                    <option value="环化学院" name="teacher_college">环化学院</option>
+                                    <option value="安全工程学院" name="teacher_college">安全工程学院</option>
+                                    <option value="电气学院" name="teacher_college">电气学院</option>
+                                    <option value="电信学院" name="teacher_college">电信学院</option>
+                                    <option value="机械学院" name="teacher_college">机械学院</option>
+                                    <option value="材料学院" name="teacher_college">材料学院</option>
+                                    <option value="建筑工程学院" name="teacher_college">建筑工程学院</option>
+                                    <option value="计算机与信息工程学院" name="teacher_college">计算机与信息工程学院</option>
+                                    <option value="管理学院" name="teacher_college">管理学院</option>
+                                    <option value="经济学院" name="teacher_college">经济学院</option>
+                                    <option value="人文学院" name="teacher_college">人文学院</option>
+                                    <option value="马克思主义学院" name="teacher_college">马克思主义学院</option>
+                                    <option value="理学院" name="teacher_college">理学院</option>
+                                    <option value="外国语学院" name="teacher_college">外国语学院</option>
+                                    <option value="国际教育学院" name="teacher_college">国际教育学院</option>
+                                    <option value="体育部" name="teacher_college">体育部</option>
+                                    <option value="实训中心" name="teacher_college">实训中心</option>
+                                  </select>
+                                </div>
+                            </div>
+
                             <form class="am-form" >
                                 <table class="am-table am-table-striped am-table-hover table-main">
                                     <thead>
@@ -56,18 +82,21 @@
                                         </tr>
                                     </tbody>
                                 </table>
+
+
                                 <div class="am-cf">
                                     <div class="am-fr">
                                         <ul class="am-pagination tpl-pagination" >
-                                            <li @click="fir"><a href="#">«</a></li>
-                                            <li class="bef" v-for='bef in before' @click="link_left">
-                                                <a>{{bef}}</a>
+                                            <li ><a @click="fir" href="#">«</a></li>
+                                            <li v-if="page-1" ><a @click="pre" href="#">上一页</a></li>
+                                            <li class="bef" v-for='bef in before' >
+                                                <a @click="link_left">{{bef}}</a>
                                             </li>
                                             <li class="am-disabled ellipsis"><a href="#">...</a></li>
-                                            <li v-for='aft in after' @click="link_right">
-                                                <a>{{aft}}</a>
+                                            <li class="aft" v-for='aft in after' >
+                                                <a @click="link_right">{{aft}}</a>
                                             </li>
-                                            <li @click="las"><a href="#">»</a></li>
+                                            <li v-if="length-page"><a @click="next" href="#">下一页</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -90,10 +119,12 @@ export default {
         content: {
             
         },
-        length: 9,
+        teacher_college: '无',
+        length: 0,
         arr: [],
         before: [],
-        after: []
+        after: [],
+        page: 1
     }
   },
   mounted() {
@@ -118,40 +149,61 @@ export default {
     _this.after = aft[0];
 
     }
-
     })
     
   },
   methods: {
     link_left: function(e) {
         var _this = this;
+        $(e.target).parent().siblings().removeClass('am-active');
         var index = parseInt(e.target.firstChild.data);
-    if(index === index) {
-            _this.axios.get(_global.baseUrl + 'all_user?page='+index).then(body => {
+        if(index === index) {
+            _this.axios.get(_global.baseUrl + 'all_user?page=' + index).then(body => {
             _this.content = body.data.data;
-            })
+        })
         
-        var bef = [];
-        
-        
+        var bef = [];//               0-4     3,7          
+        if(index == 1) {
+                var dom = $('.bef')[0];
+                dom.setAttribute('class', 'bef am-active');
+        }                 
+        //         2          <        6                    2         3       4       5       6        
         if(index > 1 && index < _this.length - 4) {
-            bef.push(_this.arr.slice(index-2, index+2));
+            bef.push(_this.arr.slice(index-2, index+2));//1,2,3,4|2,3,4,5|3,4,5,6|4,5,6,7|5,6,7,8
             _this.before = bef[0];
+            console.log(_this.before)
         }
-
+        //         6           6                             
         if(index == _this.length-4) {
-            bef.push(_this.arr.slice(index-3, index+1))
+            bef.push(_this.arr.slice(index-3, index+1))//4,5,6,7
             _this.before = bef[0];
         }
+        //         7           7
+        if(index == _this.length-3) {
+            bef.push(_this.arr.slice(index-4, index))//4,5,6,7
+            _this.before = bef[0];
+        }
+        //    5               5                                                  
         if(index >= _this.length - 5) {
             $('.ellipsis').hide();
         }else {
             $('.ellipsis').show();
         }
-    }
+
+        _this.page = index;
+
+        for(var box = 0;box<4;box++) {
+
+            if(_this.before[box] == index) {
+                var dom = $('.bef')[box];
+                dom.setAttribute('class', 'bef am-active');
+            }
+        }
+        }
     },
     link_right: function(e) {
         var _this = this;
+        $(e.target).parent().siblings().removeClass('am-active');
         var index = parseInt(e.target.firstChild.data);
         if(index === index) {
             _this.axios.get(_global.baseUrl + 'all_user?page='+index).then(body => {
@@ -159,13 +211,24 @@ export default {
             })
             var bef = [];
 
+
             bef.push(_this.arr.slice(_this.length-7, _this.length-3));
             _this.before = bef[0];
             $('.ellipsis').hide();
         }
+        _this.page = index;
+        for(var box = 0;box<3;box++) {
+            if(_this.after[box] == index) {
+                console.log(_this.after[box])
+                    var dom = $('.aft')[box];
+                    dom.setAttribute('class', 'aft am-active');
+                }
+        }
     },
     fir: function(e) {
         var _this = this;
+        $(e.target).parent().siblings().removeClass('am-active');
+        var index = parseInt(e.target.firstChild.data);
         _this.axios.get(_global.baseUrl + 'all_user?page=1').then(body => {
         _this.content = body.data.data;
         })
@@ -173,18 +236,150 @@ export default {
 
         bef.push(_this.arr.slice(0, 4));
         _this.before = bef[0];
-    },
-    las: function(e) {
-        var _this = this;
-        _this.axios.get(_global.baseUrl + 'all_user?page='+_this.length).then(body => {
-        _this.content = body.data.data;
-        })
-        var bef = [];
+        _this.page = 1;
 
-        bef.push(_this.arr.slice(_this.length-7, _this.length-3));
-        _this.before = bef[0];
-        $('.ellipsis').hide();
+        var dom = $('.bef')[0];
+        dom.setAttribute('class', 'bef am-active');
+        if(index >= _this.length - 5) {
+            $('.ellipsis').hide();
+        }else {
+            $('.ellipsis').show();
+        }
     },
+    pre: function(e) {
+        var _this = this;
+        $(e.target).parent().siblings().removeClass('am-active');
+        _this.axios.get(_global.baseUrl + 'all_user?page='+(_this.page-1)).then(body => {
+            _this.content = body.data.data;
+            _this.page -= 1;
+            var index = _this.page;
+            var bef = [];
+
+            if(index == 1) {
+                var dom = $('.bef')[0];
+                dom.setAttribute('class', 'bef am-active');
+            }
+
+            if(index > 1 && index < _this.length - 4) {
+                bef.push(_this.arr.slice(index-2, index+2));
+                _this.before = bef[0];
+
+                for(var box = 0;box<4;box++) {
+
+                    if(_this.before[box] == index) {
+                        var dom = $('.bef')[box];
+                        dom.setAttribute('class', 'bef am-active');
+                    }
+                }
+            }
+
+            if(index == _this.length-4) {
+                bef.push(_this.arr.slice(index-3, index+1))
+                _this.before = bef[0];
+                for(var box = 0;box<4;box++) {
+                    if(_this.before[box] == index) {
+                        var dom = $('.bef')[box];
+                        dom.setAttribute('class', 'bef am-active');
+                    }
+                }
+            }
+            if(index == _this.length-3) {
+                bef.push(_this.arr.slice(index-4, index))
+                _this.before = bef[0];
+                for(var box = 0;box<4;box++) {
+                    if(_this.before[box] == index) {
+                        var dom = $('.bef')[box];
+                        dom.setAttribute('class', 'bef am-active');
+                    }
+                }
+            }
+            //   8           7                        
+            if(index > _this.length-3) {
+                for(var box = 0;box<3;box++) {
+                if(_this.after[box] == index) {
+                        var dom = $('.aft')[box];
+                        dom.setAttribute('class', 'aft am-active');
+                    }
+                }
+            }
+            if(index >= _this.length - 5) {
+                $('.ellipsis').hide();
+            }else {
+                $('.ellipsis').show();
+            }
+            
+        })
+    },
+    next: function(e) {
+        var _this = this;
+        $(e.target).parent().siblings().removeClass('am-active');
+        _this.axios.get(_global.baseUrl + 'all_user?page='+(_this.page+1)).then(body => {
+            _this.content = body.data.data;
+            _this.page += 1;
+            var index = _this.page;
+            var bef = [];
+
+            if(index > 1 && index < _this.length - 4) {
+                bef.push(_this.arr.slice(index-2, index+2));
+                _this.before = bef[0];
+                for(var box = 0;box<4;box++) {
+
+                    if(_this.before[box] == index) {
+                        var dom = $('.bef')[box];
+                        dom.setAttribute('class', 'bef am-active');
+                    }
+                }
+            }
+
+            if(index == _this.length-4) {
+                bef.push(_this.arr.slice(index-3, index+1))
+                _this.before = bef[0];
+                for(var box = 0;box<4;box++) {
+                    if(_this.before[box] == index) {
+                        var dom = $('.bef')[box];
+                        dom.setAttribute('class', 'bef am-active');
+                    }
+                }
+            }
+            if(index == _this.length-3) {
+                bef.push(_this.arr.slice(index-4, index))
+                _this.before = bef[0];
+                for(var box = 0;box<4;box++) {
+                    if(_this.before[box] == index) {
+                        var dom = $('.bef')[box];
+                        dom.setAttribute('class', 'bef am-active');
+                    }
+                }
+            }
+            if(index > _this.length-3) {
+                for(var box = 0;box<3;box++) {
+                if(_this.after[box] == index) {
+                        var dom = $('.aft')[box];
+                        dom.setAttribute('class', 'aft am-active');
+                    }
+                }
+            }
+            if(index >= _this.length - 5) {
+                $('.ellipsis').hide();
+            }else {
+                $('.ellipsis').show();
+            }
+        })
+    },
+
+    select: function(e) {
+        this.axios.get(_global.baseUrl + '?').then(body => {
+          if(body.data.status==200){
+            this.content = body.data.data;
+          }else if(body.data.status==400){
+            AMUI.dialog.alert({
+              content: ''
+            });
+            this.content=[]
+          }
+        })
+    },
+
     detail: function() {
         // this.$router.push({path:'/form-line',query:{id:item.form_id}})
     }
