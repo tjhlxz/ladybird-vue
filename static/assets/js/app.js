@@ -1,5 +1,5 @@
 $(function() {
-
+    console.log('event')
     $('.tpl-left-nav-item').on('click', function() {
 
         // $(this).siblings('li').find('a').removeClass('active');
