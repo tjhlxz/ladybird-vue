@@ -112,7 +112,7 @@
 </template>
 
 <script>
-import _global from '../components/Global'
+import _global from '../../components/Global'
 
 export default {
   name: 'ApprovedDetail',
