@@ -54,8 +54,12 @@
           if(res.status==200){
             loading.modal('close')
             AMUI.dialog.alert({
-              content: res.data.data.message
+              content: res.data.message
             });
+            
+            localStorage.setItem('data',JSON.stringify(res.data.data));
+            // var list = JSON.parse(localStorage.getItem("data"));
+            // console.log(list);
             this.user = true;
             $('.hidden').css('visibility','visible');
           }
