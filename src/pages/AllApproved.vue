@@ -19,7 +19,7 @@
                             <div class="portlet-title">
                                 <div class="caption  bold">
                                   <label>选择学院:</label>
-                                  <select data-am-selected="{maxHeight: 200}" v-model="teacher_college" @change="select">
+                                  <select data-am-selected="{maxHeight: 200}" v-model="teacher_college" @change="select" class="am-input-lg">
                                     <option value="矿业学院" name="teacher_college">矿业学院</option>
                                     <option value="环化学院" name="teacher_college">环化学院</option>
                                     <option value="安全工程学院" name="teacher_college">安全工程学院</option>
@@ -138,16 +138,13 @@ export default {
         arr.push(i);
     }
     _this.arr = arr;
-
     if(_this.length > 5) {
     var bef = [];
     var aft = [];
-
     bef.push(arr.slice(0, 4));
     aft.push(arr.slice(_this.length-3,_this.length));
     _this.before = bef[0];
     _this.after = aft[0];
-
     }
     })
     

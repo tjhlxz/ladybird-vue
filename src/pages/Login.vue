@@ -13,7 +13,7 @@
         <form class="am-form">
           <fieldset>
             <div class="am-form-group">
-              <input type="email" v-model='username' class="" id="doc-ipt-email-1" placeholder="输入学工号">
+              <input type="text" v-model='username' class="" id="doc-ipt-email-1" placeholder="输入学工号">
             </div>
             <div class="am-form-group">
               <input type="password" v-model='password' class="" id="doc-ipt-pwd-1" placeholder="输入密码">
@@ -51,7 +51,7 @@
         params.append('pwd', this.password);
         this.axios.post(_global.baseUrl + 'cmsLogin',params).then(res => {
 
-          if(res.status==200){
+          if(res.data.status==200){
             loading.modal('close')
             AMUI.dialog.alert({
               content: res.data.message
@@ -63,7 +63,7 @@
             this.user = true;
             $('.hidden').css('visibility','visible');
           }
-          else if(res.status==400){
+          else if(res.data.status==400){
             loading.modal('close')
 
             AMUI.dialog.alert({

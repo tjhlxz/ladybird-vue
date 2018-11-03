@@ -104,7 +104,8 @@ export default {
     }
   },
   mounted() {
-    this.axios.get(_global.baseUrl + 'onload?staff_id=2002803437').then(body => {
+    var staff_id = JSON.parse(localStorage.getItem("data")).staff_id;
+    this.axios.get(_global.baseUrl + 'onload?staff_id=' + staff_id).then(body => {
       this.content = body.data.data;
       console.log(this.content)
     })
