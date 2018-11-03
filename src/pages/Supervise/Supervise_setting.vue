@@ -2,7 +2,7 @@
 
   <div class="tpl-content-wrapper">
     <div class="tpl-content-page-title">
-      任务详情
+      任务管理
     </div>
     <div class="tpl-portlet-components">
       <div class="portlet-title">
@@ -42,6 +42,7 @@
             <option value="实训中心" name="teacher_college">实训中心</option>
           </select>
         </div>
+        <label class="caption bold" style="margin-left:120px;">共&nbsp;<label class="font-green">{{count}}</label>&nbsp;人未分配</label>
       </div>
       
       <div class="tpl-block">
@@ -108,72 +109,16 @@ export default {
       },
       teacher_college:'',
       checked_id:[],
-      checked:false
+      checked:false,
+      count:0
     }
   },
   mounted() {
     this.edu=this.$route.query;
     this.axios.get(_global.baseUrl + 'edu_noTeacher').then(res => {
       this.content=res.data.data.no_edu_teacher;
+      this.count=this.content.length;
     })
-    /*for(var i=0;i<this.content.length;i++){
-      switch(this.content[i].length){
-        case '矿业学院':
-        this.kuangye++;
-        break;
-        case '环化学院':
-        this.huanhua++;
-        break;
-        case '安全工程学院':
-        this.anquan++;
-        break;
-        case '电气学院':
-        this.dianqi++;
-        break;
-        case '电信学院':
-        this.dianxin++;
-        break;
-        case '机械学院':
-        this.jixie++;
-        break;
-        case '材料学院':
-        this.cailiao++;
-        break;
-        case '建筑工程学院':
-        this.jianzhu++;
-        break;
-        case '计算机与信息工程学院':
-        this.jisuanji++;
-        break;
-        case '管理学院':
-        this.guanli++;
-        break;
-        case '经济学院':
-        this.jingji++;
-        break;
-        case '人文学院':
-        this.renwen++;
-        break;
-        case '马克思主义学院':
-        this.makesi++;
-        break;
-        case '理学院':
-        this.li++;
-        break;
-        case '外国语学院':
-        this.waiyu++;
-        break;
-        case '国际教育学院':
-        this.guojiao++;
-        break;
-        case '体育部':
-        this.tiyu++;
-        break;
-        case '实训中心':
-        this.shixun++;
-        break;
-      }
-    }*/
     for(var i=0;i<this.content.length;i++){
           this.teacher_college.push(this.content[i].college)
         }
@@ -196,6 +141,7 @@ export default {
         this.axios.get(_global.baseUrl + 'user_by_college?college='+this.teacher_college).then(body => {
           if(body.data.status==200){
             this.content = body.data.data;
+            this.count=this.content.length;
           }else if(body.data.status==400){
             AMUI.dialog.alert({
               content: '该学院所有老师都已被分配！'

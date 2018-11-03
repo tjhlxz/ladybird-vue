@@ -139,6 +139,7 @@ export default {
                   content:'移除成功',
                   onConfirm:function(){
                     that.axios.get(_global.baseUrl + 'edu_toTeacher?edu_id='+that.edu.id).then(body => {
+                      that.checked=false;
                       if(body.status==200){
                         that.content = body.data.data;
                         that.teacher_college=[];
