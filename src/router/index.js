@@ -13,6 +13,9 @@ import FormAmazeui from '@/pages/FormAmazeui'
 import Supervise_people from '@/pages/Supervise/Supervise_people'
 import Supervise_task from '@/pages/Supervise/Supervise_task'
 import Supervise_form from '@/pages/Supervise/Supervise_form'
+import Supervise_detail from '@/pages/Supervise/Supervise_detail'
+import Supervise_setting from '@/pages/Supervise/Supervise_setting'
+import Supervise_form_detail from '@/pages/Supervise/Supervise_form_detail'
 
 import College_teacher from '@/pages/College/College_teacher'
 import College_room from '@/pages/College/College_room'
@@ -79,6 +82,21 @@ export default new Router({
       path: '/supervise-form',
       name: 'Supervise_form',
       component: Supervise_form
+    },
+    {
+      path: '/supervise-form-detail',
+      name: 'Supervise_form_detail',
+      component: Supervise_form_detail
+    },
+    {
+      path: '/supervise-detail',
+      name: 'Supervise_detail',
+      component: Supervise_detail
+    },
+    {
+      path: '/supervise-setting',
+      name: 'Supervise_setting',
+      component: Supervise_setting
     },
     {
       path: '/college-teacher',

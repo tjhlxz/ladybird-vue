@@ -23,8 +23,8 @@
         </form>
       </div>
     </div>
-    <Header class="hidden" style="visibility: hidden;"></Header>
-    <Sider class="hidden" style="margin-top: 90px;visibility: hidden;"></Sider>
+    <Header class="hidden"></Header>
+    <Sider class="hidden" style="margin-top: 90px;"></Sider>
     <router-view v-if="user" style="background-color: #E9EDF3;"></router-view>
   </div>
 </template>
@@ -38,7 +38,7 @@
   export default {
     name: 'Login',
     data() {
-      return {username: '', password: '',user: false}
+      return {username: '', password: '',user: true}
     },
     components: {Header, Sider},
     methods: {
