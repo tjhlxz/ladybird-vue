@@ -1,7 +1,7 @@
 <template>
   <div class="tpl-left-nav tpl-left-nav-hover">
     <div class="tpl-left-nav-title">
-      Amaze UI 列表
+      功能列表
     </div>
     <div class="tpl-left-nav-list">
       <ul class="tpl-left-nav-menu">

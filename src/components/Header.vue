@@ -2,8 +2,9 @@
   <div class="am-topbar am-topbar-inverse admin-header">
         <div class="am-topbar-brand">
             <a href="javascript:;" class="tpl-logo">
-                <img src="../../static/assets/img/logo.png" alt="">
+                <img src="../../static/assets/img/logo1.jpg" alt="" width="60px" height="60px">
             </a>
+        <label>审批系统后台管理</label>
         </div>
         <div class="am-icon-list tpl-header-nav-hover-ico am-fl am-margin-right">
 

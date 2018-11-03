@@ -24,7 +24,7 @@
       </div>
     </div>
     <Header class="hidden" style="visibility: hidden;"></Header>
-    <Sider class="hidden" style="margin-top: 90px;visibility: hidden;"></Sider>
+    <Sider class="hidden" style="visibility: hidden;margin-top: 90px;"></Sider>
     <router-view v-if="user" style="background-color: #E9EDF3;"></router-view>
   </div>
 </template>
@@ -76,5 +76,5 @@
         })
       }
     }
-  }
+  };
 </script>

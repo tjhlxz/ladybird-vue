@@ -381,5 +381,5 @@ export default {
         // this.$router.push({path:'/form-line',query:{id:item.form_id}})
     }
   }
-}
+};
 </script>

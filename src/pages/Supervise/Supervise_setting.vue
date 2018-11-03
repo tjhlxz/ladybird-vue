@@ -2,17 +2,14 @@
 
   <div class="tpl-content-wrapper">
     <div class="tpl-content-page-title">
-      督学管理
+      任务管理
     </div>
     <div class="tpl-portlet-components">
       <div class="portlet-title">
         <div class="caption font-green bold">
-          <span class="am-icon-code"></span> 选择老师
+          <span class="am-icon-plus"></span> 添加任务
         </div>
-        <div class="am-u-md-3">
-          <button type="button" @click="back" class="am-btn am-btn-default am-btn-secondary"><span class="am-icon-undo"></span> 返回</button>
-          <button type="button" @click="checkok" class="am-btn am-btn-success am-btn-secondary"><span class="am-icon-check"></span> 选好了</button>
-        </div>
+        
       </div>
       <div class="portlet-title">
         <div class="caption font-black bold">
@@ -21,8 +18,9 @@
         <div class="caption bold">
           <label class="font-green">{{edu.staff_name}}&nbsp;{{edu.id}}&nbsp;{{edu.college}}&nbsp;&nbsp;&nbsp;&nbsp;</label>
         </div>
-        <div class="caption  bold">
-          <label>选择学院:</label>
+
+        <div class="caption font-black bold">按学院选择：</div>
+        <div class="caption bold">
           <select data-am-selected="{maxHeight: 200}" v-model="teacher_college" @change="select">
             <option value="矿业学院" name="teacher_college">矿业学院</option>
             <option value="环化学院" name="teacher_college">环化学院</option>
@@ -44,9 +42,14 @@
             <option value="实训中心" name="teacher_college">实训中心</option>
           </select>
         </div>
+        <label class="caption bold" style="margin-left:120px;">共&nbsp;<label class="font-green">{{count}}</label>&nbsp;人未分配</label>
       </div>
-
+      
       <div class="tpl-block">
+        <div class="">
+          <button type="button" @click="back" style="margin-left:10px" class="am-btn am-btn-default am-btn-secondary"><span class="am-icon-undo"></span> 返回</button>
+          <button type="button" @click="checkok" style="margin-left:10px" class="am-btn am-btn-success am-btn-secondary"><span class="am-icon-check"></span> 选好了</button>
+        </div>
         <div class="am-g">
           <div class="am-u-sm-12">
             <form class="am-form" >
@@ -104,20 +107,28 @@ export default {
         staff_name:'',
         college:''
       },
-      teacher_college:'计算机与信息工程学院',
+      teacher_college:'',
       checked_id:[],
-      checked:false
+      checked:false,
+      count:0
     }
   },
   mounted() {
     this.edu=this.$route.query;
-    this.axios.get(_global.baseUrl + 'user_by_college?college='+this.teacher_college).then(body => {
-      if(body.data.status==200){
-        this.content = body.data.data;
-      }else if(body.data.status==400){
-        this.content=[]
-      }
+    this.axios.get(_global.baseUrl + 'edu_noTeacher').then(res => {
+      this.content=res.data.data.no_edu_teacher;
+      this.count=this.content.length;
     })
+    for(var i=0;i<this.content.length;i++){
+          this.teacher_college.push(this.content[i].college)
+        }
+        var temp=[]
+        for(var j=0;j<this.teacher_college.length;j++){
+          if(temp.indexOf(this.teacher_college[j])==-1){
+            temp.push(this.teacher_college[j]);
+          }
+        }
+        this.temp=temp;
   },
   methods: {
     detail: function() {
@@ -130,6 +141,7 @@ export default {
         this.axios.get(_global.baseUrl + 'user_by_college?college='+this.teacher_college).then(body => {
           if(body.data.status==200){
             this.content = body.data.data;
+            this.count=this.content.length;
           }else if(body.data.status==400){
             AMUI.dialog.alert({
               content: '该学院所有老师都已被分配！'
@@ -172,17 +184,9 @@ export default {
                   AMUI.dialog.alert({
                     content:'添加成功',
                     onConfirm:function(){
-                      that.axios.get(_global.baseUrl + 'user_by_college?college='+that.teacher_college).then(body => {
-                        if(body.data.status==200){
-                          that.content = body.data.data;
-                        }else if(body.data.status==400){
-                          AMUI.dialog.alert({
-                            content:'该学院所有老师都已被分配！'
-                          });
-                          that.content=[]
-                        }
-                      })}
-                    });
+                      that.$router.go(-1);
+                    }
+                  });
                 }else if(res.data.status==400){
                   loading.modal('close')
                   AMUI.dialog.alert({
