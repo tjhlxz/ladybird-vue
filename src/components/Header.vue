@@ -17,17 +17,11 @@
             <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list tpl-header-list">
                 <li class="am-dropdown" data-am-dropdown data-am-dropdown-toggle>
                     <a class="am-dropdown-toggle tpl-header-list-link" href="javascript:;">
-                        <span class="am-icon-bell-o"></span> 提醒 <span class="am-badge tpl-badge-success am-round">5</span>
+                        <span class="am-icon-bell-o"></span> 提醒 <span class="am-badge tpl-badge-success am-round">1</span>
                     </a>
                     <ul class="am-dropdown-content tpl-dropdown-content">
                         <li class="tpl-dropdown-content-external">
-                            <h3>你有 <span class="tpl-color-success">5</span> 条提醒</h3><a href="###">全部</a></li>
-                        <li class="tpl-dropdown-list-bdbc"><a href="#" class="tpl-dropdown-list-fl"><span class="am-icon-btn am-icon-plus tpl-dropdown-ico-btn-size tpl-badge-success"></span> 【预览模块】移动端 查看时 手机、电脑框隐藏。</a>
-                            <span class="tpl-dropdown-list-fr">3小时前</span>
-                        </li>
-                        <li class="tpl-dropdown-list-bdbc"><a href="#" class="tpl-dropdown-list-fl"><span class="am-icon-btn am-icon-check tpl-dropdown-ico-btn-size tpl-badge-danger"></span> 移动端，导航条下边距处理</a>
-                            <span class="tpl-dropdown-list-fr">15分钟前</span>
-                        </li>
+                            <h3>你有 <span class="tpl-color-success">1</span> 条提醒</h3></li>
                         <li class="tpl-dropdown-list-bdbc"><a href="#" class="tpl-dropdown-list-fl"><span class="am-icon-btn am-icon-bell-o tpl-dropdown-ico-btn-size tpl-badge-warning"></span> 追加统计代码</a>
                             <span class="tpl-dropdown-list-fr">2天前</span>
                         </li>
