@@ -27,7 +27,7 @@
                 <section ref="print">
                     <div class="am-g" style="border: 1px solid #000;">
                         <div class="tpl-form-body tpl-form-line">
-                            <form class="am-form tpl-form-line-form">
+                            <div class="am-form tpl-form-line-form">
                                 <div class="am-form-group">
                                     <label for="user-name" class="am-u-sm-3 am-form-label">姓名 <span class="tpl-form-line-small-title">Name</span></label>
                                     <div class="am-u-sm-9">
@@ -102,7 +102,7 @@
                                 <button type="button" @click="print" class="am-btn am-btn-primary tpl-btn-bg-color-success " data-am-modal="{target: '#my-modal-loading'}">打印 </button>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </section>

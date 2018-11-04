@@ -1,19 +1,22 @@
 <template>
-  <div id="app">
+  <div>
+    <Header></Header>
+    <Sider></Sider>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-  
-
+  import Header from '@/components/Header'
+  import Sider from '@/components/Sider'
   export default {
-    name: 'App',
+    name: 'Main',
     data() {
       return {
-        // user: this.USER.user
+
       }
     },
+    components: {Header, Sider},
     methods: {
       
     }
