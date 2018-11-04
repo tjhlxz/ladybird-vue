@@ -51,21 +51,21 @@
 
             <li class="tpl-left-nav-item" v-if="content.staff_level==5"><router-link to='/supervise-people'>
               <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
-                <i class="am-icon-table"></i>
+                <i class="am-icon-graduation-cap"></i>
                 <span>督学管理</span>
               </a></router-link>
             </li>
             <!-- ====================================== -->
             <li class="tpl-left-nav-item" v-if="content.staff_level==5"><router-link to='/supervise-task'>
               <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
-                <i class="am-icon-table"></i>
+                <i class="am-icon-tasks"></i>
                 <span>任务管理</span>
               </a></router-link>
             </li>
             <!-- ====================================== -->
             <li class="tpl-left-nav-item" v-if="content.staff_level==5"><router-link to='/supervise-form'>
               <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
-                <i class="am-icon-table"></i>
+                <i class="am-icon-wpforms"></i>
                 <span>审批表查询</span>
               </a></router-link>
             </li>
