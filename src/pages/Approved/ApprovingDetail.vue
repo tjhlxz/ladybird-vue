@@ -135,7 +135,6 @@ var logger = {
         showLogText(args.join(' '));
     },
     error: function (text) {
-        console.error(text);
         showLogText(text, 'red');
     },
 };

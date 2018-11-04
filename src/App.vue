@@ -5,12 +5,14 @@
 </template>
 
 <script>
-import Login from '@/pages/Login';
+import Login from '@/pages/Login'
 
 export default {
   name: 'App',
   data() {
-    return {user: this.USER.user}
+    return {
+      // user: this.USER.user
+    }
   },
   components: {Login},
   methods: {

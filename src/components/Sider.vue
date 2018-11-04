@@ -14,7 +14,7 @@
           </router-link>
         </li>
 
-        <li class="tpl-left-nav-item">
+        <li class="tpl-left-nav-item" v-if="content.staff_level==4">
           <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
             <i class="am-icon-table"></i>
             <span>审批管理</span>
@@ -49,7 +49,7 @@
         </li>
             <!-- ==========评估中心============================== -->
 
-            <li class="tpl-left-nav-item"><router-link to='/supervise-people'>
+            <li class="tpl-left-nav-item" v-if="content.staff_level==5"><router-link to='/supervise-people'>
               <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
                 <i class="am-icon-table"></i>
                 <span>督学管理</span>
@@ -57,7 +57,7 @@
               </a></router-link>
             </li>
             <!-- ====================================== -->
-            <li class="tpl-left-nav-item"><router-link to='/supervise-task'>
+            <li class="tpl-left-nav-item" v-if="content.staff_level==5"><router-link to='/supervise-task'>
               <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
                 <i class="am-icon-table"></i>
                 <span>任务管理</span>
@@ -65,7 +65,7 @@
               </a></router-link>
             </li>
             <!-- ====================================== -->
-            <li class="tpl-left-nav-item"><router-link to='/supervise-form'>
+            <li class="tpl-left-nav-item" v-if="content.staff_level==5"><router-link to='/supervise-form'>
               <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
                 <i class="am-icon-table"></i>
                 <span>审批表查询</span>
@@ -73,28 +73,28 @@
               </a></router-link>
             </li>
             <!-- =====二级教务科========================================== -->
-            <li class="tpl-left-nav-item"><router-link to='/college-teacher'>
+            <li class="tpl-left-nav-item" v-if="content.staff_level==7"><router-link to='/college-teacher'>
               <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
                 <i class="am-icon-table"></i>
                 <span>教师管理</span>
                 <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right"></i>
               </a></router-link>
             </li>
-            <li class="tpl-left-nav-item"><router-link to='/college-room'>
+            <li class="tpl-left-nav-item" v-if="content.staff_level==7"><router-link to='/college-room'>
               <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
                 <i class="am-icon-table"></i>
                 <span>教研室管理</span>
                 <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right"></i>
               </a></router-link>
             </li>
-            <li class="tpl-left-nav-item"><router-link to='/college-staff'>
+            <li class="tpl-left-nav-item" v-if="content.staff_level==7"><router-link to='/college-staff'>
               <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
                 <i class="am-icon-table"></i>
                 <span>职务管理</span>
                 <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right"></i>
               </a></router-link>
             </li>
-            <li class="tpl-left-nav-item"><router-link to='/college-form'>
+            <li class="tpl-left-nav-item" v-if="content.staff_level==7"><router-link to='/college-form'>
               <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
                 <i class="am-icon-table"></i>
                 <span>审批表查询</span>
@@ -115,18 +115,36 @@
                       <i class="am-icon-angle-right"></i>
                       <span>Amaze UI 表单</span>
                       <i class="am-icon-star tpl-left-nav-content-ico am-fr am-margin-right"></i>
-                    </a></router-link>
+                    </a>
+                  </router-link>
 
-                    <router-link to='/form-line'>
-                      <a href="form-line.html">
-                        <i class="am-icon-angle-right"></i>
-                        <span>线条表单</span>
-                      </a></router-link>
-                    </li>
+                  <router-link to='/form-line'>
+                    <a href="form-line.html">
+                      <i class="am-icon-angle-right"></i>
+                      <span>线条表单</span>
+                    </a>
+                  </router-link>
+                </li>
+         </ul>
+       </li>
+     </ul>
+   </div>
+ </div>
+</template>
 
-                 </ul>
-               </li>
-             </ul>
-           </div>
-         </div>
-       </template>
+<script>
+  export default {
+    name: 'Sider',
+    data() {
+      return {
+          content: {
+              
+          }
+      }
+    },
+    mounted() {
+      var _this = this;
+      _this.content = JSON.parse(localStorage.getItem("data"));
+    }
+  }
+</script>
