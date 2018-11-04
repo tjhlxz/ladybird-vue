@@ -23,7 +23,7 @@
                       <div class="tpl-block ">
                         <div class="am-g tpl-amazeui-form">
                           <div class="am-u-sm-12 am-u-md-9">
-                            <form class="am-form am-form-horizontal" >
+                            <div class="am-form am-form-horizontal">
                               <div class="am-form-group">
                                 <label for="user-id" class="am-u-sm-3 am-form-label">教师教工号</label>
                                 <div class="am-u-sm-9">
@@ -49,7 +49,7 @@
                                   <input type="submit" value="添加教师" @click="add_teacher" class="am-btn am-btn-success">
                                 </div>
                               </div>
-                            </form>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -66,7 +66,7 @@
                     </div>
                     <div class="am-g">
                         <div class="am-u-sm-12">
-                            <form class="am-form" >
+                            <div class="am-form" >
                                 <table class="am-table am-table-striped am-table-hover table-main">
                                     <thead>
                                         <tr>
@@ -112,7 +112,7 @@
                                     </div>
                                 </div>
                                 <hr>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -157,7 +157,7 @@ export default {
   },
   mounted() {
     var _this = this;
-    _this.college = JSON.parse(localStorage.getItem("data")).college;
+    _this.college = JSON.parse(sessionStorage.getItem("data")).college;
     _this.axios.get(_global.baseUrl + 'teacher_list' + '?college=' + _this.college + '&page=1').then(res => {
         _this.content = res.data.data;
         _this.length = Math.ceil(_this.content.count/11);
@@ -457,7 +457,7 @@ export default {
                     AMUI.dialog.alert({
                       content: res.data.message,
                       onConfirm:function(){
-                        _this.college = JSON.parse(localStorage.getItem("data")).college;
+                        _this.college = JSON.parse(sessionStorage.getItem("data")).college;
                         _this.axios.get(_global.baseUrl + 'teacher_list' + '?college=' + _this.college + '&page=1').then(res => {
                             _this.content = res.data.data;
                             _this.length = Math.ceil(_this.content.count/11);
@@ -523,7 +523,7 @@ export default {
                                 AMUI.dialog.alert({
                                   content: res.data.message
                                 })
-                                _this.college = JSON.parse(localStorage.getItem("data")).college;
+                                _this.college = JSON.parse(sessionStorage.getItem("data")).college;
                                     _this.axios.get(_global.baseUrl + 'teacher_list' + '?college=' + _this.college + '&page=1').then(res => {
                                         _this.content = res.data.data;
                                         _this.length = Math.ceil(_this.content.count/11);
@@ -578,7 +578,7 @@ export default {
                         AMUI.dialog.alert({
                           content: res.data.message
                         })
-                        _this.college = JSON.parse(localStorage.getItem("data")).college;
+                        _this.college = JSON.parse(sessionStorage.getItem("data")).college;
                         _this.axios.get(_global.baseUrl + 'teacher_list' + '?college=' + _this.college + '&page=1').then(res => {
                             _this.content = res.data.data;
                             _this.length = Math.ceil(_this.content.count/11);

@@ -23,15 +23,10 @@
         </div>
       </div>
     </div>
-    <Header class="hidden" style="visibility: hidden;"></Header>
-    <Sider class="hidden" style="visibility: hidden; margin-top: 90px;"></Sider>
-    <router-view v-if="userinfo" style="background-color: #E9EDF3;"></router-view>
   </div>
 </template>
 
 <script>
-  import Header from '@/components/Header';
-  import Sider from '@/components/Sider';
   import _global from '@/components/Global';
 
 
@@ -40,7 +35,7 @@
     data() {
       return {username: '', password: '',userinfo: false}
     },
-    components: {Header, Sider},
+    
     methods: {
       login: function() {
         var _this = this;
@@ -59,10 +54,8 @@
               content: res.data.message
             });
             
-            localStorage.setItem('data', JSON.stringify(res.data.data));
-            // var list = JSON.parse(localStorage.getItem("data"));
-            // console.log(list);
-            $('.hidden').css('visibility','visible');
+            sessionStorage.setItem('data', JSON.stringify(res.data.data));
+            _this.$router.push({name: 'Home'})
           }
           else if(res.data.status==400) {
             loading.modal('close');

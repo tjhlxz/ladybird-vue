@@ -14,7 +14,7 @@
             </div>
             <div class="am-g">
               <div class="am-u-sm-12">
-                <form class="am-form" >
+                <div class="am-form" >
                     <table class="am-table am-table-striped am-table-hover table-main">
                         <thead>
                             <tr>
@@ -43,7 +43,7 @@
                         </tbody>
                     </table>
                     <hr>
-                </form>
+                </div>
               </div>
             </div>
         </div>
@@ -121,7 +121,7 @@ export default {
     },
     mounted() {
         var _this = this;
-        _this.college = JSON.parse(localStorage.getItem("data")).college;
+        _this.college = JSON.parse(sessionStorage.getItem("data")).college;
         _this.axios.get(_global.baseUrl + 'staff_mange_list' + '?college=' + _this.college).then(res => {
 
             if(res.data.status==200){
@@ -177,7 +177,7 @@ export default {
                           if(res.status==200){
                             $('#my-popup').modal('close');
 
-                            _this.college = JSON.parse(localStorage.getItem("data")).college;
+                            _this.college = JSON.parse(sessionStorage.getItem("data")).college;
                             _this.axios.get(_global.baseUrl + 'staff_mange_list' + '?college=' + _this.college).then(res => {
 
                                 if(res.data.status==200){

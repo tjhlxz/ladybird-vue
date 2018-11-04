@@ -1,6 +1,5 @@
 <template>
   <div class="tpl-content-wrapper">
-            
             <div class="tpl-portlet-components">
                 <div class="portlet-title">
                     <div class="caption font-green bold">
@@ -17,7 +16,7 @@
                 <div class="tpl-block">
                     <div class="am-g">
                         <div class="am-u-sm-12">
-                            <form class="am-form" >
+                            <div class="am-form" >
                                 <table class="am-table am-table-striped am-table-hover table-main">
                                     <thead>
                                         <tr>
@@ -67,7 +66,7 @@
                                     </div>
                                 </div>
                                 <hr>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -88,7 +87,7 @@ export default {
     }
   },
   mounted() {
-    var staff_id = JSON.parse(localStorage.getItem("data"));
+    var staff_id = JSON.parse(sessionStorage.getItem("data"));
     this.axios.get(_global.baseUrl + 'history?staff_id=' + staff_id).then(body => {
       this.content = body.data.data;
       console.log(this.content)

@@ -20,7 +20,7 @@
 
                     <div class="am-g">
                         <div class="am-u-sm-12">
-                            <form class="am-form" >
+                            <div class="am-form" >
                                 <table class="am-table am-table-striped am-table-hover table-main">
                                     <thead>
                                         <tr>
@@ -49,7 +49,7 @@
                                     </tbody>
                                 </table>
                                 <hr>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -99,7 +99,7 @@ export default {
     }
   },
   mounted() {
-    var college = JSON.parse(localStorage.getItem("data")).college;
+    var college = JSON.parse(sessionStorage.getItem("data")).college;
     this.college = college;
     this.axios.get(_global.baseUrl + 'staff_room_list?college=' + college).then(res => {
         if(res.data.status == 200) {
