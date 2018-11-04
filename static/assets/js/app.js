@@ -1,15 +1,4 @@
 $(function() {
-    console.log('event')
-    $('.tpl-left-nav-item').on('click', function() {
-
-        // $(this).siblings('li').find('a').removeClass('active');
-        // $(this).find('a').addClass('active')
-
-        // if($(this).hasClass('active')){
-        //     e.target.addClass('active')
-        // }
-        // console.log($(e.target.className.split(' ')[0]).hasClass('active'))
-    })
 
     var $fullText = $('.admin-fullText');
     $('#admin-fullscreen').on('click', function() {
@@ -38,12 +27,11 @@ $(function() {
                 }
         })
     })
-})
 
 // ==========================
 // 侧边导航下拉列表
 // ==========================
-$(function() {
+
     $('.tpl-left-nav-link-list').on('click', function() {
             $(this).siblings('.tpl-left-nav-sub-menu').slideToggle(80)
                 .end()

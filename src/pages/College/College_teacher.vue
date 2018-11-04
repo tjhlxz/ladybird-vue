@@ -9,7 +9,7 @@
                         <div class="portlet-input input-small input-inline">
                             <div class="input-icon right">
                                 <i class="am-icon-search"></i>
-                                <input type="text" v-model="search_value" @keyup.enter="search" class="form-control form-control-solid" placeholder="搜索..."></div>
+                                <input type="text" v-model="search_value" @keyup.enter="search" class="form-control form-control-solid" placeholder="按老师姓名搜索..."></div>
                         </div>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                                 <div class="portlet-title" >
                                       <label class="am-u-sm-3 am-form-label">教研室</label>
                                       <div class="am-u-sm-9">
-                                          <select data-am-selected="{maxHeight: 200}" @click="select_click" v-model="staff_room_select" @change="select" class="am-input-sm data-am-selected">
+                                          <select data-am-selected="{maxHeight: 200}" @click="select_click" v-model="staff_room_select" class="am-input-sm data-am-selected">
                                             <option v-for="(room, index) in staff_room" :value="staff_room[index]" name="staff_room_select">{{room}}</option>
                                           </select>
                                       </div>
@@ -414,10 +414,6 @@ export default {
             // _this.staff_room = res.data.data;
           }
         })
-    },
-    select: function(e) {
-        var _this = this;
-        console.log(e)
     },
     add_teacher: function() {
         var _this = this;
