@@ -115,7 +115,7 @@
 import _global from '../../components/Global'
 
 export default {
-  name: 'ApprovedDetail',
+  name: 'Approved_detail',
   data() {
     return {
         content: '',

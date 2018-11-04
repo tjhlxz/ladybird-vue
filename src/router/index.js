@@ -6,8 +6,10 @@ import Home from '@/pages/Home'
 import Chart from '@/pages/Chart'
 import Approving from '@/pages/Approved/Approving'
 import Approved from '@/pages/Approved/Approved'
-import ApprovingDetail from '@/pages/Approved/ApprovingDetail'
-import ApprovedDetail from '@/pages/Approved/ApprovedDetail'
+import Approving_detail from '@/pages/Approved/Approving_detail'
+import Approved_detail from '@/pages/Approved/Approved_detail'
+import Approved_form from '@/pages/Approved/Approved_form'
+import Approved_form_detail from '@/pages/Approved/Approved_form_detail'
 import AllApproved from '@/pages/AllApproved'
 import FormAmazeui from '@/pages/FormAmazeui'
 
@@ -22,6 +24,7 @@ import College_teacher from '@/pages/College/College_teacher'
 import College_room from '@/pages/College/College_room'
 import College_staff from '@/pages/College/College_staff'
 import College_form from '@/pages/College/College_form'
+import College_form_detail from '@/pages/College/College_form_detail'
 
 import Login from '@/pages/Login'
 
@@ -65,13 +68,23 @@ const router = new Router({
         },
         {
           path: '/approving-detail',
-          name: 'ApprovingDetail',
-          component: ApprovingDetail
+          name: 'Approving_detail',
+          component: Approving_detail
         },
         {
           path: '/approved-detail',
-          name: 'ApprovedDetail',
-          component: ApprovedDetail
+          name: 'Approved_detail',
+          component: Approved_detail
+        },
+        {
+          path: '/approved-form',
+          name: '/Approved_form',
+          component: Approved_form
+        },
+        {
+          path: '/approved-form-detail',
+          name: '/Approved_form_detail',
+          component: Approved_form_detail
         },
         {
           path: '/all-approved',
@@ -132,6 +145,11 @@ const router = new Router({
           path: '/college-form',
           name: 'College_form',
           component: College_form
+        },
+        {
+          path: '/college-form-detail',
+          name: 'College_form_detail',
+          component: College_form_detail
         }
       ]
     },

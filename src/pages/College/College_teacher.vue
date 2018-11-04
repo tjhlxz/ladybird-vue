@@ -621,6 +621,7 @@ export default {
         _this.axios.post(_global.baseUrl + 'selectTeacherForName' + '?college=' + _this.college + '&name=' + value).then(res => {
           if(res.data.status == 200){
             _this.content.teachers = res.data.data;
+            _this.search_value = '';
             AMUI.dialog.alert({
                 content: res.data.message
             })

@@ -167,7 +167,7 @@ var cos = new COS({
     }
 });
 export default {
-  name: 'ApprovingDetail',
+  name: 'Approving_detail',
   data() {
     return {
         content: '',
