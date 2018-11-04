@@ -280,6 +280,7 @@ export default {
     font-size: 28px;
 }
 .num4{
+    height:150px;
     display: flex;
     flex-direction: column;
     width: 750px;
@@ -289,6 +290,7 @@ export default {
     display: flex;
     flex-direction: row;
     width: 750px;
+    height: 120px;
 }
     @page{
         size:  auto;   /* auto is the initial value */
