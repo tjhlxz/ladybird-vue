@@ -17,7 +17,7 @@
                     </div>
                 </div>
             </div>
-            <section ref="print">
+            <section ref="print" id="print_page">
                 <center>
                 <div class="print">
                 <center><div class="heikeji">黑龙江科技大学</div></center>
@@ -157,7 +157,13 @@ export default {
     },
     methods: {
         print: function(e) {
-          this.$print(this.$refs.print)
+          var _this = this;
+          var $loading = AMUI.dialog.loading();
+
+          setTimeout(function() {
+            _this.$print('#print_page');
+            $loading.modal('close');
+          }, 3000)
       },
       back: function() {
         this.$router.go(-1);
