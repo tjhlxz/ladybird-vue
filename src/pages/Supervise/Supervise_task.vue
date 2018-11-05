@@ -63,8 +63,21 @@ export default {
     }
 },
 mounted() {
+    var loading=AMUI.dialog.loading({
+            title:'正在加载，请稍等'
+        });
     this.axios.get(_global.baseUrl + 'edu_list').then(res => {
+        if(res.data.status==200){
+            loading.modal('close');
       this.content = res.data.data;
+        }
+        else{
+            loading.modal('close');
+            AMUI.dialog.alert({
+          content: body.data.message
+      });
+        }
+        
   })
 },
 methods: {

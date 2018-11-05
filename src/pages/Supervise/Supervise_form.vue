@@ -5,101 +5,100 @@
             <div class="caption font-green bold">
                 <span class="am-icon-code"></span> 列表
             </div>
-            </div>
-            <div class="tpl-block">
-                <div class="am-g">
-                    <div class="am-u-sm-12">
-                        <div class="portlet-title">
-                            <div class="caption  bold">
-                              <label>按学院查询:</label>
-                              <select data-am-selected="{maxHeight: 200}" v-model="teacher_college" @change="select">
-                                <option value="矿业学院" name="teacher_college">矿业学院</option>
-                                <option value="环化学院" name="teacher_college">环化学院</option>
-                                <option value="安全工程学院" name="teacher_college">安全工程学院</option>
-                                <option value="电气学院" name="teacher_college">电气学院</option>
-                                <option value="电信学院" name="teacher_college">电信学院</option>
-                                <option value="机械学院" name="teacher_college">机械学院</option>
-                                <option value="材料学院" name="teacher_college">材料学院</option>
-                                <option value="建筑工程学院" name="teacher_college">建筑工程学院</option>
-                                <option value="计算机与信息工程学院" name="teacher_college">计算机与信息工程学院</option>
-                                <option value="管理学院" name="teacher_college">管理学院</option>
-                                <option value="经济学院" name="teacher_college">经济学院</option>
-                                <option value="人文学院" name="teacher_college">人文学院</option>
-                                <option value="马克思主义学院" name="teacher_college">马克思主义学院</option>
-                                <option value="理学院" name="teacher_college">理学院</option>
-                                <option value="外国语学院" name="teacher_college">外国语学院</option>
-                                <option value="国际教育学院" name="teacher_college">国际教育学院</option>
-                                <option value="体育部" name="teacher_college">体育部</option>
-                                <option value="实训中心" name="teacher_college">实训中心</option>
-                            </select>
-                            </div>
-                            <form @submit.prevent="searchByname">
-                            <div class="caption" style="margin-left:300px;">
-                                <div class="input-icon right">
-                                    <i class="am-icon-search"></i>
-                                    <input type="text" class="form-control form-control-solid" v-model="search_staff_name" placeholder="按教师姓名查询..."/>
-                                </div>
-                            </div> 
-                            <input type="submit" value="查询" style="margin-left:10px;height:36px;margin-top:5px;" class="am-btn am-btn-success"/>
-                            </form>                    
+        </div>
+        <div class="tpl-block">
+            <div class="am-g">
+                <div class="am-u-sm-12">
+                    <div class="portlet-title">
+                        <div class="caption  bold">
+                          <label>按学院查询:</label>
+                          <select data-am-selected="{maxHeight: 200}" v-model="teacher_college" @change="select">
+                            <option value="矿业学院" name="teacher_college">矿业学院</option>
+                            <option value="环化学院" name="teacher_college">环化学院</option>
+                            <option value="安全工程学院" name="teacher_college">安全工程学院</option>
+                            <option value="电气学院" name="teacher_college">电气学院</option>
+                            <option value="电信学院" name="teacher_college">电信学院</option>
+                            <option value="机械学院" name="teacher_college">机械学院</option>
+                            <option value="材料学院" name="teacher_college">材料学院</option>
+                            <option value="建筑工程学院" name="teacher_college">建筑工程学院</option>
+                            <option value="计算机与信息工程学院" name="teacher_college">计算机与信息工程学院</option>
+                            <option value="管理学院" name="teacher_college">管理学院</option>
+                            <option value="经济学院" name="teacher_college">经济学院</option>
+                            <option value="人文学院" name="teacher_college">人文学院</option>
+                            <option value="马克思主义学院" name="teacher_college">马克思主义学院</option>
+                            <option value="理学院" name="teacher_college">理学院</option>
+                            <option value="外国语学院" name="teacher_college">外国语学院</option>
+                            <option value="国际教育学院" name="teacher_college">国际教育学院</option>
+                            <option value="体育部" name="teacher_college">体育部</option>
+                            <option value="实训中心" name="teacher_college">实训中心</option>
+                        </select>
                     </div>
-
-                    <form class="am-form" >
-                        <table class="am-table am-table-striped am-table-hover table-main">
-                            <thead>
-                                <tr>
-                                    <th>教工号</th>
-                                    <th>姓名</th>
-                                    <th>申请类型</th>
-                                    <th>所属院系</th>
-                                    <th class="table-date am-hide-sm-only">所属单位</th>
-                                    
-                                    <th>申请时间</th>
-                                    <th>详情</th>
-                                    <!-- <th class="table-set">操作</th> -->
-                                </tr>
-                            </thead>
-                            <tbody v-for='(item, key) in formsData'>
-                                <tr>
-                                    <td>{{item.form_proposer_id}}</td>
-                                    <td>{{item.form_proposer_name}}</td>
-                                    <td v-if="item.form_type == 1">变更</td>
-                                    <td v-else>调串</td>
-                                    <td class="am-hide-sm-only">{{item.form_college}}</td>
-                                    <td class="am-hide-sm-only">{{item.form_staff_room}}</td>
-                                    
-                                    <td>{{item.create_time}}</td>
-                                    <td><router-link :to="{path:'/supervise-form-detail',query:{id:item.form_id}}">
-                                            <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-file-text-o"></span> 查看详情</button>
-                                        </router-link></td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-
-                        <div class="am-cf">
-                            <div class="am-fr">
-                                <ul class="am-pagination tpl-pagination" >
-                                    <li ><a @click="fir" href="#">«</a></li>
-                                    <li v-if="page-1" ><a @click="pre" href="#">上一页</a></li>
-                                    <li class="bef" v-for='bef in before' >
-                                        <a @click="link_left">{{bef}}</a>
-                                    </li>
-                                    <li class="am-disabled ellipsis"><a href="#">...</a></li>
-                                    <li class="aft" v-for='aft in after' >
-                                        <a @click="link_right">{{aft}}</a>
-                                    </li>
-                                    <li v-if="length-page"><a @click="next" href="#">下一页</a></li>
-                                </ul>
+                    <form @submit.prevent="searchByname">
+                        <div class="caption" style="margin-left:300px;">
+                            <div class="input-icon right">
+                                <i class="am-icon-search"></i>
+                                <input type="text" class="form-control form-control-solid" v-model="search_staff_name" @keyup.enter="searchByname" placeholder="按教师姓名查询..."/>
                             </div>
-                        </div>
-                        <hr>
-                    </form>
+                        </div> 
+                    </form>                    
                 </div>
+
+                <form class="am-form" >
+                    <table class="am-table am-table-striped am-table-hover table-main">
+                        <thead>
+                            <tr>
+                                <th>教工号</th>
+                                <th>姓名</th>
+                                <th>申请类型</th>
+                                <th>所属院系</th>
+                                <th class="table-date am-hide-sm-only">所属单位</th>
+
+                                <th>申请时间</th>
+                                <th>详情</th>
+                                <!-- <th class="table-set">操作</th> -->
+                            </tr>
+                        </thead>
+                        <tbody v-for='(item, key) in formsData'>
+                            <tr>
+                                <td>{{item.form_proposer_id}}</td>
+                                <td>{{item.form_proposer_name}}</td>
+                                <td v-if="item.form_type == 1">变更</td>
+                                <td v-else>调串</td>
+                                <td class="am-hide-sm-only">{{item.form_college}}</td>
+                                <td class="am-hide-sm-only">{{item.form_staff_room}}</td>
+
+                                <td>{{item.create_time}}</td>
+                                <td><router-link :to="{path:'/supervise-form-detail',query:{id:item.form_id}}">
+                                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-file-text-o"></span> 查看详情</button>
+                                </router-link></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                    <div class="am-cf">
+                        <div class="am-fr">
+                            <ul class="am-pagination tpl-pagination" >
+                                <li ><a @click="fir" href="#">«</a></li>
+                                <li v-if="page-1" ><a @click="pre" href="#">上一页</a></li>
+                                <li class="bef" v-for='bef in before' >
+                                    <a @click="link_left">{{bef}}</a>
+                                </li>
+                                <li class="am-disabled ellipsis"><a href="#">...</a></li>
+                                <li class="aft" v-for='aft in after' >
+                                    <a @click="link_right">{{aft}}</a>
+                                </li>
+                                <li v-if="length-page"><a @click="next" href="#">下一页</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <hr>
+                </form>
             </div>
         </div>
-        <div class="tpl-alert"></div>
     </div>
+    <div class="tpl-alert"></div>
+</div>
 </div>
 </template>
 
@@ -121,28 +120,40 @@ export default {
     }
 },
 mounted() {
+    var loading=AMUI.dialog.loading({
+        title:'正在加载，请稍等'
+    });
     var _this = this;
     _this.axios.get(_global.baseUrl + 'allPassForm?page=1').then(body => {
-        _this.content = body.data.data;
-        _this.formsData=_this.content.formsData;
-        _this.length = Math.ceil(_this.content.count/11);
-        var arr = [];
-        for (var i = 1; i <= _this.length; i++) {
-            arr.push(i);
-        }
-        _this.arr = arr;
+        if(body.status==200){
+            loading.modal('close');
+            _this.content = body.data.data;
+            _this.formsData=_this.content.formsData;
+            _this.length = Math.ceil(_this.content.count/11);
+            var arr = [];
+            for (var i = 1; i <= _this.length; i++) {
+                arr.push(i);
+            }
+            _this.arr = arr;
 
-        if(_this.length > 5) {
-            var bef = [];
-            var aft = [];
+            if(_this.length > 5) {
+                var bef = [];
+                var aft = [];
 
-            bef.push(arr.slice(0, 4));
-            aft.push(arr.slice(_this.length-3,_this.length));
-            _this.before = bef[0];
-            _this.after = aft[0];
+                bef.push(arr.slice(0, 4));
+                aft.push(arr.slice(_this.length-3,_this.length));
+                _this.before = bef[0];
+                _this.after = aft[0];
 
-        }
-    })
+            }
+        }else{
+            loading.modal('close');
+           AMUI.dialog.alert({
+              content: body.data.message
+          });
+           _this.formsData=[];   
+       }
+   })
     
 },
 methods: {
@@ -351,12 +362,17 @@ next: function(e) {
     })
 },
 select: function(e) {
+    var loading=AMUI.dialog.loading({
+            title:'正在加载，请稍等'
+        });
     var that=this;
     this.axios.get(_global.baseUrl + 'allPassForm?page=1&college='+that.teacher_college).then(body => {
       if(body.data.status==200){
+        loading.modal('close');
         that.content = body.data.data;
         that.formsData=that.content.formsData;
-    }else if(body.data.status==400){
+    }else{
+        loading.modal('close');
         AMUI.dialog.alert({
           content: body.data.message
       });
@@ -368,41 +384,41 @@ searchByname(){
     var that=this
     if (that.search_staff_name==='') {
         that.axios.get(_global.baseUrl + 'allPassForm?page=1').then(body => {
-        that.content = body.data.data;
-        that.formsData=that.content.formsData;
-        that.length = Math.ceil(that.content.count/11);
-        var arr = [];
-        for (var i = 1; i <= that.length; i++) {
-            arr.push(i);
-        }
-        that.arr = arr;
+            that.content = body.data.data;
+            that.formsData=that.content.formsData;
+            that.length = Math.ceil(that.content.count/11);
+            var arr = [];
+            for (var i = 1; i <= that.length; i++) {
+                arr.push(i);
+            }
+            that.arr = arr;
 
-        if(that.length > 5) {
-            var bef = [];
-            var aft = [];
+            if(that.length > 5) {
+                var bef = [];
+                var aft = [];
 
-            bef.push(arr.slice(0, 4));
-            aft.push(arr.slice(that.length-3,that.length));
-            that.before = bef[0];
-            that.after = aft[0];
+                bef.push(arr.slice(0, 4));
+                aft.push(arr.slice(that.length-3,that.length));
+                that.before = bef[0];
+                that.after = aft[0];
 
-        }
-    })
+            }
+        })
     }
     else{
-    this.axios.get(_global.baseUrl+'passFormForperson?staff_name='+this.search_staff_name).then(body =>{
-        if (body.data.status==200) {
-            that.formsData=body.data.data;
-            that.search_staff_name=''
-        }else if(body.data.status==400){
-        AMUI.dialog.alert({
-          content: body.data.message
-      });
-        that.search_staff_name=''
-        that.formsData=[]
+        this.axios.get(_global.baseUrl+'passFormForperson?staff_name='+this.search_staff_name).then(body =>{
+            if (body.data.status==200) {
+                that.formsData=body.data.data;
+                that.search_staff_name=''
+            }else if(body.data.status==400){
+                AMUI.dialog.alert({
+                  content: body.data.message
+              });
+                that.search_staff_name=''
+                that.formsData=[]
+            }
+        })}
     }
-    })}
-}
 }
 };
 </script>
