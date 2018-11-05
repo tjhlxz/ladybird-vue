@@ -1,20 +1,7 @@
 <template>
   <div class="tpl-content-wrapper">
             <div class="tpl-portlet-components">
-                <div class="portlet-title">
-                    <div class="caption font-green bold">
-                        <span class="am-icon-code"></span> 列表
-                    </div>
-                    <div class="tpl-portlet-input tpl-fz-ml">
-                        <div class="portlet-input input-small input-inline">
-                            <div class="input-icon right">
-                                <i class="am-icon-search"></i>
-                                <input type="text" v-model="search_value" @keyup.enter="search" class="form-control form-control-solid" placeholder="按老师姓名搜索..."></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tpl-block">
-                    <div class="tpl-portlet-components">
+                <div class="tpl-portlet-components">
                       <div class="portlet-title">
                         <div class="caption font-green bold">
                           <span class="am-icon-plus"></span> 添加教师
@@ -54,13 +41,19 @@
                         </div>
                       </div>
                     </div>
-                    <div class="portlet-title">
-                        <div class="caption font-green bold">
+                <div class="tpl-block">
+                        <div class="portlet-title">
+                            <div class="caption font-green bold">
                           <span class="am-icon-code"></span> 教师列表
                         </div>
-                        <div class="portlet-title">
                         <div class="caption  bold">
                           <label class="font-black">&nbsp;&nbsp;&nbsp;&nbsp;共有<label class="font-green">{{content.count}}</label>人</label>
+                        </div>
+                        <div class="tpl-portlet-input tpl-fz-ml">
+                        <div class="portlet-input input-small input-inline">
+                            <div class="input-icon right">
+                                <i class="am-icon-search"></i>
+                                <input type="text" v-model="search_value" @keyup.enter="search" class="form-control form-control-solid" placeholder="搜索..."></div>
                         </div>
                       </div>
                     </div>

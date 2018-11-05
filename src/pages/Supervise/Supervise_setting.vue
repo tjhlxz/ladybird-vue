@@ -42,7 +42,7 @@
             <option value="实训中心" name="teacher_college">实训中心</option>
           </select>
         </div>
-        <label class="caption bold" style="margin-left:120px;">共&nbsp;<label class="font-green">{{count}}</label>&nbsp;人未分配</label>
+        <label class="caption bold" style="margin-left:10px;">共&nbsp;<label class="font-green">{{count}}</label>&nbsp;人未分配</label>
       </div>
       
       <div class="tpl-block">
@@ -114,12 +114,25 @@ export default {
     }
   },
   mounted() {
+    var loading=AMUI.dialog.loading({
+                title:'正在加载，请稍等'
+              });
     this.edu=this.$route.query;
-    this.axios.get(_global.baseUrl + 'edu_noTeacher').then(res => {
-      this.content=res.data.data.no_edu_teacher;
-      this.count=this.content.length;
+    this.axios.get(_global.baseUrl + 'edu_noTeacher').then(body => {
+      if(body.data.status==201){
+              loading.modal('close');
+            this.content = body.data.data.no_edu_teacher;
+            this.count=this.content.length;
+          }else{
+            loading.modal('close');
+            AMUI.dialog.alert({
+              content: '所有老师都已被分配！'
+            });
+            this.content=[]
+            this.count=0;
+          }
     })
-    for(var i=0;i<this.content.length;i++){
+    /*for(var i=0;i<this.content.length;i++){
           this.teacher_college.push(this.content[i].college)
         }
         var temp=[]
@@ -128,7 +141,7 @@ export default {
             temp.push(this.teacher_college[j]);
           }
         }
-        this.temp=temp;
+        this.temp=temp;*/
   },
   methods: {
     detail: function() {
@@ -138,7 +151,11 @@ export default {
         this.$router.go(-1);
       },
       select(){
+        var loading=AMUI.dialog.loading({
+                title:'正在加载，请稍等'
+              });
         this.axios.get(_global.baseUrl + 'user_by_college?college='+this.teacher_college).then(body => {
+          loading.modal('close');
           if(body.data.status==200){
             this.content = body.data.data;
             this.count=this.content.length;
@@ -147,6 +164,7 @@ export default {
               content: '该学院所有老师都已被分配！'
             });
             this.content=[]
+            this.count=0;
           }
         })
       },
