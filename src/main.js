@@ -6,17 +6,13 @@ import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import Print from '../static/assets/js/print.js'
-import ECharts from 'vue-echarts/components/ECharts'
 
-import 'echarts/lib/chart/bar'
-import 'echarts/lib/component/tooltip'
   
 import user from './components/Global'
 
 Vue.prototype.USER = user
 Vue.use(VueAxios, axios);
 Vue.use(Print);
-Vue.component('v-chart', ECharts)
 
 Vue.config.productionTip = false;
 

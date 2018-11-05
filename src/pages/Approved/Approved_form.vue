@@ -12,10 +12,36 @@
                         <div class="portlet-title">
                             <div class="caption  bold">
                               <label>按学院查询:</label>
-                              <select data-am-selected="{maxHeight: 200}" v-model="teacher_college" @click="select_click" @change="select">
-                                <option v-for="(room, index) in staff_room" :value="staff_room[index]" name="staff_room_select">{{room}}</option>
+                              <select data-am-selected="{maxHeight: 200}" v-model="teacher_college" @change="select">
+                                <option value="矿业学院" name="teacher_college">矿业学院</option>
+                                <option value="环化学院" name="teacher_college">环化学院</option>
+                                <option value="安全工程学院" name="teacher_college">安全工程学院</option>
+                                <option value="电气学院" name="teacher_college">电气学院</option>
+                                <option value="电信学院" name="teacher_college">电信学院</option>
+                                <option value="机械学院" name="teacher_college">机械学院</option>
+                                <option value="材料学院" name="teacher_college">材料学院</option>
+                                <option value="建筑工程学院" name="teacher_college">建筑工程学院</option>
+                                <option value="计算机与信息工程学院" name="teacher_college">计算机与信息工程学院</option>
+                                <option value="管理学院" name="teacher_college">管理学院</option>
+                                <option value="经济学院" name="teacher_college">经济学院</option>
+                                <option value="人文学院" name="teacher_college">人文学院</option>
+                                <option value="马克思主义学院" name="teacher_college">马克思主义学院</option>
+                                <option value="理学院" name="teacher_college">理学院</option>
+                                <option value="外国语学院" name="teacher_college">外国语学院</option>
+                                <option value="国际教育学院" name="teacher_college">国际教育学院</option>
+                                <option value="体育部" name="teacher_college">体育部</option>
+                                <option value="实训中心" name="teacher_college">实训中心</option>
                             </select>
-                            </div>           
+                            </div>
+                            <form @submit.prevent="searchByname">
+                            <div class="caption" style="margin-left:300px;">
+                                <div class="input-icon right">
+                                    <i class="am-icon-search"></i>
+                                    <input type="text" class="form-control form-control-solid" v-model="search_staff_name" placeholder="按教师姓名查询..."/>
+                                </div>
+                            </div> 
+                            <input type="submit" value="查询" style="margin-left:10px;height:36px;margin-top:5px;" class="am-btn am-btn-success"/>
+                            </form>                    
                     </div>
 
                     <form class="am-form" >
@@ -43,7 +69,7 @@
                                     <td class="am-hide-sm-only">{{item.form_staff_room}}</td>
                                     
                                     <td>{{item.create_time}}</td>
-                                    <td><router-link :to="{path:'/College-form-detail',query:{id:item.form_id}}">
+                                    <td><router-link :to="{path:'/approved-form-detail',query:{id:item.form_id}}">
                                             <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-file-text-o"></span> 查看详情</button>
                                         </router-link></td>
                                 </tr>
@@ -80,11 +106,10 @@
 <script>
 import _global from '../../components/Global'
 export default {
-  name: 'College_form',
+  name: 'Approved_form',
   data() {
     return {
         content:{},
-        college: '',
         formsData:[],
         teacher_college: '无',
         length: 0,
@@ -92,14 +117,12 @@ export default {
         before: [],
         after: [],
         page: 1,
-        search_staff_name:'',
-        staff_room: []
+        search_staff_name:''
     }
 },
 mounted() {
     var _this = this;
-    _this.college = JSON.parse(sessionStorage.getItem("data")).college;
-    _this.axios.get(_global.baseUrl + 'allPassForm?page=1'+'&college='+_this.college).then(body => {
+    _this.axios.get(_global.baseUrl + 'allPassForm?page=1').then(body => {
         _this.content = body.data.data;
         _this.formsData=_this.content.formsData;
         _this.length = Math.ceil(_this.content.count/11);
@@ -120,15 +143,6 @@ mounted() {
 
         }
     })
-    _this.axios.get(_global.baseUrl + 'selectStaffroomForCollege' + '?college=' + _this.college).then(res => {
-          if(res.data.status==200){
-            var staff_room = [];
-            for(var i of res.data.data) {
-                staff_room.push(i.staff_room);
-            }
-            _this.staff_room = staff_room;
-          }
-        })
     
 },
 methods: {
@@ -137,7 +151,7 @@ methods: {
         $(e.target).parent().siblings().removeClass('am-active');
         var index = parseInt(e.target.firstChild.data);
         if(index === index) {
-            _this.axios.get(_global.baseUrl + 'allPassForm?page=' + index+'&college='+_this.college).then(body => {
+            _this.axios.get(_global.baseUrl + 'allPassForm?page=' + index).then(body => {
                 _this.content = body.data.data;
             })
 
@@ -184,7 +198,7 @@ link_right: function(e) {
     $(e.target).parent().siblings().removeClass('am-active');
     var index = parseInt(e.target.firstChild.data);
     if(index === index) {
-        _this.axios.get(_global.baseUrl + 'allPassForm?page='+index+ '&college=' + _this.college).then(body => {
+        _this.axios.get(_global.baseUrl + 'allPassForm?page='+index).then(body => {
             _this.content = body.data.data;
         })
         var bef = [];
@@ -204,7 +218,7 @@ fir: function(e) {
     var _this = this;
     $(e.target).parent().siblings().removeClass('am-active');
     var index = parseInt(e.target.firstChild.data);
-    _this.axios.get(_global.baseUrl + 'allPassForm?page=1'+'&college='+college).then(body => {
+    _this.axios.get(_global.baseUrl + 'allPassForm?page=1').then(body => {
         _this.content = body.data.data;
     })
     var bef = [];
@@ -222,7 +236,7 @@ fir: function(e) {
 pre: function(e) {
     var _this = this;
     $(e.target).parent().siblings().removeClass('am-active');
-    _this.axios.get(_global.baseUrl + 'allPassForm?page='+(_this.page-1)+'&college='+_this.college).then(body => {
+    _this.axios.get(_global.baseUrl + 'allPassForm?page='+(_this.page-1)).then(body => {
         _this.content = body.data.data;
         _this.page -= 1;
         var index = _this.page;
@@ -283,7 +297,7 @@ pre: function(e) {
 next: function(e) {
     var _this = this;
     $(e.target).parent().siblings().removeClass('am-active');
-    _this.axios.get(_global.baseUrl + 'allPassForm?page='+(_this.page+1)+'&college='+_this.college).then(body => {
+    _this.axios.get(_global.baseUrl + 'allPassForm?page='+(_this.page+1)).then(body => {
         _this.content = body.data.data;
         _this.page += 1;
         var index = _this.page;
@@ -336,19 +350,6 @@ next: function(e) {
         }
     })
 },
-select_click: function() {
-    var _this = this;
-        _this.axios.get(_global.baseUrl + 'selectStaffroomForCollege' + '?college=' + _this.college).then(res => {
-          if(res.data.status==200){
-            var staff_room = [];
-            for(var i of res.data.data) {
-                staff_room.push(i.staff_room);
-            }
-            _this.staff_room = staff_room;
-            // _this.staff_room = res.data.data;
-          }
-        })
-},
 select: function(e) {
     var that=this;
     this.axios.get(_global.baseUrl + 'allPassForm?page=1&college='+that.teacher_college).then(body => {
@@ -363,6 +364,45 @@ select: function(e) {
     }
 })
 },
+searchByname(){
+    var that=this
+    if (that.search_staff_name==='') {
+        that.axios.get(_global.baseUrl + 'allPassForm?page=1').then(body => {
+        that.content = body.data.data;
+        that.formsData=that.content.formsData;
+        that.length = Math.ceil(that.content.count/11);
+        var arr = [];
+        for (var i = 1; i <= that.length; i++) {
+            arr.push(i);
+        }
+        that.arr = arr;
+
+        if(that.length > 5) {
+            var bef = [];
+            var aft = [];
+
+            bef.push(arr.slice(0, 4));
+            aft.push(arr.slice(that.length-3,that.length));
+            that.before = bef[0];
+            that.after = aft[0];
+
+        }
+    })
+    }
+    else{
+    this.axios.get(_global.baseUrl+'passFormForperson?staff_name='+this.search_staff_name).then(body =>{
+        if (body.data.status==200) {
+            that.formsData=body.data.data;
+            that.search_staff_name=''
+        }else if(body.data.status==400){
+        AMUI.dialog.alert({
+          content: body.data.message
+      });
+        that.search_staff_name=''
+        that.formsData=[]
+    }
+    })}
+}
 }
 };
 </script>

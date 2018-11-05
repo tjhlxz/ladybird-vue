@@ -87,7 +87,7 @@ export default {
     }
   },
   mounted() {
-    var staff_id = JSON.parse(sessionStorage.getItem("data"));
+    var staff_id = JSON.parse(sessionStorage.getItem("data")).staff_id;
     this.axios.get(_global.baseUrl + 'history?staff_id=' + staff_id).then(body => {
       this.content = body.data.data;
       console.log(this.content)
