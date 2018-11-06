@@ -448,7 +448,7 @@ export default {
                 params.append('college', _this.college);
                 params.append('staff_room', staff_room_select);
                 params.append('staff_id', staff_id);
-                params.append('staff_name', staff_name);
+                params.append('staff_name', staff_name);    
                 _this.axios.post(_global.baseUrl + 'addStaff',params).then(res => {
                   if(res.status==200){
                     AMUI.dialog.alert({

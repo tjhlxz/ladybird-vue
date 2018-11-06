@@ -9,7 +9,8 @@
 </template>
 
 <script>
-  export default {
+import _global from '../components/Global'
+export default {
     name: 'Home',
     data() {
         return {

@@ -1,13 +1,13 @@
 <template>
-  <div class="am-g">
-    <div class="myapp-login-logo-block tpl-login-max" v-if="!userinfo">
+  <div class="am-g" style="height:800px;padding:90px 0;">
+    <div class="myapp-login-logo-block tpl-login-max" v-if="!userinfo" style="padding-bottom:50px;">
       <div class="myapp-login-logo-text">
         <div class="myapp-login-logo-text">
-          Amaze UI<span> Login</span> <i class="am-icon-skyatlas"></i>
+          <span>教务审批系统后台管理</span>
         </div>
       </div>
       <div class="login-font">
-        <i>Log In </i> or <span> Sign Up</span>
+        <i style="font-size:20px;">欢迎您！ </i>
       </div>
       <div class="am-u-sm-10 login-am-center">
         <div class="am-form">

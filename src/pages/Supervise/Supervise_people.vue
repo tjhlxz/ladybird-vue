@@ -16,9 +16,9 @@
           <div class="am-u-sm-12 am-u-md-9">
             <form class="am-form am-form-horizontal" @submit.prevent="add_edu">
               <div class="am-form-group">
-                <label for="user-id" class="am-u-sm-3 am-form-label">督学学工号</label>
+                <label for="user-id" class="am-u-sm-3 am-form-label">督学教工号</label>
                 <div class="am-u-sm-9">
-                  <input type="text" id="user-id" maxlength="10" v-model="staff_id" placeholder="请在此处填写督学学工号">
+                  <input type="text" id="user-id" maxlength="10" v-model="staff_id" placeholder="请在此处填写督学教工号">
                 </div>
               </div>
               <div class="am-form-group">
@@ -83,8 +83,19 @@ export default {
   }
 },
 mounted() {
+  var loading=AMUI.dialog.loading({
+    title:'正在加载，请稍等'
+  });
   this.axios.get(_global.baseUrl + 'edu_list').then(res => {
-    this.content = res.data.data;
+    if(res.status==200){
+      loading.modal('close');
+      this.content = res.data.data;
+    }else{
+      loading.modal('close');
+      AMUI.dialog.alert({
+        content: res.data.message
+      });
+    }
   })
 },
 methods: {
@@ -95,7 +106,7 @@ methods: {
           if(this.staff_id==''){
             AMUI.dialog.alert({
               title: '提示',
-              content: '请填写督学学工号'
+              content: '请填写督学教工号'
             });
           }
           else{
@@ -103,7 +114,7 @@ methods: {
             if(/^[0-9]+$/.test(this.staff_id)==false||this.staff_id.length!==10){
               AMUI.dialog.alert({
                 title: '提示',
-                content: '学工号为10位数字'
+                content: '教工号为10位数字'
               });
             }else{
               if(this.staff_name==''){
@@ -150,39 +161,39 @@ methods: {
           
         },
         edu_clear(index){
-        var that=this;
-        AMUI.dialog.confirm({
+          var that=this;
+          AMUI.dialog.confirm({
             content:'删除后不可撤回，确定要删除吗?',
             onConfirm(){
-                var loading=AMUI.dialog.loading({
-                    title:'正在删除，请稍等'
-                });
-                that.axios.get(_global.baseUrl + 'edu_clear?edu_id='+that.content[index].staff_id).then(res => {
-                  if(res.data.status==200){
-                    loading.modal('close')
-                    AMUI.dialog.alert({
-                        content:'移除成功',
-                        onConfirm:function(){
-                            that.axios.get(_global.baseUrl + 'edu_list').then(res => {
-                              that.content = res.data.data;
-                          })
-                        }
-                    });
+              var loading=AMUI.dialog.loading({
+                title:'正在删除，请稍等'
+              });
+              that.axios.get(_global.baseUrl + 'edu_clear?edu_id='+that.content[index].staff_id).then(res => {
+                if(res.data.status==200){
+                  loading.modal('close')
+                  AMUI.dialog.alert({
+                    content:'移除成功',
+                    onConfirm:function(){
+                      that.axios.get(_global.baseUrl + 'edu_list').then(res => {
+                        that.content = res.data.data;
+                      })
+                    }
+                  });
                 }else if(res.data.status==400){
-                    loading.modal('close')
-                    AMUI.dialog.alert({
-                        content: res.data.message
-                    });
+                  loading.modal('close')
+                  AMUI.dialog.alert({
+                    content: res.data.message
+                  });
                 }else{
-                    loading.modal('close')
+                  loading.modal('close')
                   AMUI.dialog.alert({
                     content: '失败，请重试'
                   });
                 }
-            })
+              })
             }
-        });   
-    }
+          });   
+        }
       }
     };
     </script>

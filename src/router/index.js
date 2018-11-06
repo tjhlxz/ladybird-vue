@@ -28,6 +28,13 @@ import College_staff from '@/pages/College/College_staff'
 import College_form from '@/pages/College/College_form'
 import College_form_detail from '@/pages/College/College_form_detail'
 
+import AdminUser from '@/pages/Admin/AdminUser'
+import AdminCollege from '@/pages/Admin/AdminCollege'
+import AdminHelp from '@/pages/Admin/AdminHelp'
+import AdminBackup from '@/pages/Admin/AdminBackup'
+import AdminPeople from '@/pages/Admin/AdminPeople'
+import AdminCheck from '@/pages/Admin/AdminCheck'
+
 import Login from '@/pages/Login'
 
 Vue.use(Router)
@@ -162,6 +169,36 @@ const router = new Router({
           path: '/college-form-detail',
           name: 'College_form_detail',
           component: College_form_detail
+        },
+        {
+          path: '/admin_user',
+          name: 'AdminUser',
+          component: AdminUser
+        },
+        {
+          path: '/admin_college',
+          name: 'AdminCollege',
+          component: AdminCollege
+        },
+        {
+          path: '/admin_backup',
+          name: 'AdminBackup',
+          component: AdminBackup
+        },
+        {
+          path: '/admin_help',
+          name: 'AdminHelp',
+          component: AdminHelp
+        },
+        {
+          path: '/admin_people',
+          name: 'AdminPeople',
+          component: AdminPeople
+        },
+        {
+          path: '/admin_check',
+          name: 'AdminCheck',
+          component: AdminCheck
         }
       ]
     },

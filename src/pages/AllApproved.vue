@@ -168,7 +168,6 @@ export default {
         if(index > 1 && index < _this.length - 4) {
             bef.push(_this.arr.slice(index-2, index+2));//1,2,3,4|2,3,4,5|3,4,5,6|4,5,6,7|5,6,7,8
             _this.before = bef[0];
-            console.log(_this.before)
         }
         //         6           6                             
         if(index == _this.length-4) {
@@ -216,7 +215,6 @@ export default {
         _this.page = index;
         for(var box = 0;box<3;box++) {
             if(_this.after[box] == index) {
-                console.log(_this.after[box])
                     var dom = $('.aft')[box];
                     dom.setAttribute('class', 'aft am-active');
                 }

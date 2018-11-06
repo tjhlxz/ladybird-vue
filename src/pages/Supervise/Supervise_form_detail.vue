@@ -150,7 +150,6 @@ export default {
           for(var i=0;i<4-this.date_before.length;i++){
             this.before.push('第 周 星期 第 节');
         }
-        console.log(this.before)
         this.datetime=this.content.update_time.split(',');
         this.leader=this.content.form_flow_name.split(',');
     })
