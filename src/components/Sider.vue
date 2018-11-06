@@ -8,7 +8,7 @@
         <li class="tpl-left-nav-item">
           <router-link to='/'>
             <a class="nav-link">
-              <i class="am-icon-home"></i>
+              <i class="am-icon-sm am-icon-home"></i>
               <span>首页</span>
             </a>
           </router-link>
@@ -40,14 +40,33 @@
                 </a>
                </router-link>
 
+
+
                <router-link to='/approved-form'>
-                 <a href="form-news-list.html">
+                 <a href="审批表查询">
                   <i class="am-icon-angle-right"></i>
                   <span>审批表查询</span>
                 </a>
                </router-link>
+               
             </li>
           </ul>
+        </li>
+
+        <li class="tpl-left-nav-item" v-if="content.staff_level==4">
+          
+                <router-link to='/intelligence'>
+                <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
+                  <i class="am-icon-graduation-cap"></i>
+                  <span>学院请假率</span>
+                </a></router-link>
+
+               <router-link to='/intelligence-college'>
+                <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
+                  <i class="am-icon-graduation-cap"></i>
+                  <span>教研室请假率</span>
+                </a></router-link>
+            
         </li>
             <!-- ==========评估中心============================== -->
 
@@ -74,19 +93,19 @@
             <!-- =====二级教务科========================================== -->
             <li class="tpl-left-nav-item" v-if="content.staff_level==7"><router-link to='/college-teacher'>
               <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
-                <i class="am-icon-table"></i>
+                <i class="am-icon-sm am-icon-male"></i>
                 <span>教师管理</span>
               </a></router-link>
             </li>
             <li class="tpl-left-nav-item" v-if="content.staff_level==7"><router-link to='/college-room'>
               <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
-                <i class="am-icon-table"></i>
+                <i class="am-icon-group"></i>
                 <span>教研室管理</span>
               </a></router-link>
             </li>
             <li class="tpl-left-nav-item" v-if="content.staff_level==7"><router-link to='/college-staff'>
               <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
-                <i class="am-icon-table"></i>
+                <i class="am-icon-graduation-cap"></i>
                 <span>职务管理</span>
               </a></router-link>
             </li>

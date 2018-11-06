@@ -4,7 +4,7 @@
             <a href="javascript:;" class="tpl-logo">
                 <img src="../../static/assets/img/logo1.jpg" alt="" width="60px" height="60px">
             </a>
-        <label>审批系统后台管理</label>
+        <label>教务审批后台管理系统</label>
         </div>
         <div class="am-icon-list tpl-header-nav-hover-ico am-fl am-margin-right">
 

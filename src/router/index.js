@@ -10,6 +10,8 @@ import Approving_detail from '@/pages/Approved/Approving_detail'
 import Approved_detail from '@/pages/Approved/Approved_detail'
 import Approved_form from '@/pages/Approved/Approved_form'
 import Approved_form_detail from '@/pages/Approved/Approved_form_detail'
+import Intelligence from '@/pages/Approved/Intelligence'
+import Intelligence_college from '@/pages/Approved/Intelligence_college'
 import AllApproved from '@/pages/AllApproved'
 import FormAmazeui from '@/pages/FormAmazeui'
 
@@ -92,6 +94,16 @@ const router = new Router({
           path: '/approved-form-detail',
           name: '/Approved_form_detail',
           component: Approved_form_detail
+        },
+        {
+          path: '/intelligence',
+          name: '/Intelligence',
+          component: Intelligence
+        },
+        {
+          path: '/intelligence-college',
+          name: '/Intelligence_college',
+          component: Intelligence_college
         },
         {
           path: '/all-approved',

@@ -11,7 +11,7 @@
                 <div class="am-u-sm-12">
                     <div class="portlet-title">
                         <div class="caption  bold">
-                          <label>按学院查询:</label>
+                          <label>按教研室查询:</label>
                           <select data-am-selected="{maxHeight: 200}" v-model="teacher_college" @click="select_click" @change="select">
                             <option v-for="(room, index) in staff_room" :value="staff_room[index]" name="staff_room_select">{{room}}</option>
                         </select>
@@ -27,7 +27,6 @@
                                 <th>申请类型</th>
                                 <th>所属院系</th>
                                 <th class="table-date am-hide-sm-only">所属单位</th>
-
                                 <th>申请时间</th>
                                 <th>详情</th>
                                 <!-- <th class="table-set">操作</th> -->
@@ -49,26 +48,41 @@
                             </tr>
                         </tbody>
                     </table>
-
-
-                    <div class="am-cf">
-                        <div class="am-fr">
-                            <ul class="am-pagination tpl-pagination" >
-                                <li ><a @click="fir" href="#">«</a></li>
-                                <li v-if="page-1" ><a @click="pre" href="#">上一页</a></li>
-                                <li class="bef" v-for='bef in before' >
-                                    <a @click="link_left">{{bef}}</a>
-                                </li>
-                                <li class="am-disabled ellipsis"><a href="#">...</a></li>
-                                <li class="aft" v-for='aft in after' >
-                                    <a @click="link_right">{{aft}}</a>
-                                </li>
-                                <li v-if="length-page"><a @click="next" href="#">下一页</a></li>
-                            </ul>
+                        <div class="am-cf" v-if="!fenye">
+                            <div class="am-fr">
+                                <ul class="am-pagination tpl-pagination" >
+                                    <li ><a @click="fir" href="#">«</a></li>
+                                    <li v-if="page-1" ><a @click="pre" href="#">上一页</a></li>
+                                    <li class="bef" v-for='bef in before' >
+                                        <a @click="link_left">{{bef}}</a>
+                                    </li>
+                                    <li class="am-disabled ellipsis"><a href="#">...</a></li>
+                                    <li class="aft" v-for='aft in after' >
+                                        <a @click="link_right">{{aft}}</a>
+                                    </li>
+                                    <li v-if="length-page"><a @click="next" href="#">下一页</a></li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                    <hr>
-                </form>
+                        <div class="am-cf" v-if="fenye">
+                            <div class="am-fr">
+                                <ul class="am-pagination tpl-pagination" >
+                                    <li ><a @click="fir1" href="#">«</a></li>
+                                    <li v-if="page-1" ><a @click="pre1" href="#">上一页</a></li>
+                                    <li class="bef" v-for='bef in before' >
+                                        <a @click="link_left1">{{bef}}</a>
+                                    </li>
+                                    <li class="am-disabled ellipsis"><a href="#">...</a></li>
+                                    <li class="aft" v-for='aft in after' >
+                                        <a @click="link_right1">{{aft}}</a>
+                                    </li>
+                                    <li v-if="length-page"><a @click="next1" href="#">下一页</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <hr>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -93,7 +107,8 @@ export default {
         after: [],
         page: 1,
         search_staff_name:'',
-        staff_room: []
+        staff_room: [],
+        fenye: false
     }
 },
 mounted() {
@@ -145,6 +160,7 @@ methods: {
         if(index === index) {
             _this.axios.get(_global.baseUrl + 'allPassForm?page=' + index+'&college='+_this.college).then(body => {
                 _this.content = body.data.data;
+                _this.formsData=_this.content.formsData;
             })
 
         var bef = [];//               0-4     3,7          
@@ -192,6 +208,7 @@ link_right: function(e) {
     if(index === index) {
         _this.axios.get(_global.baseUrl + 'allPassForm?page='+index+ '&college=' + _this.college).then(body => {
             _this.content = body.data.data;
+            _this.formsData=_this.content.formsData;
         })
         var bef = [];
         bef.push(_this.arr.slice(_this.length-7, _this.length-3));
@@ -210,8 +227,9 @@ fir: function(e) {
     var _this = this;
     $(e.target).parent().siblings().removeClass('am-active');
     var index = parseInt(e.target.firstChild.data);
-    _this.axios.get(_global.baseUrl + 'allPassForm?page=1'+'&college='+college).then(body => {
+    _this.axios.get(_global.baseUrl + 'allPassForm?page=1'+'&college='+_this.college).then(body => {
         _this.content = body.data.data;
+        _this.formsData=_this.content.formsData;
     })
     var bef = [];
     bef.push(_this.arr.slice(0, 4));
@@ -230,6 +248,7 @@ pre: function(e) {
     $(e.target).parent().siblings().removeClass('am-active');
     _this.axios.get(_global.baseUrl + 'allPassForm?page='+(_this.page-1)+'&college='+_this.college).then(body => {
         _this.content = body.data.data;
+        _this.formsData=_this.content.formsData;
         _this.page -= 1;
         var index = _this.page;
         var bef = [];
@@ -291,6 +310,7 @@ next: function(e) {
     $(e.target).parent().siblings().removeClass('am-active');
     _this.axios.get(_global.baseUrl + 'allPassForm?page='+(_this.page+1)+'&college='+_this.college).then(body => {
         _this.content = body.data.data;
+        _this.formsData=_this.content.formsData;
         _this.page += 1;
         var index = _this.page;
         var bef = [];
@@ -378,6 +398,215 @@ select: function(e) {
               content: body.data.message
           });
             this.formsData=[]
+        }
+    })
+},
+link_left1: function(e) {
+        var _this = this;
+        $(e.target).parent().siblings().removeClass('am-active');
+        var index = parseInt(e.target.firstChild.data);
+        if(index === index) {
+            _this.axios.get(_global.baseUrl + 'allPassForm?page=' + index+'&college='+_this.college+'&staff_room='+_this.teacher_college).then(body => {
+                _this.content = body.data.data;
+                _this.formsData=_this.content.formsData;
+            })
+
+        var bef = [];//               0-4     3,7          
+        if(index == 1) {
+            var dom = $('.bef')[0];
+            dom.setAttribute('class', 'bef am-active');
+        }                 
+        //         2          <        6                    2         3       4       5       6        
+        if(index > 1 && index < _this.length - 4) {
+            bef.push(_this.arr.slice(index-2, index+2));//1,2,3,4|2,3,4,5|3,4,5,6|4,5,6,7|5,6,7,8
+            _this.before = bef[0];
+        }
+        //         6           6                             
+        if(index == _this.length-4) {
+            bef.push(_this.arr.slice(index-3, index+1))//4,5,6,7
+            _this.before = bef[0];
+        }
+        //         7           7
+        if(index == _this.length-3) {
+            bef.push(_this.arr.slice(index-4, index))//4,5,6,7
+            _this.before = bef[0];
+        }
+        //    5               5                                                  
+        if(index >= _this.length - 5) {
+            $('.ellipsis').hide();
+        }else {
+            $('.ellipsis').show();
+        }
+
+        _this.page = index;
+
+        for(var box = 0;box<4;box++) {
+
+            if(_this.before[box] == index) {
+                var dom = $('.bef')[box];
+                dom.setAttribute('class', 'bef am-active');
+            }
+        }
+    }
+},
+link_right1: function(e) {
+    var _this = this;
+    $(e.target).parent().siblings().removeClass('am-active');
+    var index = parseInt(e.target.firstChild.data);
+    if(index === index) {
+        _this.axios.get(_global.baseUrl + 'allPassForm?page='+index+ '&college=' + _this.college+'&staff_room='+_this.teacher_college).then(body => {
+            _this.content = body.data.data;
+            _this.formsData=_this.content.formsData;
+        })
+        var bef = [];
+        bef.push(_this.arr.slice(_this.length-7, _this.length-3));
+        _this.before = bef[0];
+        $('.ellipsis').hide();
+    }
+    _this.page = index;
+    for(var box = 0;box<3;box++) {
+        if(_this.after[box] == index) {
+            var dom = $('.aft')[box];
+            dom.setAttribute('class', 'aft am-active');
+        }
+    }
+},
+fir1: function(e) {
+    var _this = this;
+    $(e.target).parent().siblings().removeClass('am-active');
+    var index = parseInt(e.target.firstChild.data);
+    _this.axios.get(_global.baseUrl + 'allPassForm?page=1'+'&college='+_this.college+'&staff_room='+_this.teacher_college).then(body => {
+        _this.content = body.data.data;
+        _this.formsData=_this.content.formsData;
+    })
+    var bef = [];
+    bef.push(_this.arr.slice(0, 4));
+    _this.before = bef[0];
+    _this.page = 1;
+    var dom = $('.bef')[0];
+    dom.setAttribute('class', 'bef am-active');
+    if(index >= _this.length - 5) {
+        $('.ellipsis').hide();
+    }else {
+        $('.ellipsis').show();
+    }
+},
+pre1: function(e) {
+    var _this = this;
+    $(e.target).parent().siblings().removeClass('am-active');
+    _this.axios.get(_global.baseUrl + 'allPassForm?page='+(_this.page-1)+'&college='+_this.college+'&staff_room='+_this.teacher_college).then(body => {
+        _this.content = body.data.data;
+        _this.formsData=_this.content.formsData;
+        _this.page -= 1;
+        var index = _this.page;
+        var bef = [];
+        if(index == 1) {
+            var dom = $('.bef')[0];
+            dom.setAttribute('class', 'bef am-active');
+        }
+        if(index > 1 && index < _this.length - 4) {
+            bef.push(_this.arr.slice(index-2, index+2));
+            _this.before = bef[0];
+
+            for(var box = 0;box<4;box++) {
+
+                if(_this.before[box] == index) {
+                    var dom = $('.bef')[box];
+                    dom.setAttribute('class', 'bef am-active');
+                }
+            }
+        }
+        if(index == _this.length-4) {
+            bef.push(_this.arr.slice(index-3, index+1))
+            _this.before = bef[0];
+            for(var box = 0;box<4;box++) {
+                if(_this.before[box] == index) {
+                    var dom = $('.bef')[box];
+                    dom.setAttribute('class', 'bef am-active');
+                }
+            }
+        }
+        if(index == _this.length-3) {
+            bef.push(_this.arr.slice(index-4, index))
+            _this.before = bef[0];
+            for(var box = 0;box<4;box++) {
+                if(_this.before[box] == index) {
+                    var dom = $('.bef')[box];
+                    dom.setAttribute('class', 'bef am-active');
+                }
+            }
+        }
+            //   8           7                        
+            if(index > _this.length-3) {
+                for(var box = 0;box<3;box++) {
+                    if(_this.after[box] == index) {
+                        var dom = $('.aft')[box];
+                        dom.setAttribute('class', 'aft am-active');
+                    }
+                }
+            }
+            if(index >= _this.length - 5) {
+                $('.ellipsis').hide();
+            }else {
+                $('.ellipsis').show();
+            }
+            
+        })
+},
+next1: function(e) {
+    var _this = this;
+    $(e.target).parent().siblings().removeClass('am-active');
+    _this.axios.get(_global.baseUrl + 'allPassForm?page='+(_this.page+1)+'&college='+_this.college+'&staff_room='+_this.teacher_college).then(body => {
+        _this.content = body.data.data;
+        _this.formsData=_this.content.formsData;
+        _this.page += 1;
+        var index = _this.page;
+        var bef = [];
+
+        if(index > 1 && index < _this.length - 4) {
+            bef.push(_this.arr.slice(index-2, index+2));
+            _this.before = bef[0];
+            for(var box = 0;box<4;box++) {
+
+                if(_this.before[box] == index) {
+                    var dom = $('.bef')[box];
+                    dom.setAttribute('class', 'bef am-active');
+                }
+            }
+        }
+
+        if(index == _this.length-4) {
+            bef.push(_this.arr.slice(index-3, index+1))
+            _this.before = bef[0];
+            for(var box = 0;box<4;box++) {
+                if(_this.before[box] == index) {
+                    var dom = $('.bef')[box];
+                    dom.setAttribute('class', 'bef am-active');
+                }
+            }
+        }
+        if(index == _this.length-3) {
+            bef.push(_this.arr.slice(index-4, index))
+            _this.before = bef[0];
+            for(var box = 0;box<4;box++) {
+                if(_this.before[box] == index) {
+                    var dom = $('.bef')[box];
+                    dom.setAttribute('class', 'bef am-active');
+                }
+            }
+        }
+        if(index > _this.length-3) {
+            for(var box = 0;box<3;box++) {
+                if(_this.after[box] == index) {
+                    var dom = $('.aft')[box];
+                    dom.setAttribute('class', 'aft am-active');
+                }
+            }
+        }
+        if(index >= _this.length - 5) {
+            $('.ellipsis').hide();
+        }else {
+            $('.ellipsis').show();
         }
     })
 },

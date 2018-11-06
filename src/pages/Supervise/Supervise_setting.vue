@@ -55,18 +55,21 @@
                 </tbody>
               </table>
               <div class="am-cf">
-                <div class="am-fr">
-                  <ul class="am-pagination tpl-pagination">
-                    <li class="am-disabled"><a href="#">«</a></li>
-                    <li class="am-active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">»</a></li>
-                  </ul>
-                </div>
-              </div>
+                            <div class="am-fr">
+                                <ul class="am-pagination tpl-pagination" >
+                                    <li ><a @click="fir" href="#">«</a></li>
+                                    <li v-if="page-1" ><a @click="pre" href="#">上一页</a></li>
+                                    <li class="bef" v-for='bef in before' >
+                                        <a @click="link_left">{{bef}}</a>
+                                    </li>
+                                    <li class="am-disabled ellipsis"><a href="#">...</a></li>
+                                    <li class="aft" v-for='aft in after' >
+                                        <a @click="link_right">{{aft}}</a>
+                                    </li>
+                                    <li v-if="length-page"><a @click="next" href="#">下一页</a></li>
+                                </ul>
+                            </div>
+                        </div>
               <hr>
             </div>
           </div>
@@ -94,52 +97,250 @@ export default {
       checked_id:[],
       checked:false,
       count:0,
-      college:[]
+      formsData:[],
+      length: 0,
+      arr: [],
+      before: [],
+      after: [],
+      page: 1
     }
   },
   mounted() {
-    var loading=AMUI.dialog.loading({
-                title:'正在加载，请稍等'
-              });
+    var _this = this;
     this.edu=this.$route.query;
-    this.axios.get(_global.baseUrl + 'edu_noTeacher').then(body => {
-      if(body.data.status==201){
-              loading.modal('close');
-            this.content = body.data.data.no_edu_teacher;
-            this.count=this.content.length;
-          }else{
-            loading.modal('close');
-            AMUI.dialog.alert({
-              content: '所有老师都已被分配！'
-            });
-            this.content=[]
-            this.count=0;
-          }
-    })
-    this.axios.get(_global.baseUrl + 'allCollege').then(res => {
-        if(res.status==200){
-          this.college = res.data.data;
-      }else{
-          AMUI.dialog.alert({
-            content: res.data.message
-        });
+    this.axios.get(_global.baseUrl + 'edu_noTeacher?page=1').then(res => {
+      _this.content = res.data.data.no_edu_teacher;
+      _this.count=res.data.data.count;
+      _this.formsData=_this.content.formsData;
+      _this.length = Math.ceil(_this.count/11);
+      var arr = [];
+      for (var i = 1; i <= _this.length; i++) {
+          arr.push(i);
       }
-  })
-    /*for(var i=0;i<this.content.length;i++){
-          this.teacher_college.push(this.content[i].college)
-        }
-        var temp=[]
-        for(var j=0;j<this.teacher_college.length;j++){
-          if(temp.indexOf(this.teacher_college[j])==-1){
-            temp.push(this.teacher_college[j]);
-          }
-        }
-        this.temp=temp;*/
+      _this.arr = arr;
 
+      if(_this.length > 5) {
+          var bef = [];
+          var aft = [];
+
+          bef.push(arr.slice(0, 4));
+          aft.push(arr.slice(_this.length-3,_this.length));
+          _this.before = bef[0];
+          _this.after = aft[0];
+
+      }
+
+
+      
+    })
+    for(var i=0;i<this.count;i++){
+      this.teacher_college.push(this.content[i].college)
+    }
   },
   methods: {
-    detail: function() {
-        // this.$router.push({path:'/form-line',query:{id:item.form_id}})
+      link_left: function(e) {
+        var _this = this;
+        $(e.target).parent().siblings().removeClass('am-active');
+        var index = parseInt(e.target.firstChild.data);
+        if(index === index) {
+            _this.axios.get(_global.baseUrl + 'edu_noTeacher?page=' + index).then(body => {
+                _this.content = body.data.data.no_edu_teacher;
+            })
+
+        var bef = [];//               0-4     3,7          
+        if(index == 1) {
+            var dom = $('.bef')[0];
+            dom.setAttribute('class', 'bef am-active');
+        }                 
+        //         2          <        6                    2         3       4       5       6        
+        if(index > 1 && index < _this.length - 4) {
+            bef.push(_this.arr.slice(index-2, index+2));//1,2,3,4|2,3,4,5|3,4,5,6|4,5,6,7|5,6,7,8
+            _this.before = bef[0];
+        }
+        //         6           6                             
+        if(index == _this.length-4) {
+            bef.push(_this.arr.slice(index-3, index+1))//4,5,6,7
+            _this.before = bef[0];
+        }
+        //         7           7
+        if(index == _this.length-3) {
+            bef.push(_this.arr.slice(index-4, index))//4,5,6,7
+            _this.before = bef[0];
+        }
+        //    5               5                                                  
+        if(index >= _this.length - 5) {
+            $('.ellipsis').hide();
+        }else {
+            $('.ellipsis').show();
+        }
+
+        _this.page = index;
+
+        for(var box = 0;box<4;box++) {
+
+            if(_this.before[box] == index) {
+                var dom = $('.bef')[box];
+                dom.setAttribute('class', 'bef am-active');
+            }
+          }
+        }
+      },
+      link_right: function(e) {
+          var _this = this;
+          $(e.target).parent().siblings().removeClass('am-active');
+          var index = parseInt(e.target.firstChild.data);
+          if(index === index) {
+              _this.axios.get(_global.baseUrl + 'edu_noTeacher?page='+index).then(body => {
+                  _this.content = body.data.data.no_edu_teacher;
+              })
+              var bef = [];
+              bef.push(_this.arr.slice(_this.length-7, _this.length-3));
+              _this.before = bef[0];
+              $('.ellipsis').hide();
+          }
+          _this.page = index;
+          for(var box = 0;box<3;box++) {
+              if(_this.after[box] == index) {
+                  var dom = $('.aft')[box];
+                  dom.setAttribute('class', 'aft am-active');
+              }
+          }
+      },
+      fir: function(e) {
+          var _this = this;
+          $(e.target).parent().siblings().removeClass('am-active');
+          var index = parseInt(e.target.firstChild.data);
+          _this.axios.get(_global.baseUrl + 'edu_noTeacher?page=1').then(body => {
+              _this.content = body.data.data.no_edu_teacher;
+          })
+          var bef = [];
+          bef.push(_this.arr.slice(0, 4));
+          _this.before = bef[0];
+          _this.page = 1;
+          var dom = $('.bef')[0];
+          dom.setAttribute('class', 'bef am-active');
+          if(index >= _this.length - 5) {
+              $('.ellipsis').hide();
+          }else {
+              $('.ellipsis').show();
+          }
+      },
+      pre: function(e) {
+          var _this = this;
+          $(e.target).parent().siblings().removeClass('am-active');
+          _this.axios.get(_global.baseUrl + 'edu_noTeacher?page='+(_this.page-1)).then(body => {
+              _this.content = body.data.data.no_edu_teacher;
+              _this.page -= 1;
+              var index = _this.page;
+              var bef = [];
+              if(index == 1) {
+                  var dom = $('.bef')[0];
+                  dom.setAttribute('class', 'bef am-active');
+              }
+              if(index > 1 && index < _this.length - 4) {
+                  bef.push(_this.arr.slice(index-2, index+2));
+                  _this.before = bef[0];
+
+                  for(var box = 0;box<4;box++) {
+
+                      if(_this.before[box] == index) {
+                          var dom = $('.bef')[box];
+                          dom.setAttribute('class', 'bef am-active');
+                      }
+                  }
+              }
+              if(index == _this.length-4) {
+                  bef.push(_this.arr.slice(index-3, index+1))
+                  _this.before = bef[0];
+                  for(var box = 0;box<4;box++) {
+                      if(_this.before[box] == index) {
+                          var dom = $('.bef')[box];
+                          dom.setAttribute('class', 'bef am-active');
+                      }
+                  }
+              }
+              if(index == _this.length-3) {
+                  bef.push(_this.arr.slice(index-4, index))
+                  _this.before = bef[0];
+                  for(var box = 0;box<4;box++) {
+                      if(_this.before[box] == index) {
+                          var dom = $('.bef')[box];
+                          dom.setAttribute('class', 'bef am-active');
+                      }
+                  }
+              }
+                  //   8           7                        
+                  if(index > _this.length-3) {
+                      for(var box = 0;box<3;box++) {
+                          if(_this.after[box] == index) {
+                              var dom = $('.aft')[box];
+                              dom.setAttribute('class', 'aft am-active');
+                          }
+                      }
+                  }
+                  if(index >= _this.length - 5) {
+                      $('.ellipsis').hide();
+                  }else {
+                      $('.ellipsis').show();
+                  }
+                  
+              })
+      },
+      next: function(e) {
+          var _this = this;
+          $(e.target).parent().siblings().removeClass('am-active');
+          _this.axios.get(_global.baseUrl + 'edu_noTeacher?page='+(_this.page+1)).then(body => {
+              _this.content = body.data.data.no_edu_teacher;
+              _this.page += 1;
+              var index = _this.page;
+              var bef = [];
+
+              if(index > 1 && index < _this.length - 4) {
+                  bef.push(_this.arr.slice(index-2, index+2));
+                  _this.before = bef[0];
+                  for(var box = 0;box<4;box++) {
+
+                      if(_this.before[box] == index) {
+                          var dom = $('.bef')[box];
+                          dom.setAttribute('class', 'bef am-active');
+                      }
+                  }
+              }
+
+              if(index == _this.length-4) {
+                  bef.push(_this.arr.slice(index-3, index+1))
+                  _this.before = bef[0];
+                  for(var box = 0;box<4;box++) {
+                      if(_this.before[box] == index) {
+                          var dom = $('.bef')[box];
+                          dom.setAttribute('class', 'bef am-active');
+                      }
+                  }
+              }
+              if(index == _this.length-3) {
+                  bef.push(_this.arr.slice(index-4, index))
+                  _this.before = bef[0];
+                  for(var box = 0;box<4;box++) {
+                      if(_this.before[box] == index) {
+                          var dom = $('.bef')[box];
+                          dom.setAttribute('class', 'bef am-active');
+                      }
+                  }
+              }
+              if(index > _this.length-3) {
+                  for(var box = 0;box<3;box++) {
+                      if(_this.after[box] == index) {
+                          var dom = $('.aft')[box];
+                          dom.setAttribute('class', 'aft am-active');
+                      }
+                  }
+              }
+              if(index >= _this.length - 5) {
+                  $('.ellipsis').hide();
+              }else {
+                  $('.ellipsis').show();
+              }
+          })
       },
       back: function() {
         this.$router.go(-1);
@@ -214,7 +415,6 @@ export default {
             }
           });
         }
-        
       }
     }
   };

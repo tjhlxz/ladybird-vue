@@ -1,7 +1,20 @@
 <template>
   <div class="tpl-content-wrapper">
             <div class="tpl-portlet-components">
-                <div class="tpl-portlet-components">
+                <div class="portlet-title">
+                    <div class="caption font-green bold">
+                        <span class="am-icon-code"></span> 列表
+                    </div>
+                    <div class="tpl-portlet-input tpl-fz-ml">
+                        <div class="portlet-input input-small input-inline">
+                            <div class="input-icon right">
+                                <i class="am-icon-search"></i>
+                                <input type="text" v-model="search_value" @keyup.enter="search" class="form-control form-control-solid" placeholder="按老师姓名搜索..."></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tpl-block">
+                    <div class="tpl-portlet-components">
                       <div class="portlet-title">
                         <div class="caption font-green bold">
                           <span class="am-icon-plus"></span> 添加教师
@@ -41,19 +54,13 @@
                         </div>
                       </div>
                     </div>
-                <div class="tpl-block">
-                        <div class="portlet-title">
-                            <div class="caption font-green bold">
+                    <div class="portlet-title">
+                        <div class="caption font-green bold">
                           <span class="am-icon-code"></span> 教师列表
                         </div>
+                        <div class="portlet-title">
                         <div class="caption  bold">
                           <label class="font-black">&nbsp;&nbsp;&nbsp;&nbsp;共有<label class="font-green">{{content.count}}</label>人</label>
-                        </div>
-                        <div class="tpl-portlet-input tpl-fz-ml">
-                        <div class="portlet-input input-small input-inline">
-                            <div class="input-icon right">
-                                <i class="am-icon-search"></i>
-                                <input type="text" v-model="search_value" @keyup.enter="search" class="form-control form-control-solid" placeholder="搜索..."></div>
                         </div>
                       </div>
                     </div>
@@ -115,7 +122,7 @@
                     <div class="am-modal-bd">
                       将 {{staff_room_old}} 修改为
                       <!-- <input type="text" class="am-modal-prompt-input"> -->
-                      <select data-am-selected="{maxHeight: 200}" @click="select_click" v-model="staff_room_select" @change="select" class="am-input-sm data-am-selected">
+                      <select data-am-selected="{maxHeight: 200}" @click="select_click" v-model="staff_room_select"  class="am-input-sm data-am-selected">
                         <option v-for="(room, index) in staff_room" :value="staff_room[index]" name="staff_room_select">{{room}}</option>
                       </select>
                     </div>
@@ -145,7 +152,8 @@ export default {
         staff_room_select: '',
         staff_id: '',
         staff_name: '',
-        college: ''
+        college: '',
+        _id: 0
     }
   },
   mounted() {
@@ -440,7 +448,7 @@ export default {
                 params.append('college', _this.college);
                 params.append('staff_room', staff_room_select);
                 params.append('staff_id', staff_id);
-                params.append('staff_name', staff_name);
+                params.append('staff_name', staff_name);    
                 _this.axios.post(_global.baseUrl + 'addStaff',params).then(res => {
                   if(res.status==200){
                     AMUI.dialog.alert({
@@ -491,6 +499,7 @@ export default {
         var _this = this;
         var _e = e;
         _this._id = _this.content.teachers[index].id;
+        console.log(_this._id)
         _this.staff_room_old = _this.content.teachers[index].staff_room;
 
         $('#my-prompt').modal({

@@ -1,7 +1,7 @@
 <template>
     <div class="tpl-content-wrapper">
         <div class="tpl-content-page-title">
-          学院请假率
+          教研室请假率
         </div>
         <div class="tpl-portlet-components">
             <div class="am-g tpl-amazeui-form">
@@ -11,18 +11,24 @@
 
                         <input type="text" v-model="years" placeholder="请输入年份">
 
-                        <div class="am-form-select" style="width: 250px;position: absolute;left:120px; top:0px;">
+                        <div class="am-form-select" style="width: 250px;position: absolute;left:120px; top:5px;">
                           <select class="am-input-sm" v-model="date" readonly>
                             <option value="-08-01,-02-01" name="date">第一学期</option>
                             <option value="-02-01,-08-01" name="date">第二学期</option>
                           </select>
                         </div>
 
-                                        <button style="position: absolute;top: 0px;left: 385px;" type="button" @click="seach_app" class="am-btn am-btn-default am-btn-success"> 查询</button>
-                                   
+                          <div style="position: absolute;top:5px;left:385px;width: 100px;">
+                              <select data-am-selected="{maxHeight: 200}" @click="select_click" v-model="staff_room_select" class="am-input-sm data-am-selected">
+                                <option v-for="(room, index) in staff_room" :value="staff_room[index]" name="staff_room_select">{{room}}</option>
+                              </select>
+                          </div>
+                                        <button style="position: absolute;top: 0px;left: 500px;" type="button" @click="seach_app" class="am-btn am-btn-default am-btn-success">查询</button>
+            
 
                     <div class="tpl-echarts" id="tpl-echarts-A" style="width: 800px;height: 600px;margin-top: 40px;">
                     </div>
+                </div>
                 </div>
             </div>
         </div>
@@ -34,17 +40,21 @@
 <script>
 import _global from '../../components/Global'
   export default {
-    name: 'Intelligence',
+    name: 'Intelligence_college',
     data() {
         return {
             content: {},
             option: {},
             date: '',
-            years: ''
+            years: '',
+            staff_room_select: '',
+            staff_room: ''
+
         }
     },
     mounted() {
         var _this = this;
+        _this.college = JSON.parse(sessionStorage.getItem("data")).college;
         _this.echartsA = echarts.init(document.getElementById('tpl-echarts-A'));
            var option = {
             legend: {},
@@ -65,12 +75,37 @@ import _global from '../../components/Global'
                     {top: '55%'}
                 ],
                 series: [
+                    // These series are in the first grid.
+                    {type: 'bar', seriesLayoutBy: 'row'}
                 ]
         };
             _this.option = option;
             _this.echartsA.setOption(option);
+
+            _this.axios.get(_global.baseUrl + 'allCollege').then(res => {
+              if(res.data.status==200){
+                var staff_room = [];
+                for(var i of res.data.data) {
+                    staff_room.push(i.college);
+                }
+                _this.staff_room = staff_room;
+              }
+            })
     },
     methods: {
+        select_click: function(e) {
+            // var _this = this;
+            // _this.axios.get(_global.baseUrl + 'allCollege').then(res => {
+            //   if(res.data.status==200){
+            //     var staff_room = [];
+            //     for(var i of res.data.data) {
+            //         staff_room.push(i.college);
+            //     }
+            //     _this.staff_room = staff_room;
+            //     // _this.staff_room = res.data.data;
+            //   }
+            // })
+        },
         seach_app: function() {
             var _this = this;
             var date = _this.date.split(',');
@@ -78,14 +113,13 @@ import _global from '../../components/Global'
                 //-08-01,-02-01
                 var timestart = _this.years + date[0];
                 var timeend = +_this.years + 1 + date[1];
-                _this.axios.get(_global.baseUrl + 'statistics_leaveRate?timestart=' + timestart + '&timeend=' + timeend).then(res => {
+                _this.axios.get(_global.baseUrl + 'statistics_forCollege'+'?college='+_this.staff_room_select+'&timestart=' + timestart + '&timeend=' + timeend).then(res => {
                     if(res.data.status == 200) {
                         _this.content = res.data.data;
-                        var source = [['product', _this.years+' 第一学期']];
+                        var source = [['product', _this.years+'-'+(+_this.years+1)+' 第一学期']];
 
                         for(var echart in _this.content) {
                             source.push([echart, (_this.content[echart].form/_this.content[echart].people).toFixed(2)]);
-
                         }
 
                         var len = source.length;
@@ -127,11 +161,10 @@ import _global from '../../components/Global'
                 _this.axios.get(_global.baseUrl + 'statistics_leaveRate?timestart=' + timestart + '&timeend=' + timeend).then(res => {
                     if(res.data.status == 200) {
                         _this.content = res.data.data;
-                        var source = [['product', _this.years+' 第二学期']];
+                        var source = [['product', _this.years+'-'+(+_this.years+1)+' 第二学期']];
 
                         for(var echart in _this.content) {
                             source.push([echart, (_this.content[echart].form/_this.content[echart].people).toFixed(2)]);
-
                         }
 
                         var len = source.length;
