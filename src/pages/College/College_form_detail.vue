@@ -142,8 +142,11 @@ export default {
         }
     },
     mounted() {
-
+        var loading=AMUI.dialog.loading({
+            title:'正在加载，请稍等'
+        });
         this.axios.get(_global.baseUrl + 'find_form?form_id=' + this.$route.query.id).then(body => {
+            loading.modal('close');
           this.content = body.data.data;
           this.date_before=this.content.form_before_adjust.split(',');
           this.date_after=this.content.form_later_adjust.split(',');

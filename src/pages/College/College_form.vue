@@ -5,75 +5,75 @@
             <div class="caption font-green bold">
                 <span class="am-icon-code"></span> 列表
             </div>
-            </div>
-            <div class="tpl-block">
-                <div class="am-g">
-                    <div class="am-u-sm-12">
-                        <div class="portlet-title">
-                            <div class="caption  bold">
-                              <label>按学院查询:</label>
-                              <select data-am-selected="{maxHeight: 200}" v-model="teacher_college" @click="select_click" @change="select">
-                                <option v-for="(room, index) in staff_room" :value="staff_room[index]" name="staff_room_select">{{room}}</option>
-                            </select>
-                            </div>           
-                    </div>
-
-                    <form class="am-form" >
-                        <table class="am-table am-table-striped am-table-hover table-main">
-                            <thead>
-                                <tr>
-                                    <th>教工号</th>
-                                    <th>姓名</th>
-                                    <th>申请类型</th>
-                                    <th>所属院系</th>
-                                    <th class="table-date am-hide-sm-only">所属单位</th>
-                                    
-                                    <th>申请时间</th>
-                                    <th>详情</th>
-                                    <!-- <th class="table-set">操作</th> -->
-                                </tr>
-                            </thead>
-                            <tbody v-for='(item, key) in formsData'>
-                                <tr>
-                                    <td>{{item.form_proposer_id}}</td>
-                                    <td>{{item.form_proposer_name}}</td>
-                                    <td v-if="item.form_type == 1">变更</td>
-                                    <td v-else>调串</td>
-                                    <td class="am-hide-sm-only">{{item.form_college}}</td>
-                                    <td class="am-hide-sm-only">{{item.form_staff_room}}</td>
-                                    
-                                    <td>{{item.create_time}}</td>
-                                    <td><router-link :to="{path:'/College-form-detail',query:{id:item.form_id}}">
-                                            <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-file-text-o"></span> 查看详情</button>
-                                        </router-link></td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-
-                        <div class="am-cf">
-                            <div class="am-fr">
-                                <ul class="am-pagination tpl-pagination" >
-                                    <li ><a @click="fir" href="#">«</a></li>
-                                    <li v-if="page-1" ><a @click="pre" href="#">上一页</a></li>
-                                    <li class="bef" v-for='bef in before' >
-                                        <a @click="link_left">{{bef}}</a>
-                                    </li>
-                                    <li class="am-disabled ellipsis"><a href="#">...</a></li>
-                                    <li class="aft" v-for='aft in after' >
-                                        <a @click="link_right">{{aft}}</a>
-                                    </li>
-                                    <li v-if="length-page"><a @click="next" href="#">下一页</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <hr>
-                    </form>
+        </div>
+        <div class="tpl-block">
+            <div class="am-g">
+                <div class="am-u-sm-12">
+                    <div class="portlet-title">
+                        <div class="caption  bold">
+                          <label>按学院查询:</label>
+                          <select data-am-selected="{maxHeight: 200}" v-model="teacher_college" @click="select_click" @change="select">
+                            <option v-for="(room, index) in staff_room" :value="staff_room[index]" name="staff_room_select">{{room}}</option>
+                        </select>
+                    </div>           
                 </div>
+
+                <form class="am-form" >
+                    <table class="am-table am-table-striped am-table-hover table-main">
+                        <thead>
+                            <tr>
+                                <th>教工号</th>
+                                <th>姓名</th>
+                                <th>申请类型</th>
+                                <th>所属院系</th>
+                                <th class="table-date am-hide-sm-only">所属单位</th>
+
+                                <th>申请时间</th>
+                                <th>详情</th>
+                                <!-- <th class="table-set">操作</th> -->
+                            </tr>
+                        </thead>
+                        <tbody v-for='(item, key) in formsData'>
+                            <tr>
+                                <td>{{item.form_proposer_id}}</td>
+                                <td>{{item.form_proposer_name}}</td>
+                                <td v-if="item.form_type == 1">变更</td>
+                                <td v-else>调串</td>
+                                <td class="am-hide-sm-only">{{item.form_college}}</td>
+                                <td class="am-hide-sm-only">{{item.form_staff_room}}</td>
+
+                                <td>{{item.create_time}}</td>
+                                <td><router-link :to="{path:'/College-form-detail',query:{id:item.form_id}}">
+                                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-file-text-o"></span> 查看详情</button>
+                                </router-link></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                    <div class="am-cf">
+                        <div class="am-fr">
+                            <ul class="am-pagination tpl-pagination" >
+                                <li ><a @click="fir" href="#">«</a></li>
+                                <li v-if="page-1" ><a @click="pre" href="#">上一页</a></li>
+                                <li class="bef" v-for='bef in before' >
+                                    <a @click="link_left">{{bef}}</a>
+                                </li>
+                                <li class="am-disabled ellipsis"><a href="#">...</a></li>
+                                <li class="aft" v-for='aft in after' >
+                                    <a @click="link_right">{{aft}}</a>
+                                </li>
+                                <li v-if="length-page"><a @click="next" href="#">下一页</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <hr>
+                </form>
             </div>
         </div>
-        <div class="tpl-alert"></div>
     </div>
+    <div class="tpl-alert"></div>
+</div>
 </div>
 </template>
 
@@ -97,9 +97,13 @@ export default {
     }
 },
 mounted() {
+    var loading=AMUI.dialog.loading({
+        title:'正在加载，请稍等'
+    });
     var _this = this;
     _this.college = JSON.parse(sessionStorage.getItem("data")).college;
     _this.axios.get(_global.baseUrl + 'allPassForm?page=1'+'&college='+_this.college).then(body => {
+        
         _this.content = body.data.data;
         _this.formsData=_this.content.formsData;
         _this.length = Math.ceil(_this.content.count/11);
@@ -120,15 +124,17 @@ mounted() {
 
         }
     })
+
     _this.axios.get(_global.baseUrl + 'selectStaffroomForCollege' + '?college=' + _this.college).then(res => {
-          if(res.data.status==200){
+        loading.modal('close');
+        if(res.data.status==200){
             var staff_room = [];
             for(var i of res.data.data) {
                 staff_room.push(i.staff_room);
             }
             _this.staff_room = staff_room;
-          }
-        })
+        }
+    })
     
 },
 methods: {
@@ -337,31 +343,43 @@ next: function(e) {
     })
 },
 select_click: function() {
+    var loading=AMUI.dialog.loading({
+        title:'正在加载，请稍等'
+    });
     var _this = this;
-        _this.axios.get(_global.baseUrl + 'selectStaffroomForCollege' + '?college=' + _this.college).then(res => {
-          if(res.data.status==200){
+    _this.axios.get(_global.baseUrl + 'selectStaffroomForCollege' + '?college=' + _this.college).then(res => {
+        loading.modal('close');
+        if(res.data.status==200){
             var staff_room = [];
             for(var i of res.data.data) {
                 staff_room.push(i.staff_room);
             }
             _this.staff_room = staff_room;
             // _this.staff_room = res.data.data;
-          }
-        })
+        }else{
+            AMUI.dialog.alert({
+                content: res.data.message
+            });
+        }
+    })
 },
 select: function(e) {
+    var loading=AMUI.dialog.loading({
+        title:'正在加载，请稍等'
+    });
     var that=this;
     this.axios.get(_global.baseUrl + 'allPassForm?page=1&college='+that.teacher_college).then(body => {
-      if(body.data.status==200){
-        that.content = body.data.data;
-        that.formsData=that.content.formsData;
-    }else if(body.data.status==400){
-        AMUI.dialog.alert({
-          content: body.data.message
-      });
-        this.formsData=[]
-    }
-})
+        loading.modal('close');
+        if(body.data.status==200){
+            that.content = body.data.data;
+            that.formsData=that.content.formsData;
+        }else if(body.data.status==400){
+            AMUI.dialog.alert({
+              content: body.data.message
+          });
+            this.formsData=[]
+        }
+    })
 },
 }
 };
