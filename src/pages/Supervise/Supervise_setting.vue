@@ -21,26 +21,9 @@
 
         <div class="caption font-black bold">按学院选择：</div>
         <div class="caption bold">
-          <select data-am-selected="{maxHeight: 200}" v-model="teacher_college" @change="select">
-            <option value="矿业学院" name="teacher_college">矿业学院</option>
-            <option value="环化学院" name="teacher_college">环化学院</option>
-            <option value="安全工程学院" name="teacher_college">安全工程学院</option>
-            <option value="电气学院" name="teacher_college">电气学院</option>
-            <option value="电信学院" name="teacher_college">电信学院</option>
-            <option value="机械学院" name="teacher_college">机械学院</option>
-            <option value="材料学院" name="teacher_college">材料学院</option>
-            <option value="建筑工程学院" name="teacher_college">建筑工程学院</option>
-            <option value="计算机与信息工程学院" name="teacher_college">计算机与信息工程学院</option>
-            <option value="管理学院" name="teacher_college">管理学院</option>
-            <option value="经济学院" name="teacher_college">经济学院</option>
-            <option value="人文学院" name="teacher_college">人文学院</option>
-            <option value="马克思主义学院" name="teacher_college">马克思主义学院</option>
-            <option value="理学院" name="teacher_college">理学院</option>
-            <option value="外国语学院" name="teacher_college">外国语学院</option>
-            <option value="国际教育学院" name="teacher_college">国际教育学院</option>
-            <option value="体育部" name="teacher_college">体育部</option>
-            <option value="实训中心" name="teacher_college">实训中心</option>
-          </select>
+          <select data-am-selected="{maxHeight:200px}" v-model="teacher_college" @change="select">
+            <option v-for="(item,index) in college" :value="item.college" name="teacher_college">{{item.college}}</option>
+        </select>
         </div>
         <label class="caption bold" style="margin-left:10px;">共&nbsp;<label class="font-green">{{count}}</label>&nbsp;人未分配</label>
       </div>
@@ -110,7 +93,8 @@ export default {
       teacher_college:'',
       checked_id:[],
       checked:false,
-      count:0
+      count:0,
+      college:[]
     }
   },
   mounted() {
@@ -132,6 +116,15 @@ export default {
             this.count=0;
           }
     })
+    this.axios.get(_global.baseUrl + 'allCollege').then(res => {
+        if(res.status==200){
+          this.college = res.data.data;
+      }else{
+          AMUI.dialog.alert({
+            content: res.data.message
+        });
+      }
+  })
     /*for(var i=0;i<this.content.length;i++){
           this.teacher_college.push(this.content[i].college)
         }
@@ -142,6 +135,7 @@ export default {
           }
         }
         this.temp=temp;*/
+
   },
   methods: {
     detail: function() {

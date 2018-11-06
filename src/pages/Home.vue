@@ -16,7 +16,6 @@
                             </ul>
                         </div>
                     </div>
-
                     <!--此部分数据请在 js文件夹下中的 app.js 中的 “百度图表A” 处修改数据 插件使用的是 百度echarts-->
                     <div class="tpl-echarts" id="tpl-echarts-A">
 
@@ -28,7 +27,10 @@
 </template>
 
 <script>
-  export default {
+import _global from '../components/Global'
+export default {
     name: 'Home',
-  }
+    methods: {
+    }
+};
 </script>

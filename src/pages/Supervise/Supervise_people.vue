@@ -16,9 +16,9 @@
           <div class="am-u-sm-12 am-u-md-9">
             <form class="am-form am-form-horizontal" @submit.prevent="add_edu">
               <div class="am-form-group">
-                <label for="user-id" class="am-u-sm-3 am-form-label">督学学工号</label>
+                <label for="user-id" class="am-u-sm-3 am-form-label">督学教工号</label>
                 <div class="am-u-sm-9">
-                  <input type="text" id="user-id" maxlength="10" v-model="staff_id" placeholder="请在此处填写督学学工号">
+                  <input type="text" id="user-id" maxlength="10" v-model="staff_id" placeholder="请在此处填写督学教工号">
                 </div>
               </div>
               <div class="am-form-group">
@@ -106,7 +106,7 @@ methods: {
           if(this.staff_id==''){
             AMUI.dialog.alert({
               title: '提示',
-              content: '请填写督学学工号'
+              content: '请填写督学教工号'
             });
           }
           else{
@@ -114,7 +114,7 @@ methods: {
             if(/^[0-9]+$/.test(this.staff_id)==false||this.staff_id.length!==10){
               AMUI.dialog.alert({
                 title: '提示',
-                content: '学工号为10位数字'
+                content: '教工号为10位数字'
               });
             }else{
               if(this.staff_name==''){

@@ -53,7 +53,7 @@
     methods: {
       
     }
-  }
+  };
 
 </script>
 <style>

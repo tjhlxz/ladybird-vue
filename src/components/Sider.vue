@@ -1,5 +1,5 @@
 <template>
-  <div class="tpl-left-nav tpl-left-nav-hover">
+  <div class="tpl-left-nav tpl-left-nav-hover" style="position:fixed">
     <div class="tpl-left-nav-title">
       功能列表
     </div>
@@ -94,6 +94,43 @@
               <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
                 <i class="am-icon-table"></i>
                 <span>审批表查询</span>
+              </a></router-link>
+            </li>
+            <!-- =====超级管理员========================================== -->
+            <li class="tpl-left-nav-item" v-if="content.staff_level==8"><router-link to='/admin_college'>
+              <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
+                <i class="am-icon-fort-awesome"></i>
+                <span>机构管理</span>
+              </a></router-link>
+            </li>
+            <li class="tpl-left-nav-item" v-if="content.staff_level==8"><router-link to='/admin_people'>
+              <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
+                <i class="am-icon-user-plus"></i>
+                <span>人员管理</span>
+              </a></router-link>
+            </li>
+            <li class="tpl-left-nav-item" v-if="content.staff_level==8"><router-link to='/admin_user'>
+              <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
+                <i class="am-icon-odnoklassniki"></i>
+                <span>角色管理</span>
+              </a></router-link>
+            </li>
+            <li class="tpl-left-nav-item" v-if="content.staff_level==8"><router-link to='/admin_backup'>
+              <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
+                <i class="am-icon-database"></i>
+                <span>数据备份</span>
+              </a></router-link>
+            </li>
+            <li class="tpl-left-nav-item" v-if="content.staff_level==8"><router-link to='/admin_check'>
+              <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
+                <i class="am-icon-spinner"></i>
+                <span>一键检测</span>
+              </a></router-link>
+            </li>
+            <li class="tpl-left-nav-item" v-if="content.staff_level==8"><router-link to='/admin_help'>
+              <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
+                <i class="am-icon-question-circle"></i>
+                <span>系统帮助</span>
               </a></router-link>
             </li>
      </ul>

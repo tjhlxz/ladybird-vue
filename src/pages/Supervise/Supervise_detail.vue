@@ -149,18 +149,24 @@ export default {
 										var loading=AMUI.dialog.loading({
 											title:'正在加载，请稍等'
 										});
+										that.content=[];
+										that.teacher_college=[];
+										that.edu=that.$route.query;
 										that.axios.get(_global.baseUrl + 'edu_toTeacher?edu_id='+that.edu.id).then(body => {
-											that.checked=false;
 											if(body.status==200){
-												loading.modal('close')
+												loading.modal('close');
 												that.content = body.data.data;
-												that.teacher_college=[];
-												that.teacher_college.push(that.content[0].college);
-												for(var i=1;i<that.content.length;i++){
-													if(that.content[i].college!==that.content[i-1].college){
-														that.teacher_college.push(that.content[i].college);
+												for(var i=0;i<that.content.length;i++){
+													that.teacher_college.push(that.content[i].college)
+												}
+												var temp=[]
+												for(var j=0;j<that.teacher_college.length;j++){
+													if(temp.indexOf(that.teacher_college[j])==-1){
+														temp.push(that.teacher_college[j]);
 													}
 												}
+												that.temp=temp;
+												console.log(that.temp)
 											}else{
 												AMUI.dialog.alert({
 													content: body.data.message
