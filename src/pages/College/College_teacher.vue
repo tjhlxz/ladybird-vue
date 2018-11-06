@@ -122,7 +122,7 @@
                     <div class="am-modal-bd">
                       将 {{staff_room_old}} 修改为
                       <!-- <input type="text" class="am-modal-prompt-input"> -->
-                      <select data-am-selected="{maxHeight: 200}" @click="select_click" v-model="staff_room_select" @change="select" class="am-input-sm data-am-selected">
+                      <select data-am-selected="{maxHeight: 200}" @click="select_click" v-model="staff_room_select"  class="am-input-sm data-am-selected">
                         <option v-for="(room, index) in staff_room" :value="staff_room[index]" name="staff_room_select">{{room}}</option>
                       </select>
                     </div>
@@ -152,7 +152,8 @@ export default {
         staff_room_select: '',
         staff_id: '',
         staff_name: '',
-        college: ''
+        college: '',
+        _id: 0
     }
   },
   mounted() {
@@ -498,6 +499,7 @@ export default {
         var _this = this;
         var _e = e;
         _this._id = _this.content.teachers[index].id;
+        console.log(_this._id)
         _this.staff_room_old = _this.content.teachers[index].staff_room;
 
         $('#my-prompt').modal({

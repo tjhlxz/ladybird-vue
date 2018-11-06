@@ -31,7 +31,7 @@
                                 <option value="国际教育学院" name="teacher_college">国际教育学院</option>
                                 <option value="体育部" name="teacher_college">体育部</option>
                                 <option value="实训中心" name="teacher_college">实训中心</option>
-                            </select>
+                              </select>
                             </div>
                             <form @submit.prevent="searchByname">
                             <div class="caption" style="margin-left:300px;">
@@ -226,7 +226,9 @@ fir: function(e) {
     _this.before = bef[0];
     _this.page = 1;
     var dom = $('.bef')[0];
-    dom.setAttribute('class', 'bef am-active');
+    if(dom) {
+        dom.setAttribute('class', 'bef am-active');   
+    }
     if(index >= _this.length - 5) {
         $('.ellipsis').hide();
     }else {

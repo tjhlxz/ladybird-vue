@@ -49,12 +49,12 @@
         </div>
     </div>
 
-    <div class="am-popup" id="my-popup" >
+    <div class="am-popup" id="my-popup" style="height: 400px;margin-top: -150px;">
       <div class="am-popup-inner">
         <div class="am-popup-hd">
           <h4 class="am-popup-title">教师列表</h4>
           <span data-am-modal-close
-                class="am-close" style="color: red">&times;</span>
+                class="am-close" style="color: red;">&times;</span>
         </div>
         <div>
             <div class="am-u-md-8 am-u-sm-centered">
