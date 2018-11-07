@@ -107,10 +107,14 @@
                         <div class="row last">
                             <div class="number1 beizhu">备&nbsp;&nbsp;注</div>
                             <div class="content">
-                            <div class="item">1、审批表签字后复印一式三份，一份教务处留存，一份教师所在二级教学单位留存，一份送至评估办公室。<br></div>
-                            <div class="item">2、申请表中，如仅有几次课的时间需调整，申请类型需选择"调串"选项；如因故需要调整整门课的上课时间或将课程转给其他老师，申请类型需选择"变更"选项。<br></div>
-                            <div class="item">3、除极特殊原因外，不可随意调串课。凡因公出差、因病者，该教学单位必须在同时间、同地点安排代课教师。<br></div>
-                        </div>
+                                        <div class="item">1.调串类型：调串申请时教师课表不会发生永久变化，此时无附件。<br></div>
+                                        <div class="item">&nbsp;&nbsp;&nbsp;A.临时代课：调整前后时间保持不变填写，明确填写代课教师；<br></div>
+                                        <div class="item">&nbsp;&nbsp;&nbsp;B.临时顺延：调整前后时间地点按二级学院教务科实际可行填写，代课教师可不填；<br></div>
+                                        <div class="item">&nbsp;&nbsp;&nbsp;C.临时调串：若干次调串时间地点按二级学院教务科实际可行填写，代课教师可不填；<br></div>
+                                        <div class="item">2.变更类型：变更申请时教师课表将永久变化，教务处教务科变更后新课表详见附件。<br></div>
+                                        <div class="item">&nbsp;&nbsp;&nbsp;A.教师永久性变更：申请整门课程的任课教师永久性变更。<br></div>
+                                        <div class="item">&nbsp;&nbsp;&nbsp;B.时间地点久性变更：申请整门课的上课时间地点永久性变更。<br></div>
+                                    </div>
                         </div>
                     </div>
                 </center>
@@ -182,7 +186,7 @@ export default {
     font-family:SimSun;
     font-size: 20px;
     font-weight: 700;
-    padding:50px 23px;
+    padding:10px 23px;
 }
 .form{
     font-size: 40px;
@@ -205,18 +209,18 @@ export default {
 }
 .last{
     border-bottom: none;
-    height: 200px;
-    
+    height: 250px;
+
 }
 .item{
-    line-height: 25px;
+    line-height: 28px;
     text-align: left;
-    font-size: 20px;
+    font-size: 18px;
     margin-bottom: 3px;
 }
 .beizhu{
-    height:200px;
-    line-height: 200px;
+    height:250px;
+    line-height: 250px;
     text-align: center;
 }
 .content{
@@ -286,6 +290,7 @@ export default {
     font-size: 28px;
 }
 .num4{
+    height:150px;
     display: flex;
     flex-direction: column;
     width: 750px;
@@ -295,9 +300,10 @@ export default {
     display: flex;
     flex-direction: row;
     width: 750px;
+    height: 120px;
 }
-    @page{
-        size:  auto;   /* auto is the initial value */
-        margin: 0mm;  /* this affects the margin in the printer settings */
-    }  
+@page{
+    size:  auto;   /* auto is the initial value */
+    margin: 0mm;  /* this affects the margin in the printer settings */
+}  
 </style>
