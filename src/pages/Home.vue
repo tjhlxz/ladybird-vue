@@ -1,8 +1,8 @@
 <template>
     <div class="tpl-content-wrapper">
         <div class="tpl-portlet-components">
-            <div class="tpl-block">
-
+            <div>
+                <image src='../../static/assets/img/bg.jpg'></image>
             </div>
         </div>
     </div>
@@ -20,5 +20,5 @@ export default {
     mounted() {
         
     }
-  }
+  };
 </script>
