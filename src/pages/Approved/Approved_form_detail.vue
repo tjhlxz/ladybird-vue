@@ -113,7 +113,7 @@
                                         <div class="item">&nbsp;&nbsp;&nbsp;C.临时调串：若干次调串时间地点按二级学院教务科实际可行填写，代课教师可不填；<br></div>
                                         <div class="item">2.变更类型：变更申请时教师课表将永久变化，教务处教务科变更后新课表详见附件。<br></div>
                                         <div class="item">&nbsp;&nbsp;&nbsp;A.教师永久性变更：申请整门课程的任课教师永久性变更。<br></div>
-                                        <div class="item">&nbsp;&nbsp;&nbsp;B.时间地点久性变更：申请整门课的上课时间地点永久性变更。<br></div>
+                                        <div class="item">&nbsp;&nbsp;&nbsp;B.时间地点永久性变更：申请整门课的上课时间地点永久性变更。<br></div>
                                     </div>
                         </div>
                     </div>
@@ -164,12 +164,7 @@ export default {
     methods: {
         print: function(e) {
           var _this = this;
-          var $loading = AMUI.dialog.loading();
-
-          setTimeout(function() {
             _this.$print('#print_page');
-            $loading.modal('close');
-          }, 3000)
       },
       back: function() {
         this.$router.go(-1);
