@@ -163,13 +163,7 @@ export default {
     },
     methods: {
         print: function(e) {
-          var _this = this;
-          var $loading = AMUI.dialog.loading();
-
-          setTimeout(function() {
-            _this.$print('#print_page');
-            $loading.modal('close');
-          }, 3000)
+          $.print('#print_page');
       },
       back: function() {
         this.$router.go(-1);

@@ -162,9 +162,8 @@ export default {
     })
     },
     methods: {
-        print: function(e) {
-          var _this = this;
-          _this.$print('#print_page');
+        print: function() {
+            $.print('#print_page');
         },
         back: function() {
           this.$router.go(-1);

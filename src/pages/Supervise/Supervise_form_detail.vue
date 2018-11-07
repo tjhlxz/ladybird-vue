@@ -162,19 +162,13 @@ export default {
         })
     },
     methods: {
-        print: function(e) {
-          var _this = this;
-          var $loading = AMUI.dialog.loading();
-
-          setTimeout(function() {
-            _this.$print('#print_page');
-            $loading.modal('close');
-        }, 3000)
-      },
-      back: function() {
-        this.$router.go(-1);
+        print: function() {
+          $.print('#print_page');
+        },
+        back: function() {
+          this.$router.go(-1);
+        }
     }
-}
 };
 </script>
 <style media="print" type="text/css">
