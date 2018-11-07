@@ -8,7 +8,6 @@
         <label style="color:#32c5d2">教务审批后台管理系统</label>
         </div>
         <div class="am-icon-list tpl-header-nav-hover-ico am-fl am-margin-right">
-
         </div>
 
         <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
