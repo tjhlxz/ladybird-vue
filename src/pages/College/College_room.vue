@@ -99,12 +99,20 @@ export default {
     }
   },
   mounted() {
+    var loading=AMUI.dialog.loading({
+            title:'正在加载，请稍等'
+        });
     var college = JSON.parse(sessionStorage.getItem("data")).college;
     this.college = college;
     this.axios.get(_global.baseUrl + 'staff_room_list?college=' + college).then(res => {
+            loading.modal('close')
         if(res.data.status == 200) {
             this.content = res.data;
-        }
+        }else {
+            AMUI.dialog.alert({
+              content: res.data.message
+            })
+          }
     })
     
   },
@@ -126,13 +134,14 @@ export default {
                                 _this.content = res.data;
                             }
                         })
-                    }
+                    }else {
+                            AMUI.dialog.alert({
+                              content: res.data.message
+                            })
+                          }
                 })
             }
-          },
-          // onCancel: function(e) {
-            
-          // }
+          }
         })
     },
     change: function(e, index) {
@@ -165,7 +174,11 @@ export default {
                                         _this.content = res.data;
                                     }
                                 })
-                              }
+                              }else {
+                            AMUI.dialog.alert({
+                              content: res.data.message
+                            })
+                          }
                         })
                     },
                     onCancel: function() {}
@@ -197,7 +210,11 @@ export default {
                                 _this.content = res.data;
                             }
                         })
-                      }
+                      }else {
+                            AMUI.dialog.alert({
+                              content: res.data.message
+                            })
+                          }
                 })
             }  
         })

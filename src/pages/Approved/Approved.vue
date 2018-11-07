@@ -90,10 +90,13 @@ export default {
     }
   },
   mounted() {
+    var loading=AMUI.dialog.loading({
+        title:'正在加载，请稍等'
+    });
     var staff_id = JSON.parse(sessionStorage.getItem("data")).staff_id;
     this.axios.get(_global.baseUrl + 'history?staff_id=' + staff_id).then(body => {
+        loading.modal('close')
       this.content = body.data.data;
-      console.log(this.content)
     })
   },
   methods: {

@@ -115,8 +115,12 @@ export default {
 },
 mounted() {
     var _this = this;
+    var loading=AMUI.dialog.loading({
+            title:'正在加载，请稍等'
+        });
     _this.college = JSON.parse(sessionStorage.getItem("data")).college;
     _this.axios.get(_global.baseUrl + 'allPassForm?page=1'+'&college='+_this.college).then(body => {
+        loading,model('close');
         _this.content = body.data.data;
         _this.formsData=_this.content.formsData;
         _this.length = Math.ceil(_this.content.count/11);
@@ -368,6 +372,10 @@ select_click: function() {
             }
             _this.staff_room = staff_room;
             // _this.staff_room = res.data.data;
+          }else {
+            AMUI.dialog.alert({
+              content: res.data.message
+            })
           }
         })
 },
@@ -384,7 +392,11 @@ select: function(e) {
           content: body.data.message
       });
         this.formsData=[]
-    }
+    }else {
+        AMUI.dialog.alert({
+          content: res.data.message
+        })
+      }
 })
 },
 link_left1: function(e) {

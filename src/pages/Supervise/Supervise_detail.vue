@@ -88,8 +88,8 @@ export default {
 		});
 		this.edu=this.$route.query;
 		this.axios.get(_global.baseUrl + 'edu_toTeacher?edu_id='+this.edu.id).then(body => {
-			if(body.status==200){
 				loading.modal('close');
+			if(body.status==200){
 				this.content = body.data.data;
 				for(var i=0;i<this.content.length;i++){
 					this.teacher_college.push(this.content[i].college)

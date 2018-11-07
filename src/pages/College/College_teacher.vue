@@ -158,14 +158,22 @@ export default {
   },
   mounted() {
     var _this = this;
+    var loading=AMUI.dialog.loading({
+        title:'正在加载，请稍等'
+    });
     _this.college = JSON.parse(sessionStorage.getItem("data")).college;
     _this.axios.get(_global.baseUrl + 'teacher_list' + '?college=' + _this.college + '&page=1').then(res => {
+        loading.modal('close')
         _this.content = res.data.data;
         _this.length = Math.ceil(_this.content.count/11);
 
         if(res.data.status==200){
             this.content = res.data.data;
-        }
+        }else {
+            AMUI.dialog.alert({
+              content: res.data.message
+            })
+          }
         var arr = [];
         for (var i = 1; i <= _this.length; i++) {
             arr.push(i);
@@ -187,6 +195,10 @@ export default {
                 staff_room.push(i.staff_room);
             }
             _this.staff_room = staff_room;
+          }else {
+            AMUI.dialog.alert({
+              content: res.data.message
+            })
           }
         })
   },
@@ -413,6 +425,10 @@ export default {
             }
             _this.staff_room = staff_room;
             // _this.staff_room = res.data.data;
+          }else {
+            AMUI.dialog.alert({
+              content: res.data.message
+            })
           }
         })
     },
@@ -487,6 +503,10 @@ export default {
                             })
                       }
                     })
+                  }else {
+                    AMUI.dialog.alert({
+                      content: res.data.message
+                    })
                   }
                 })
             },
@@ -516,7 +536,6 @@ export default {
                         _this.axios.post(_global.baseUrl + 'reviseStaff',params).then(res => {
 
                               if(res.status==200){
-                                console.log(res.data)
 
                                 AMUI.dialog.alert({
                                   content: res.data.message
@@ -552,6 +571,10 @@ export default {
                                             _this.staff_room = staff_room;
                                           }
                                         })
+                              }else {
+                                AMUI.dialog.alert({
+                                  content: res.data.message
+                                })
                               }
                         })
                     },
@@ -571,7 +594,6 @@ export default {
                 _this.axios.delete(_global.baseUrl + 'reviseStaff', {params:{'id':_id}}).then(res => {
 
                       if(res.status==200){
-                        console.log(res.data)
 
                         AMUI.dialog.alert({
                           content: res.data.message
@@ -607,6 +629,10 @@ export default {
                                 _this.staff_room = staff_room;
                               }
                             })
+                      }else {
+                        AMUI.dialog.alert({
+                          content: res.data.message
+                        })
                       }
                 })
             }  

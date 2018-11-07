@@ -121,9 +121,13 @@ export default {
     },
     mounted() {
         var _this = this;
+        var loading=AMUI.dialog.loading({
+            title:'正在加载，请稍等'
+        });
         _this.college = JSON.parse(sessionStorage.getItem("data")).college;
         _this.axios.get(_global.baseUrl + 'staff_mange_list' + '?college=' + _this.college).then(res => {
 
+                loading.modal('close')
             if(res.data.status==200){
                 _this.content = res.data.data;
             }
@@ -135,7 +139,6 @@ export default {
             _this._id = _this.content[index].id;
             _this.staff_name = _this.content[index].staff_name;
             $('#my-popup').modal();
-            // console.log(_this._id)
         },
         search: function() {
             var _this = this;

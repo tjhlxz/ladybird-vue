@@ -177,9 +177,12 @@ export default {
     }
   },
   mounted() {
+    var loading=AMUI.dialog.loading({
+        title:'正在加载，请稍等'
+    });
     this.axios.get(_global.baseUrl + 'find_form?form_id=' + this.$route.query.id).then(body => {
+        loading.modal('close')
       this.content = body.data.data;
-      console.log(this.content)
     })
   },
   methods: {

@@ -122,7 +122,11 @@ export default {
 },
 mounted() {
     var _this = this;
+    var loading=AMUI.dialog.loading({
+            title:'正在加载，请稍等'
+        });
     _this.axios.get(_global.baseUrl + 'allPassForm?page=1').then(body => {
+        loading.modal('close')
         _this.content = body.data.data;
         _this.formsData=_this.content.formsData;
         _this.length = Math.ceil(_this.content.count/11);
