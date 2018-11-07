@@ -10,7 +10,6 @@ import Print from '../static/assets/js/jQuery.print.js'
 import user from './components/Global'
 
 Vue.prototype.USER = user;
-// Vue.prototype.Print = Print;
 Vue.use(VueAxios, axios);
 
 Vue.config.productionTip = false;

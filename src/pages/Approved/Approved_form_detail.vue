@@ -163,7 +163,17 @@ export default {
     },
     methods: {
         print: function() {
-            $.print('#print_page');
+            $('#print_page').print({
+            globalStyles: true,
+            mediaPrint: false,
+            stylesheet: null,
+            noPrintSelector: ".no-print",
+            iframe: false,
+            append: null,
+            prepend: null,
+            manuallyCopyFormValues: true,
+            deferred: $.Deferred()
+          });
         },
         back: function() {
           this.$router.go(-1);
