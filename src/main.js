@@ -5,15 +5,12 @@ import App from './App'
 import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-import Print from '../static/assets/js/print.js'
-// import Schart from 'vue-schart'
+import Print from '../static/assets/js/jQuery.print.js'
   
 import user from './components/Global'
 
-Vue.prototype.USER = user
+Vue.prototype.USER = user;
 Vue.use(VueAxios, axios);
-Vue.use(Print);
-// Vue.component('schart', Schart);
 
 Vue.config.productionTip = false;
 

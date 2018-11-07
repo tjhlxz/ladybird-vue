@@ -30,18 +30,6 @@
                   </a>
                 </router-link>
 
-               <router-link to='/approved'>
-                 <a href="已审批">
-                  <i class="am-icon-angle-right"></i>
-                  <span>已审批</span>
-                  <i class="tpl-left-nav-content tpl-badge-primary">
-                   5
-                 </i>
-                </a>
-               </router-link>
-
-
-
                <router-link to='/approved-form'>
                  <a href="审批表查询">
                   <i class="am-icon-angle-right"></i>

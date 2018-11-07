@@ -116,12 +116,9 @@ mounted() {
         title:'正在加载，请稍等'
     });
     var _this = this;
-    var loading=AMUI.dialog.loading({
-            title:'正在加载，请稍等'
-        });
     _this.college = JSON.parse(sessionStorage.getItem("data")).college;
     _this.axios.get(_global.baseUrl + 'allPassForm?page=1'+'&college='+_this.college).then(body => {
-        loading,model('close');
+        loading.modal('close');
         _this.content = body.data.data;
         _this.formsData=_this.content.formsData;
         _this.length = Math.ceil(_this.content.count/11);
@@ -142,7 +139,6 @@ mounted() {
 
         }
     })
-
     _this.axios.get(_global.baseUrl + 'selectStaffroomForCollege' + '?college=' + _this.college).then(res => {
         loading.modal('close');
         if(res.data.status==200){

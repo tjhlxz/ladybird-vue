@@ -162,14 +162,23 @@ export default {
         })
     },
     methods: {
-        print: function(e) {
-          var _this = this;
-            _this.$print('#print_page');
-      },
-      back: function() {
-        this.$router.go(-1);
+        print: function() {
+          $('#print_page').print({
+            globalStyles: true,
+            mediaPrint: false,
+            stylesheet: null,
+            noPrintSelector: ".no-print",
+            iframe: false,
+            append: null,
+            prepend: null,
+            manuallyCopyFormValues: true,
+            deferred: $.Deferred()
+          });
+        },
+        back: function() {
+          this.$router.go(-1);
+        }
     }
-}
 };
 </script>
 <style media="print" type="text/css">

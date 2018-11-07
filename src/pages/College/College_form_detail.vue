@@ -17,7 +17,8 @@
                     </div>
                 </div>
             </div>
-            <section ref="print" id="print_page">
+        <div class="print_box">
+            <div id="print_page">
                 <center>
                 <div class="print">
                 <center><div class="heikeji">黑龙江科技大学</div></center>
@@ -120,7 +121,8 @@
                 </center>
                 </div>
             </center>
-            </section>
+            </div>
+        </div>
             <div class="am-u-sm-9 am-u-sm-push-3" style="margin-left:500px;">
             <button type="button" @click="print" class="am-btn am-btn-primary tpl-btn-bg-color-success " data-am-modal="{target: '#my-modal-loading'}">打印 </button>
             </div>
@@ -163,8 +165,17 @@ export default {
     },
     methods: {
         print: function(e) {
-          var _this = this;
-            _this.$print('#print_page');
+          $('#print_page').print({
+            globalStyles: true,
+            mediaPrint: false,
+            stylesheet: null,
+            noPrintSelector: ".no-print",
+            iframe: false,
+            append: null,
+            prepend: null,
+            manuallyCopyFormValues: true,
+            deferred: $.Deferred()
+          });
       },
       back: function() {
         this.$router.go(-1);
@@ -173,6 +184,10 @@ export default {
 };
 </script>
 <style media="print" type="text/css">
+.print_box {
+    width:100%;
+    margin: 0 auto;
+}
 .heikeji{
 
     font-size: 25px;
