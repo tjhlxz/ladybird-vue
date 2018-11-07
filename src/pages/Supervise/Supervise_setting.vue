@@ -54,22 +54,22 @@
                   </tr>
                 </tbody>
               </table>
-              <div class="am-cf">
-                            <div class="am-fr">
-                                <ul class="am-pagination tpl-pagination" >
-                                    <li ><a @click="fir" href="#">«</a></li>
-                                    <li v-if="page-1" ><a @click="pre" href="#">上一页</a></li>
-                                    <li class="bef" v-for='bef in before' >
-                                        <a @click="link_left">{{bef}}</a>
-                                    </li>
-                                    <li class="am-disabled ellipsis"><a href="#">...</a></li>
-                                    <li class="aft" v-for='aft in after' >
-                                        <a @click="link_right">{{aft}}</a>
-                                    </li>
-                                    <li v-if="length-page"><a @click="next" href="#">下一页</a></li>
-                                </ul>
-                            </div>
-                        </div>
+              <div v-if="select2==1" class="am-cf">
+                    <div class="am-fr">
+                        <ul class="am-pagination tpl-pagination" >
+                            <li ><a @click="fir" href="#">«</a></li>
+                            <li v-if="page-1" ><a @click="pre" href="#">上一页</a></li>
+                            <li class="bef" v-for='bef in before' >
+                                <a @click="link_left">{{bef}}</a>
+                            </li>
+                            <li class="am-disabled ellipsis"><a href="#">...</a></li>
+                            <li class="aft" v-for='aft in after' >
+                                <a @click="link_right">{{aft}}</a>
+                            </li>
+                            <li v-if="length-page"><a @click="next" href="#">下一页</a></li>
+                        </ul>
+                    </div>
+                </div>
               <hr>
             </div>
           </div>
@@ -102,13 +102,19 @@ export default {
       arr: [],
       before: [],
       after: [],
-      page: 1
+      page: 1,
+      college:'无',
+      select2:1
     }
   },
   mounted() {
+  	var loading=AMUI.dialog.loading({
+                title:'正在添加，请稍等'
+              });
     var _this = this;
     this.edu=this.$route.query;
     this.axios.get(_global.baseUrl + 'edu_noTeacher?page=1').then(res => {
+    	loading.modal('close');
       _this.content = res.data.data.no_edu_teacher;
       _this.count=res.data.data.count;
       _this.formsData=_this.content.formsData;
@@ -129,13 +135,19 @@ export default {
           _this.after = aft[0];
 
       }
-
-
-      
     })
-    for(var i=0;i<this.count;i++){
-      this.teacher_college.push(this.content[i].college)
-    }
+    _this.axios.get(_global.baseUrl + 'allCollege').then(res => {
+        if(res.status==200){
+          _this.college = res.data.data;
+      }else{
+          AMUI.dialog.alert({
+            content: res.data.message
+        });
+      }
+  })
+    // for(var i=0;i<this.count;i++){
+    //   this.teacher_college.push(this.content[i].college)
+    // }
   },
   methods: {
       link_left: function(e) {
@@ -346,6 +358,7 @@ export default {
         this.$router.go(-1);
       },
       select(){
+      	this.select2=2;
         var loading=AMUI.dialog.loading({
                 title:'正在加载，请稍等'
               });
