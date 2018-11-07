@@ -8,28 +8,8 @@
                     <div class="caption font-green bold">
                         <span class="am-icon-code"></span> 列表
                     </div>
-                    <div class="tpl-portlet-input tpl-fz-ml">
-                        <div class="portlet-input input-small input-inline">
-                            <div class="input-icon right">
-                                <i class="am-icon-search"></i>
-                                <input type="text" class="form-control form-control-solid" placeholder="搜索..."></div>
-                        </div>
-                    </div>
                 </div>
                 <div class="tpl-block">
-                    <div class="am-g">
-                        <div class="am-u-sm-12 am-u-md-6">
-                            <div class="am-btn-toolbar">
-                                <div class="am-btn-group am-btn-group-xs">
-                                    <button type="button" class="am-btn am-btn-default am-btn-success"><span class="am-icon-plus"></span> 新增</button>
-                                    <button type="button" class="am-btn am-btn-default am-btn-secondary"><span class="am-icon-save"></span> 保存</button>
-                                    <button type="button" class="am-btn am-btn-default am-btn-warning"><span class="am-icon-archive"></span> 审核</button>
-                                    <button type="button" class="am-btn am-btn-default am-btn-danger"><span class="am-icon-trash-o"></span> 删除</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
 
                     <div class="am-g">
                         <div class="am-u-sm-12">
@@ -70,19 +50,6 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                                <div class="am-cf">
-                                    <div class="am-fr">
-                                        <ul class="am-pagination tpl-pagination">
-                                            <li class="am-disabled"><a href="#">«</a></li>
-                                            <li class="am-active"><a href="#">1</a></li>
-                                            <li><a href="#">2</a></li>
-                                            <li><a href="#">3</a></li>
-                                            <li><a href="#">4</a></li>
-                                            <li><a href="#">5</a></li>
-                                            <li><a href="#">»</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
                                 <hr>
                             </div>
                         </div>

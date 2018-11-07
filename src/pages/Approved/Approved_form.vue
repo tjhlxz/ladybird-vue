@@ -62,7 +62,7 @@
                             <tbody v-for='(item, key) in formsData'>
                                 <tr>
                                     <td>{{item.form_proposer_id}}</td>
-                                    <td>{{item.form_proposer_name}}</td>
+                                    <td><a href="#">{{item.form_proposer_name}}</a></td>
                                     <td v-if="item.form_type == 1">变更</td>
                                     <td v-else>调串</td>
                                     <td class="am-hide-sm-only">{{item.form_college}}</td>
@@ -70,7 +70,8 @@
                                     
                                     <td>{{item.create_time}}</td>
                                     <td><router-link :to="{path:'/approved-form-detail',query:{id:item.form_id}}">
-                                            <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-file-text-o"></span> 查看详情</button>
+                                            <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-file-text-o"></span> 查看</button>
+                                            <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-file-text-o"></span> 打印</button>
                                         </router-link></td>
                                 </tr>
                             </tbody>
