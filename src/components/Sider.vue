@@ -134,12 +134,6 @@
                 <span>一键检测</span>
               </a></router-link>
             </li>
-            <li class="tpl-left-nav-item" v-if="content.staff_level==8"><router-link to='/admin_help'>
-              <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
-                <i class="am-icon-question-circle"></i>
-                <span>系统帮助</span>
-              </a></router-link>
-            </li>
      </ul>
    </div>
  </div>

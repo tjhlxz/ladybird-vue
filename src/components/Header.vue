@@ -3,8 +3,9 @@
         <div class="am-topbar-brand">
             <a href="javascript:;" class="tpl-logo">
                 <img src="../../static/assets/img/logo1.jpg" alt="" width="60px" height="60px">
+                <!-- <img src='../../static/assets/img/logo2.png' alt="" width="250px" height="60px" /> -->
             </a>
-        <label>教务审批后台管理系统</label>
+        <label style="color:#32c5d2">教务审批后台管理系统</label>
         </div>
         <div class="am-icon-list tpl-header-nav-hover-ico am-fl am-margin-right">
 
