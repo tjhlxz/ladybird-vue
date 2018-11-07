@@ -288,7 +288,5 @@ export default {
         this.$router.go(-1);
     }
   }
-}
-
-
+};
 </script>
