@@ -17,7 +17,7 @@
                         <div class="portlet-input input-small input-inline">
                             <div class="input-icon right">
                                 <i class="am-icon-search"></i>
-                                <input type="text" class="form-control form-control-solid" placeholder="搜索..."> </div>
+                                <input type="text" class="form-control form-control-solid" placeholder="输入名字搜索..."> </div>
                         </div>
                     </div>
 
