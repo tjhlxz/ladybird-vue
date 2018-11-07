@@ -30,7 +30,6 @@ import College_form_detail from '@/pages/College/College_form_detail'
 
 import AdminUser from '@/pages/Admin/AdminUser'
 import AdminCollege from '@/pages/Admin/AdminCollege'
-import AdminHelp from '@/pages/Admin/AdminHelp'
 import AdminBackup from '@/pages/Admin/AdminBackup'
 import AdminPeople from '@/pages/Admin/AdminPeople'
 import AdminCheck from '@/pages/Admin/AdminCheck'
@@ -184,11 +183,6 @@ const router = new Router({
           path: '/admin_backup',
           name: 'AdminBackup',
           component: AdminBackup
-        },
-        {
-          path: '/admin_help',
-          name: 'AdminHelp',
-          component: AdminHelp
         },
         {
           path: '/admin_people',

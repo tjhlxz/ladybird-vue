@@ -183,7 +183,7 @@ export default {
     font-family:SimSun;
     font-size: 20px;
     font-weight: 700;
-    padding:10px 23px;
+    padding:50px 23px 0 23px;
 }
 .form{
     font-size: 40px;
