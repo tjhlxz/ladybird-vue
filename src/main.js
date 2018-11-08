@@ -2,7 +2,6 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
-import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import Print from '../static/assets/js/jQuery.print.js'
@@ -15,6 +14,7 @@ Vue.use(VueAxios, axios);
 Vue.config.productionTip = false;
 
 
+import router from './router'
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
