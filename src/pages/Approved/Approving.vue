@@ -6,7 +6,7 @@
             <div class="tpl-portlet-components">
                 <div class="portlet-title">
                     <div class="caption font-green bold">
-                        <span class="am-icon-code"></span> 列表
+                        <span class="am-icon-code"></span> 待审批列表
                     </div>
                 </div>
                 <div class="tpl-block">
@@ -17,18 +17,16 @@
                                 <table class="am-table am-table-striped am-table-hover table-main">
                                     <thead>
                                         <tr>
-                                            <th class="table-check"><input type="checkbox" class="tpl-table-fz-check"></th>
-                                            <th class="table-id">id</th>
-                                            <th class="table-title">姓名</th>
-                                            <th class="table-type">表单类别</th>
-                                            <th class="table-author am-hide-sm-only">所属院系</th>
-                                            <th class="table-date am-hide-sm-only">申请日期</th>
-                                            <th class="table-set">操作</th>
+                                            <th >id</th>
+                                            <th >姓名</th>
+                                            <th >表单类别</th>
+                                            <th >所属院系</th>
+                                            <th >申请日期</th>
+                                            <th >操作</th>
                                         </tr>
                                     </thead>
                                     <tbody v-for='(item, key) in content.approve_forms_deal'>
                                         <tr>
-                                            <td><input type="checkbox"></td>
                                             <td>{{item.form_id}}</td>
                                             <td><a href="#">{{item.form_proposer_name}}</a></td>
                                             <td v-if='item.form_type-1'>调串</td>

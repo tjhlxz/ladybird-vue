@@ -134,6 +134,11 @@ export default {
           _this.before = bef[0];
           _this.after = aft[0];
 
+      }else {
+          var bef = [];
+
+          bef.push(arr);
+          _this.before = bef[0];
       }
     })
     _this.axios.get(_global.baseUrl + 'allCollege').then(res => {

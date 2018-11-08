@@ -130,22 +130,26 @@ export default {
   mounted() {
     var _this = this;
     _this.axios.get(_global.baseUrl + 'all_user?page=1').then(body => {
-    _this.content = body.data.data;
-    _this.length = Math.ceil(_this.content.count/11);
+        _this.content = body.data.data;
+        _this.length = Math.ceil(_this.content.count/11);
 
-    var arr = [];
-    for (var i = 1; i <= _this.length; i++) {
-        arr.push(i);
-    }
-    _this.arr = arr;
-    if(_this.length > 5) {
-    var bef = [];
-    var aft = [];
-    bef.push(arr.slice(0, 4));
-    aft.push(arr.slice(_this.length-3,_this.length));
-    _this.before = bef[0];
-    _this.after = aft[0];
-    }
+        var arr = [];
+        for (var i = 1; i <= _this.length; i++) {
+            arr.push(i);
+        }
+        _this.arr = arr;
+        if(_this.length > 5) {
+        var bef = [];
+        var aft = [];
+        bef.push(arr.slice(0, 4));
+        aft.push(arr.slice(_this.length-3,_this.length));
+        _this.before = bef[0];
+        _this.after = aft[0];
+        }else {
+            var bef = [];
+            bef.push(arr.slice(0, 4));
+            _this.before = bef[0];
+        }
     })
     
   },

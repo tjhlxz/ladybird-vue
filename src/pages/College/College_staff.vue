@@ -1,15 +1,9 @@
 <template>
   <div class="tpl-content-wrapper">
     <div class="tpl-portlet-components">
-        <div class="portlet-title">
-            <div class="caption font-green bold">
-                <span class="am-icon-code"></span> 列表
-            </div>
-        </div>
-        <div class="tpl-block">
             <div class="portlet-title">
               <div class="caption font-green bold">
-                  <span class="am-icon-code"></span> 教师列表
+                  <span class="am-icon-code"></span> 职务管理
               </div>
             </div>
             <div class="am-g">
@@ -46,7 +40,7 @@
                 </div>
               </div>
             </div>
-        </div>
+
     </div>
 
     <div class="am-popup" id="my-popup" style="height: 400px;margin-top: -150px;">
@@ -161,7 +155,7 @@ export default {
             if(_this.staff_name == '无'){
                 var message = '是否选择' + staff_name+'?'
             }else {
-                var message = '该职务当前为 '+_this.staff_name+' 是否覆盖?'
+                var message = '该职务当前为 '+_this.staff_name+' 是否变更?'
             }
 
 

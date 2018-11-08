@@ -3,7 +3,7 @@
     <div class="tpl-portlet-components">
         <div class="portlet-title">
             <div class="caption font-green bold">
-                <span class="am-icon-code"></span> 列表
+                <span class="am-icon-code"></span> 审批表查询
             </div>
         </div>
         <div class="tpl-block">
@@ -12,7 +12,7 @@
                     <div class="portlet-title">
                         <div class="caption  bold">
                           <label>按教研室查询:</label>
-                          <select data-am-selected="{maxHeight: 200}" v-model="teacher_college" @click="select_click" @change="select">
+                          <select v-model="teacher_college" @click="select_click" @change="select">
                             <option v-for="(room, index) in staff_room" :value="staff_room[index]" name="staff_room_select">{{room}}</option>
                         </select>
                     </div>           
@@ -51,32 +51,32 @@
                         <div class="am-cf" v-if="!fenye">
                             <div class="am-fr">
                                 <ul class="am-pagination tpl-pagination" >
-                                    <li ><a @click="fir" href="#">«</a></li>
-                                    <li v-if="page-1" ><a @click="pre" href="#">上一页</a></li>
+                                    <li v-if="page-1"><a @click="fir" href="javascript:;">«</a></li>
+                                    <li v-if="page-1" ><a @click="pre" href="javascript:;">上一页</a></li>
                                     <li class="bef" v-for='bef in before' >
                                         <a @click="link_left">{{bef}}</a>
                                     </li>
-                                    <li class="am-disabled ellipsis"><a href="#">...</a></li>
+                                    <li class="am-disabled ellipsis"><a href="javascript:;">...</a></li>
                                     <li class="aft" v-for='aft in after' >
                                         <a @click="link_right">{{aft}}</a>
                                     </li>
-                                    <li v-if="length-page"><a @click="next" href="#">下一页</a></li>
+                                    <li v-if="length-page"><a @click="next" href="javascript:;">下一页</a></li>
                                 </ul>
                             </div>
                         </div>
                         <div class="am-cf" v-if="fenye">
                             <div class="am-fr">
                                 <ul class="am-pagination tpl-pagination" >
-                                    <li ><a @click="fir1" href="#">«</a></li>
-                                    <li v-if="page-1" ><a @click="pre1" href="#">上一页</a></li>
+                                    <li v-if="page-1"><a @click="fir1" href="javascript:;">«</a></li>
+                                    <li v-if="page-1" ><a @click="pre1" href="javascript:;">上一页</a></li>
                                     <li class="bef" v-for='bef in before' >
                                         <a @click="link_left1">{{bef}}</a>
                                     </li>
-                                    <li class="am-disabled ellipsis"><a href="#">...</a></li>
+                                    <li class="am-disabled ellipsis"><a href="javascript:;">...</a></li>
                                     <li class="aft" v-for='aft in after' >
                                         <a @click="link_right1">{{aft}}</a>
                                     </li>
-                                    <li v-if="length-page"><a @click="next1" href="#">下一页</a></li>
+                                    <li v-if="length-page"><a @click="next1" href="javascript:;">下一页</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -137,6 +137,11 @@ mounted() {
             _this.before = bef[0];
             _this.after = aft[0];
 
+        }else {
+            var bef = [];
+
+            bef.push(arr.slice(0, 4));
+            _this.before = bef[0];
         }
     })
     _this.axios.get(_global.baseUrl + 'selectStaffroomForCollege' + '?college=' + _this.college).then(res => {
@@ -362,12 +367,8 @@ next: function(e) {
     })
 },
 select_click: function() {
-    var loading=AMUI.dialog.loading({
-        title:'正在加载，请稍等'
-    });
     var _this = this;
     _this.axios.get(_global.baseUrl + 'selectStaffroomForCollege' + '?college=' + _this.college).then(res => {
-        loading.modal('close');
         if(res.data.status==200){
             var staff_room = [];
             for(var i of res.data.data) {
@@ -383,15 +384,38 @@ select_click: function() {
         })
 },
 select: function(e) {
-    var loading=AMUI.dialog.loading({
-        title:'正在加载，请稍等'
-    });
     var that=this;
     that.fenye = true;
+    that.before = [];
+    that.after = [];
+    that.length = 0;
+    that.arr = [];
     this.axios.get(_global.baseUrl + 'allPassForm?page=1&college='+that.college+'&staff_room='+that.teacher_college).then(body => {
       if(body.data.status==200){
         that.content = body.data.data;
         that.formsData=that.content.formsData;
+        that.length = Math.ceil(that.content.count/11);
+        var arr = [];
+        for (var i = 1; i <= that.length; i++) {
+            arr.push(i);
+        }
+        that.arr = arr;
+
+        if(that.length > 5) {
+            var bef = [];
+            var aft = [];
+
+            bef.push(arr.slice(0, 4));
+            aft.push(arr.slice(that.length-3,that.length));
+            that.before = bef[0];
+            that.after = aft[0];
+
+        }else {
+            var bef = [];
+
+            bef.push(arr);
+            that.before = bef[0];
+        }
     }else if(body.data.status==400){
         AMUI.dialog.alert({
           content: body.data.message

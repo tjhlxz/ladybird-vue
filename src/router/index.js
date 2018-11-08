@@ -42,7 +42,11 @@ const router = new Router({
   mode: 'history',
   routes: [
     {
-      path: '/Login',
+      path: '/',
+      redirect: '/ladybird_cms/'
+    },
+    {
+      path: '/ladybird_cms/Login',
       name: 'Login',
       component: Login
     },
@@ -50,7 +54,7 @@ const router = new Router({
       meta: {
         requireAuth: true
       },
-      path: '/',
+      path: '/ladybird_cms',
       name: 'Main',
       component: Main,
       children: [
@@ -205,7 +209,7 @@ router.beforeEach((to, from, next) => {
        next()
      } else {// 没登录则跳转到登录界面
        next({
-         path: '/Login'
+         path: '/ladybird_cms/Login'
        })
      }
    } else {
