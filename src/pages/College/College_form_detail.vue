@@ -25,7 +25,7 @@
                             <center><div class="heikeji">黑龙江科技大学</div></center>
                             <center><div class="form">课程表变更审批表</div></center>
                             <center>
-                                <div style="margin-right:350px;">申请时间：{{content.create_time}}</div>
+                                <div style="margin-right:350px;">申请时间:{{content.create_time}}</div>
                                 <div class="kuang">
                                     <div class="row num1">
                                         <div class="number1">单&nbsp;位</div>
@@ -207,7 +207,7 @@ export default {
     height:28cm;
     font-family:SimSun;
     font-size: 14pt;
-    padding:1cm 1cm 0 1cm;
+    padding-top:3cm;
     font-weight: 400;
 }
 .form{
