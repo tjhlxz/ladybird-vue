@@ -1,20 +1,15 @@
 <template>
   <div class="tpl-content-wrapper">
             <div class="tpl-portlet-components">
-                <div class="portlet-title">
-                    <div class="caption font-green bold">
-                        <span class="am-icon-code"></span> 列表
-                    </div>
                     <div class="tpl-portlet-input tpl-fz-ml">
                         <div class="portlet-input input-small input-inline">
                             <div class="input-icon right">
                                 <i class="am-icon-search"></i>
-                                <input type="text" v-model="search_value" @keyup.enter="search" class="form-control form-control-solid" placeholder="按老师姓名搜索..."></div>
+                                <input type="text" v-model="search_value" @keyup.enter="search" class="form-control form-control-solid" placeholder="按老师姓名搜索...">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="tpl-block">
-                    <div class="tpl-portlet-components">
+
                       <div class="portlet-title">
                         <div class="caption font-green bold">
                           <span class="am-icon-plus"></span> 添加教师
@@ -53,7 +48,6 @@
                           </div>
                         </div>
                       </div>
-                    </div>
                     <div class="portlet-title">
                         <div class="caption font-green bold">
                           <span class="am-icon-code"></span> 教师列表
@@ -115,7 +109,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+
                 <div class="am-modal am-modal-prompt" tabindex="-1" id="my-prompt">
                   <div class="am-modal-dialog">
                     <div class="am-modal-hd">修改教研室</div>
@@ -186,6 +180,10 @@ export default {
         aft.push(arr.slice(_this.length-3,_this.length));
         _this.before = bef[0];
         _this.after = aft[0];
+        }else {
+            var bef = [];
+            bef.push(arr);
+            _this.before = bef[0];
         }
     })
     _this.axios.get(_global.baseUrl + 'selectStaffroomForCollege' + '?college=' + _this.college).then(res => {
@@ -268,7 +266,6 @@ export default {
         _this.page = index;
         for(var box = 0;box<3;box++) {
             if(_this.after[box] == index) {
-                console.log(_this.after[box])
                     var dom = $('.aft')[box];
                     dom.setAttribute('class', 'aft am-active');
                 }
