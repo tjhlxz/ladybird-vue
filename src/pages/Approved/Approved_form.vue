@@ -57,7 +57,6 @@
                                     <td>{{item.create_time}}</td>
                                     <td><router-link :to="{path:'/approved-form-detail',query:{id:item.form_id}}">
                                             <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-file-text-o"></span> 查看</button>
-                                            <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-file-text-o"></span> 打印</button>
                                         </router-link></td>
                                 </tr>
                             </tbody>
@@ -120,7 +119,8 @@ export default {
         after: [],
         page: 1,
         search_staff_name:'',
-        fenye: false
+        fenye: false,
+        college: []
     }
 },
 mounted() {
@@ -128,6 +128,15 @@ mounted() {
     var loading=AMUI.dialog.loading({
             title:'正在加载，请稍等'
         });
+    this.axios.get(_global.baseUrl + 'allCollege').then(res => {
+        if(res.status==200){
+          this.college = res.data.data;
+      }else{
+          AMUI.dialog.alert({
+            content: res.data.message
+        });
+      }
+  })
     _this.axios.get(_global.baseUrl + 'allPassForm?page=1').then(body => {
         loading.modal('close')
         _this.content = body.data.data;

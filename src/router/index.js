@@ -5,9 +5,7 @@ import Main from '@/pages/Main'
 import Home from '@/pages/Home'
 import Chart from '@/pages/Chart'
 import Approving from '@/pages/Approved/Approving'
-import Approved from '@/pages/Approved/Approved'
 import Approving_detail from '@/pages/Approved/Approving_detail'
-import Approved_detail from '@/pages/Approved/Approved_detail'
 import Approved_form from '@/pages/Approved/Approved_form'
 import Approved_form_detail from '@/pages/Approved/Approved_form_detail'
 import Intelligence from '@/pages/Approved/Intelligence'
@@ -74,19 +72,9 @@ const router = new Router({
           component: Approving
         },
         {
-          path: '/approved',
-          name: 'Approved',
-          component: Approved
-        },
-        {
           path: '/approving-detail',
           name: 'Approving_detail',
           component: Approving_detail
-        },
-        {
-          path: '/approved-detail',
-          name: 'Approved_detail',
-          component: Approved_detail
         },
         {
           path: '/approved-form',
