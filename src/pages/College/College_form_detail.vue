@@ -18,6 +18,7 @@
                 </div>
             </div>
             <div class="print_box">
+                <center>
                 <div id="print_page">
                     <center>
                         <div class="print">
@@ -121,6 +122,7 @@
                         </div>
                     </center>
                 </div>
+            </center>
             </div>
             <div class="am-u-sm-9 am-u-sm-push-3" style="margin-left:500px;">
                 <button type="button" @click="print" class="am-btn am-btn-primary tpl-btn-bg-color-success " data-am-modal="{target: '#my-modal-loading'}">打印 </button>
@@ -198,14 +200,14 @@ export default {
 }
 #print_page{
     width: 21cm;
-    height:29.7cm;
+    height:28cm;
 }
 .print{
     width: 21cm;
-    height:29.7cm;
+    height:28cm;
     font-family:SimSun;
     font-size: 14pt;
-    padding:1.5cm 1cm;
+    padding:1cm 1cm 0 1cm;
     font-weight: 400;
 }
 .form{
