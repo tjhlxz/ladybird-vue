@@ -18,15 +18,14 @@
                 </div>
             </div>
             <div class="print_box">
-            <div ref="print" id="print_page">
                 <center>
-                    <div class="print">
+            <section ref="print" id="print_page">
+                <center>
                         <center><div class="heikeji">黑龙江科技大学</div></center>
                         <center><div class="form">课程表变更审批表</div></center>
-                        
                         <center>
                             <div style="margin-right:350px;">申请时间：{{content.create_time}}</div>
-                            <div class="kuang" style="border: 1px solid #000;">
+                            <div class="kuang" style="border: 1pt solid #000;">
                                 <div class="row num1">
                                     <div class="number1">单&nbsp;位</div>
                                     <div class="number5">{{content.form_college}}</div>
@@ -71,15 +70,15 @@
                                                 <div v-for="item3 in before">{{item3}}</div>
                                             </div>
                                             <div class="number9">
-                                            <div v-if="date_before.length!==0" v-for="item1 in date_after">{{item1}}</div>
-                                            <div v-for="item4 in before">{{item4}}</div>
+                                                <div v-if="date_before.length!==0" v-for="item1 in date_after">{{item1}}</div>
+                                                <div v-for="item4 in before">{{item4}}</div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="number1 num3">原&nbsp;&nbsp;因</div>
-                                    <div style="padding:5px 8px;width:16.5cm;text-align: left;font-size: 14pt;">{{content.form_reason}}</div>
+                                    <div style="padding:5px 8px;width:16.4cm;text-align: left;font-size: 14pt;">{{content.form_reason}}</div>
                                 </div>
                                 <div class="row number3">
                                         <div class="number2">教研室意见</div>
@@ -109,19 +108,19 @@
                                     <div class="number1 beizhu">备&nbsp;&nbsp;注</div>
                                     <div class="content">
                                         <div class="item">1.调串类型：调串申请时教师课表不会发生永久变化，此时无附件。<br></div>
-                                        <div class="item">&nbsp;A.临时代课：调整前后时间保持不变填写，明确填写代课教师；<br></div>
-                                        <div class="item">&nbsp;B.临时顺延：调整前后时间地点按二级学院教务科实际可行填写，代课教师可不填；<br></div>
-                                        <div class="item">&nbsp;C.临时调串：若干次调串时间地点按二级学院教务科实际可行填写，代课教师可不填；<br></div>
-                                        <div class="item">2.变更类型：变更申请时教师课表将永久变化，教务处教务科变更后新课表详见附件。<br></div>
-                                        <div class="item">&nbsp;A.教师永久性变更：申请整门课程的任课教师永久性变更。<br></div>
-                                        <div class="item">&nbsp;B.时间地点永久性变更：申请整门课的上课时间地点永久性变更。<br></div>
+                                        <div class="item">&nbsp;A.临时代课:调整前后时间保持不变填写，明确填写代课教师；<br></div>
+                                        <div class="item">&nbsp;B.临时顺延:调整前后时间地点按二级学院教务科实际可行填写，代课教师可不填；<br></div>
+                                        <div class="item">&nbsp;C.临时调串:若干次调串时间地点按二级学院教务科实际可行填写，代课教师可不填；<br></div>
+                                        <div class="item">2.变更类型:变更申请时教师课表将永久变化，教务处教务科变更后新课表详见附件。<br></div>
+                                        <div class="item">&nbsp;A.教师永久性变更:申请整门课程的任课教师永久性变更。<br></div>
+                                        <div class="item">&nbsp;B.时间地点永久性变更:申请整门课的上课时间地点永久性变更。<br></div>
                                     </div>
                                 </div>
                             </div>
                         </center>
-                    </div>
                 </center>
-            </div>
+            </section>
+        </center>
         </div>
             <div class="am-u-sm-9 am-u-sm-push-3" style="margin-left:500px;">
                 <button type="button" @click="print" class="am-btn am-btn-primary tpl-btn-bg-color-success " data-am-modal="{target: '#my-modal-loading'}">打印 </button>
@@ -196,18 +195,18 @@ export default {
 }
 .print_box{
     width: 100%;
+    color:#000;
 }
 #print_page{
     width: 21cm;
     height:28cm;
-}
-.print{
-    width: 21cm;
-    height:28cm;
     font-family:SimSun;
     font-size: 14pt;
-    padding:1cm 1cm 0 1cm;
+    padding:1.5cm 0.5cm 0 0.5cm;
     font-weight: 400;
+}
+.print{
+    
 }
 .form{
     font-family:SimHei;
@@ -284,7 +283,7 @@ export default {
     flex-direction: column;
 }
 .number9{
-    width: 8.2cm;
+    width: 8.3cm;
 }
 .num5{
     height: 2.3cm;
@@ -333,5 +332,5 @@ export default {
 @page{
     size:  auto;   /* auto is the initial value */
     margin: 0mm;  /* this affects the margin in the printer settings */
-}  
+}
 </style>
