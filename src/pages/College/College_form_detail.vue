@@ -188,7 +188,7 @@ export default {
 }
 };
 </script>
-<style media="print" type="text/css">
+<style media="print" type="text/css" scoped>
 .heikeji{
     font-size: 16pt;
     letter-spacing:11px;
@@ -202,10 +202,11 @@ export default {
 }
 .print{
     width: 21cm;
-    height:29.7;
+    height:29.7cm;
     font-family:SimSun;
     font-size: 14pt;
     padding:1.5cm 1cm;
+    font-weight: 400;
 }
 .form{
     font-family:SimHei;
