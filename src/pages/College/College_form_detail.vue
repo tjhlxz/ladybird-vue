@@ -196,7 +196,7 @@ export default {
 .print_box{
     width: 100%;
 }
-.print_page{
+#print_page{
     width: 21cm;
     height:29.7cm;
 }

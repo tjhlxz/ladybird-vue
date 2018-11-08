@@ -17,7 +17,8 @@
                     </div>
                 </div>
             </div>
-            <section ref="print" id="print_page">
+            <div class="print_box">
+            <div ref="print" id="print_page">
                 <center>
                     <div class="print">
                         <center><div class="heikeji">黑龙江科技大学</div></center>
@@ -120,7 +121,8 @@
                         </center>
                     </div>
                 </center>
-            </section>
+            </div>
+        </div>
             <div class="am-u-sm-9 am-u-sm-push-3" style="margin-left:500px;">
                 <button type="button" @click="print" class="am-btn am-btn-primary tpl-btn-bg-color-success " data-am-modal="{target: '#my-modal-loading'}">打印 </button>
             </div>
@@ -195,7 +197,7 @@ export default {
 .print_box{
     width: 100%;
 }
-.print_page{
+#print_page{
     width: 21cm;
     height:29.7cm;
 }
