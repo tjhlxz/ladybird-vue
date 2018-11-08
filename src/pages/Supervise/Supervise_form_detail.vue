@@ -199,14 +199,14 @@ export default {
 }
 #print_page{
     width: 21cm;
-    height:29.7cm;
+    height:28cm;
 }
 .print{
     width: 21cm;
-    height:29.7cm;
+    height:28cm;
     font-family:SimSun;
     font-size: 14pt;
-    padding:1.5cm 1cm;
+    padding:1cm 1cm 0 1cm;
     font-weight: 400;
 }
 .form{
