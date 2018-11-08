@@ -187,7 +187,7 @@ export default {
   }
 };
 </script>
-<style media="print" type="text/css" scoped>
+<style media="print" type="text/css">
 .heikeji{
     font-size: 16pt;
     letter-spacing:11px;
