@@ -72,7 +72,7 @@
                                             <td>
                                                 <div class="am-btn-toolbar">
                                                     <div class="am-btn-group am-btn-group-xs">
-                                                        <router-link :to="{path:'/approved-detail',query:{id:item.form_id}}">
+                                                        <router-link :to="{path:'/ladybird_cms/approved-detail',query:{id:item.form_id}}">
                                                             <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 查看</button>
                                                             <button @click="detail" class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-copy"></span> 打印</button>
                                                         </router-link>

@@ -126,6 +126,7 @@ import _global from '../../components/Global'
                 var timeend = +_this.years + 1 + date[1];
                 _this.axios.get(_global.baseUrl + 'statistics_leaveRate?timestart=' + timestart + '&timeend=' + timeend).then(res => {
                     if(res.data.status == 200) {
+                        _this.echartsA.clear();
                         _this.content = res.data.data;
                         var source = [['product', _this.years+' 第二学期']];
 
@@ -139,7 +140,6 @@ import _global from '../../components/Global'
                         for(var i = 0;i<len;i++) {
                             data.push({type: 'bar', seriesLayoutBy: 'row'});
                         }
-                        console.log(data);
 
                         // var echartsA = echarts.init(document.getElementById('tpl-echarts-A'));
                             var option = {

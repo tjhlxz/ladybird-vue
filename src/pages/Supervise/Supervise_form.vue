@@ -49,7 +49,7 @@
                                 <td class="am-hide-sm-only">{{item.form_staff_room}}</td>
 
                                 <td>{{item.create_time}}</td>
-                                <td><router-link :to="{path:'/supervise-form-detail',query:{id:item.form_id}}">
+                                <td><router-link :to="{path:'/ladybird_cms/supervise-form-detail',query:{id:item.form_id}}">
                                     <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-file-text-o"></span> 查看详情</button>
                                 </router-link></td>
                             </tr>

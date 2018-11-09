@@ -29,7 +29,7 @@
 				<div class="" >
 					<button type="button" style="margin-left:10px" @click="back" class="am-btn am-btn-default am-btn-secondary"><span class="am-icon-undo"></span> 返回</button>
 					<button type="button"  style="margin-left:10px" @click="checkok" class="am-btn am-btn-danger"><span class="am-icon-trash-o"></span>  移除</button>
-					<router-link :to="{path:'/supervise-setting',query:{id:edu.id,staff_name:edu.staff_name,college:edu.college}}">
+					<router-link :to="{path:'/ladybird_cms/supervise-setting',query:{id:edu.id,staff_name:edu.staff_name,college:edu.college}}">
 						<button type="button"  style="margin-left:10px" class="am-btn am-btn-success"><span class="am-icon-plus"></span>  添加更多</button>
 					</router-link>
 				</div>       

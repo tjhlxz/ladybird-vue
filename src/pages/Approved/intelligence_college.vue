@@ -115,6 +115,9 @@ import _global from '../../components/Global'
                 var timeend = +_this.years + 1 + date[1];
                 _this.axios.get(_global.baseUrl + 'statistics_forCollege'+'?college='+_this.staff_room_select+'&timestart=' + timestart + '&timeend=' + timeend).then(res => {
                     if(res.data.status == 200) {
+                        _this.echartsA.clear();
+                        _this.option.dataset.source = [];
+                        _this.option.series = [];
                         _this.content = res.data.data;
                         var source = [['product', _this.years+'-'+(+_this.years+1)+' 第一学期']];
 
@@ -122,12 +125,11 @@ import _global from '../../components/Global'
                             source.push([echart, (_this.content[echart].form/_this.content[echart].people).toFixed(2)]);
                         }
 
-                        var len = source.length;
+                        var len = source.length-1;
                         var data = [];
                         for(var i = 0;i<len;i++) {
                             data.push({type: 'bar', seriesLayoutBy: 'row'});
                         }
-                        console.log(data);
 
                         // var echartsA = echarts.init(document.getElementById('tpl-echarts-A'));
                             var option = {
@@ -160,7 +162,10 @@ import _global from '../../components/Global'
                 var timeend = +_this.years + 1 + date[1];
                 _this.axios.get(_global.baseUrl + 'statistics_leaveRate?timestart=' + timestart + '&timeend=' + timeend).then(res => {
                     if(res.data.status == 200) {
+                        _this.echartsA.clear();
                         _this.content = res.data.data;
+                        _this.option.dataset.source = [];
+                        _this.option.series = [];
                         var source = [['product', _this.years+'-'+(+_this.years+1)+' 第二学期']];
 
                         for(var echart in _this.content) {
@@ -172,11 +177,14 @@ import _global from '../../components/Global'
                         for(var i = 0;i<len;i++) {
                             data.push({type: 'bar', seriesLayoutBy: 'row'});
                         }
-                        console.log(data);
 
                         // var echartsA = echarts.init(document.getElementById('tpl-echarts-A'));
                             var option = {
-                                legend: {},
+                                legend: {
+                                   orient: 'vertical',
+                                   left: 'left',
+                                   data: ['文章','论坛','漏洞','微博','知乎']
+                                },
                                 tooltip: {},
                                 dataset: {
                                     source: source
@@ -184,6 +192,10 @@ import _global from '../../components/Global'
                                 xAxis: [
                                     {type: 'category', gridIndex: 0}
                                 ],
+                                axisLabel: {  
+                                   interval:0,  
+                                   rotate:40  
+                                },
                                 yAxis: [
                                     {gridIndex: 0}
                                 ],
