@@ -5,13 +5,6 @@
                     <div class="caption font-green bold">
                         <span class="am-icon-code"></span> 申请表
                     </div>
-                    <div class="tpl-portlet-input tpl-fz-ml">
-                        <div class="portlet-input input-small input-inline">
-                            <div class="input-icon right">
-                                <i class="am-icon-search"></i>
-                                <input type="text" class="form-control form-control-solid" placeholder="搜索..."> </div>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="tpl-block">

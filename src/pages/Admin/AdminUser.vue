@@ -215,7 +215,7 @@ export default {
       var _this=this;
       AMUI.dialog.confirm({
         title: '提示',
-        content: '您确定要将'+_this.teacher[index].staff_name+'设置成'+_this.teacher[index].college+'的二级学院教务科吗？将覆盖掉原来的二级教务科，请慎重！',
+        content: '您确定要将'+_this.teacher[index].staff_name+'设置成'+_this.teacher[index].college+'的二级学院教务科吗？将覆盖掉原来的二级教务科！',
         onConfirm(){
           var loading=AMUI.dialog.loading({
             title:'正在设置，请稍等'
@@ -312,10 +312,10 @@ export default {
       }
       else{
         var regex="^\\d+$";
-        if(/^[0-9]+$/.test(this.staff_id)==false||this.staff_id.length!==10){
+        if(/^[0-9]+$/.test(this.staff_id)==false){
           AMUI.dialog.alert({
             title: '提示',
-            content: '教工号为10位数字'
+            content: '教工号为纯数字'
           });
         }else{
           if(this.staff_name==''){

@@ -111,10 +111,10 @@ methods: {
           }
           else{
             var regex="^\\d+$";
-            if(/^[0-9]+$/.test(this.staff_id)==false||this.staff_id.length!==10){
+            if(/^[0-9]+$/.test(this.staff_id)==false){
               AMUI.dialog.alert({
                 title: '提示',
-                content: '教工号为10位数字'
+                content: '教工号为纯数字'
               });
             }else{
               if(this.staff_name==''){

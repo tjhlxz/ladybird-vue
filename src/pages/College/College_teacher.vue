@@ -1,15 +1,6 @@
 <template>
   <div class="tpl-content-wrapper">
             <div class="tpl-portlet-components">
-                    <div class="tpl-portlet-input tpl-fz-ml">
-                        <div class="portlet-input input-small input-inline">
-                            <div class="input-icon right">
-                                <i class="am-icon-search"></i>
-                                <input type="text" v-model="search_value" @keyup.enter="search" class="form-control form-control-solid" placeholder="按老师姓名搜索...">
-                            </div>
-                        </div>
-                    </div>
-
                       <div class="portlet-title">
                         <div class="caption font-green bold">
                           <span class="am-icon-plus"></span> 添加教师
@@ -50,11 +41,17 @@
                       </div>
                     <div class="portlet-title">
                         <div class="caption font-green bold">
-                          <span class="am-icon-code"></span> 教师列表
+                          <span class="am-icon-list"></span> 教师列表
                         </div>
-                        <div class="portlet-title">
                         <div class="caption  bold">
                           <label class="font-black">&nbsp;&nbsp;&nbsp;&nbsp;共有<label class="font-green">{{content.count}}</label>人</label>
+                        </div>
+                        <div class="tpl-portlet-input tpl-fz-ml">
+                        <div class="portlet-input input-small input-inline">
+                            <div class="input-icon right">
+                                <i class="am-icon-search"></i>
+                                <input type="text" v-model="search_value" @keyup.enter="search" class="form-control form-control-solid" placeholder="按老师姓名搜索...">
+                            </div>
                         </div>
                       </div>
                     </div>
@@ -434,10 +431,10 @@ export default {
         var staff_id = _this.staff_id;
         var staff_name = _this.staff_name;
         var staff_room_select = _this.staff_room_select;
-
-        if(!staff_id) {
+        var regex="^\\d+$";
+        if(!staff_id||/^[0-9]+$/.test(this.staff_id)==false) {
             AMUI.dialog.alert({
-              content: '请输入教工号'
+              content: '教工号为纯数字'
             });
             return false;
         }
@@ -490,6 +487,7 @@ export default {
                             }
                         })
                         _this.axios.get(_global.baseUrl + 'selectStaffroomForCollege' + '?college=' + _this.college).then(res => {
+
                               if(res.data.status==200){
                                 var staff_room = [];
                                 for(var i of res.data.data) {
