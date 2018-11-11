@@ -134,6 +134,12 @@
                 <span>一键检测</span>
               </a></router-link>
             </li>
+            <li class="tpl-left-nav-item"><router-link to='/ladybird_cms/updatepwd'>
+              <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
+                <i class="am-icon-lock"></i>
+                <span>修改密码</span>
+              </a></router-link>
+            </li>
      </ul>
    </div>
  </div>

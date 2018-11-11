@@ -3,6 +3,7 @@ import Router from 'vue-router'
 
 import Main from '@/pages/Main'
 import Home from '@/pages/Home'
+import Upatepwd from '@/pages/Upatepwd'
 import Chart from '@/pages/Chart'
 import Approving from '@/pages/Approved/Approving'
 import Approving_detail from '@/pages/Approved/Approving_detail'
@@ -180,6 +181,11 @@ const router = new Router({
           path: '/ladybird_cms/admin_check',
           name: 'AdminCheck',
           component: AdminCheck
+        },
+        {
+          path: '/ladybird_cms/updatepwd',
+          name: 'Upatepwd',
+          component: Upatepwd
         }
       ]
     },
