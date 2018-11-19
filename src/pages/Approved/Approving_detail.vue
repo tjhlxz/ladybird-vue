@@ -226,7 +226,7 @@ export default {
                           title: ' ',
                           content: '上传成功',
                           onConfirm: function() { console.log('close');
-                            }
+                          }
                         });
                     }
                 });
