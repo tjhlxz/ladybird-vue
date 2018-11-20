@@ -13,7 +13,7 @@
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
                                     <button type="button" @click="back" class="am-btn am-btn-default am-btn-secondary"><span class="am-icon-undo"></span> 返回</button>
-                                    <button style="margin-left: 12px;" type="button" @click="change" class="am-btn am-btn-success am-btn-secondary"><span class="am-icon-undo"></span> 修改</button>
+                                    <button style="margin-left: 12px;" type="button" @click="change" class="am-btn am-btn-success am-btn-secondary"><span class="am-icon-check"></span> 确认修改</button>
                                 </div>
                             </div>
                         </div>
