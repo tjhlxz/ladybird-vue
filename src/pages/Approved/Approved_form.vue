@@ -17,7 +17,7 @@
                               <label>按学院查询:</label>
                               <select v-model="teacher_college" @change="select">
                                <option v-for="(item,index) in college" :value="item.college" name="teacher_college">{{item.college}}</option>
-                            </select>
+                              </select>
                             </div>
                             <form @submit.prevent="searchByname">
                             <div class="caption" style="margin-left:300px;">
@@ -128,9 +128,9 @@ mounted() {
     var loading=AMUI.dialog.loading({
             title:'正在加载，请稍等'
         });
-    this.axios.get(_global.baseUrl + 'allCollege').then(res => {
+    _this.axios.get(_global.baseUrl + 'allCollege').then(res => {
         if(res.status==200){
-          this.college = res.data.data;
+          _this.college = res.data.data;
       }else{
           AMUI.dialog.alert({
             content: res.data.message
@@ -405,7 +405,6 @@ select: function(e) {
 
         }else {
             var bef = [];
-
             bef.push(arr);
             _this.before = bef[0];
         }

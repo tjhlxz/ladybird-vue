@@ -26,7 +26,7 @@
                                         <button style="position: absolute;top: 0px;left: 500px;" type="button" @click="seach_app" class="am-btn am-btn-default am-btn-success">查询</button>
             
 
-                    <div class="tpl-echarts" id="tpl-echarts-A" style="width: 800px;height: 600px;margin-top: 40px;">
+                    <div class="tpl-echarts" id="tpl-echarts-A" style="width: 800px;height: 400px;margin-top: 40px;">
                     </div>
                 </div>
                 </div>
@@ -57,7 +57,10 @@ import _global from '../../components/Global'
         _this.college = JSON.parse(sessionStorage.getItem("data")).college;
         _this.echartsA = echarts.init(document.getElementById('tpl-echarts-A'));
            var option = {
-            legend: {},
+                legend: {
+                    type: 'scroll',
+                    bottom: 20
+                },
                 tooltip: {},
                 dataset: {
                     source: [
@@ -94,17 +97,7 @@ import _global from '../../components/Global'
     },
     methods: {
         select_click: function(e) {
-            // var _this = this;
-            // _this.axios.get(_global.baseUrl + 'allCollege').then(res => {
-            //   if(res.data.status==200){
-            //     var staff_room = [];
-            //     for(var i of res.data.data) {
-            //         staff_room.push(i.college);
-            //     }
-            //     _this.staff_room = staff_room;
-            //     // _this.staff_room = res.data.data;
-            //   }
-            // })
+
         },
         seach_app: function() {
             var _this = this;
@@ -133,7 +126,10 @@ import _global from '../../components/Global'
 
                         // var echartsA = echarts.init(document.getElementById('tpl-echarts-A'));
                             var option = {
-                                legend: {},
+                                legend: {
+                                    type: 'scroll',
+                                    bottom: 20
+                                },
                                 tooltip: {},
                                 dataset: {
                                     source: source
@@ -142,7 +138,7 @@ import _global from '../../components/Global'
                                     {type: 'category', gridIndex: 0}
                                 ],
                                 yAxis: [
-                                    {gridIndex: 0}
+                                    {type: 'value', name:'请假率', gridIndex: 0}
                                 ],
                                 grid: [
                                     {bottom: '25%'}
@@ -181,9 +177,8 @@ import _global from '../../components/Global'
                         // var echartsA = echarts.init(document.getElementById('tpl-echarts-A'));
                             var option = {
                                 legend: {
-                                   orient: 'vertical',
-                                   left: 'left',
-                                   data: ['文章','论坛','漏洞','微博','知乎']
+                                   type: 'scroll',
+                                   bottom: 20
                                 },
                                 tooltip: {},
                                 dataset: {
@@ -197,7 +192,7 @@ import _global from '../../components/Global'
                                    rotate:40  
                                 },
                                 yAxis: [
-                                    {gridIndex: 0}
+                                    {type: 'value', name:'请假率', gridIndex: 0}
                                 ],
                                 grid: [
                                     {bottom: '25%'}
@@ -207,7 +202,6 @@ import _global from '../../components/Global'
                         _this.option = option;
                         _this.echartsA.setOption(option);
                     }else {
-
                     }
                 })
             }

@@ -24,7 +24,7 @@
                         <center><div class="heikeji">黑龙江科技大学</div></center>
                         <center><div class="form">课程表变更审批表</div></center>
                         <center>
-                            <div style="margin-right:350px;">申请时间：{{content.create_time}}</div>
+                            <div style="margin-right:350px;">{{content.school_term}}</div>
                             <div class="kuang" style="border: 1pt solid #000;">
                                 <div class="row num1">
                                     <div class="number1">单&nbsp;位</div>
@@ -78,7 +78,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="number1 num3">原&nbsp;&nbsp;因</div>
-                                    <div style="padding:5px 8px;width:16.4cm;text-align: left;font-size: 14pt;">{{content.form_reason}}</div>
+                                    <div style="padding:3px 8px;width:16.4cm;text-align:left;line-height:16pt;font-size: 14pt;">{{content.form_reason}}</div>
                                 </div>
                                 <div class="row number3">
                                         <div class="number2">教研室意见</div>
