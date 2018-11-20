@@ -13,6 +13,7 @@
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
                                     <button type="button" @click="back" class="am-btn am-btn-default am-btn-secondary"><span class="am-icon-undo"></span> 返回</button>
+                                    <button style="margin-left: 12px;" type="button" @click="change" class="am-btn am-btn-success am-btn-secondary"><span class="am-icon-undo"></span> 修改</button>
                                 </div>
                             </div>
                         </div>
@@ -55,45 +56,74 @@
                                         <input type="text" class="am-form-field tpl-form-no-bg" v-model="content.form_course" disabled/>
                                     </div>
                                 </div>
+
+                                <div class="am-form-group">
+                                    <label for="user-email" class="am-u-sm-3 am-form-label">代课老师 <span class="tpl-form-line-small-title">teacher</span></label>
+                                    <div class="am-u-sm-9">
+                                        <input type="text" class="am-form-field tpl-form-no-bg" v-model="content.form_teacher" />
+                                    </div>
+                                </div>
+
+                                <div class="am-form-group">
+                                    <label for="user-email" class="am-u-sm-3 am-form-label">地点 <span class="tpl-form-line-small-title">place</span></label>
+                                    <div class="am-u-sm-9">
+                                        <input type="text" class="am-form-field tpl-form-no-bg" v-model="content.form_place" />
+                                    </div>
+                                </div>
                                 
                                 <div v-if="content.form_type-1">
                                     <div class="am-form-group">
                                         <label for="user-email" class="am-u-sm-3 am-form-label">调整前 <span class="tpl-form-line-small-title">before</span></label>
                                         <div class="am-u-sm-9">
-                                            <input type="text" class="am-form-field tpl-form-no-bg" v-model="content.form_before_adjust" disabled/>
+                                            <input type="text" class="am-form-field tpl-form-no-bg" v-model="content.form_before_adjust" />
                                         </div>
                                     </div>
 
                                     <div class="am-form-group">
                                         <label for="user-email" class="am-u-sm-3 am-form-label">调整后 <span class="tpl-form-line-small-title">later</span></label>
                                         <div class="am-u-sm-9">
-                                            <input type="text" class="am-form-field tpl-form-no-bg" v-model="content.form_later_adjust" disabled/>
+                                            <input type="text" class="am-form-field tpl-form-no-bg" v-model="content.form_later_adjust" />
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="am-form-group">
+                                    <label for="user-intro" class="am-u-sm-3 am-form-label">申请内容</label>
+                                    <div class="am-u-sm-9">
+                                        <textarea class="" rows="10" id="user-intro" v-model="content.form_reason" style="background-color: #fff"></textarea>
+                                    </div>
+                                </div>
+
+                                <div v-if="content.form_type==1">
+                                    <div class="am-form-group">
+                                        <label for="user-weibo" class="am-u-sm-3 am-form-label">附件 <span class="tpl-form-line-small-title">attachment</span></label>
+                                        <div class="am-u-sm-9">
+                                            <div class="am-form-group am-form-file">
+                                                <button type="button" class="am-btn am-btn-danger am-btn-sm">
+                                                    <i class="am-icon-cloud-upload"></i> 上传附件</button>
+                                                <input @change="subFile" id="doc-form-file" type="file" >
+                                            </div>
+                                        </div>
+                                    </div>
 
                                     <div class="am-form-group">
-                                        <label for="user-intro" class="am-u-sm-3 am-form-label">申请内容</label>
-                                        <div class="am-u-sm-9">
-                                            <textarea class="" rows="10" id="user-intro" v-model="content.form_reason" readonly style="background-color: #fff"></textarea>
-                                        </div>
-                                    </div>
-
-                                <div class="am-form-group">
-                                    <label for="user-weibo" class="am-u-sm-3 am-form-label">附件 <span class="tpl-form-line-small-title">attachment</span></label>
-                                    <div class="am-u-sm-9">
-                                        <div class="am-form-group am-form-file">
-                                            <button type="button" class="am-btn am-btn-danger am-btn-sm">
-    <i class="am-icon-cloud-upload"></i> 上传附件</button>
-                                            <input @change="subFile" id="doc-form-file" type="file" >
+                                        <div class="am-u-sm-9 am-u-sm-push-3">
+                                            <button type="button" @click="subForm" class="am-btn am-btn-primary tpl-btn-bg-color-success " data-am-modal="{target: '#your-modal'}">提交并通知 </button>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="am-form-group">
-                                    <div class="am-u-sm-9 am-u-sm-push-3">
-                                        <button type="button" @click="subForm" class="am-btn am-btn-primary tpl-btn-bg-color-success " data-am-modal="{target: '#your-modal'}">提交并通知 </button>
+                                <div class="am-modal am-modal-prompt" tabindex="-1" id="my-prompt">
+                                  <div class="am-modal-dialog">
+                                    <div class="am-modal-hd">修改审批表</div>
+                                    <div class="am-modal-bd">
+                                      确认要修改审批表么？
                                     </div>
+                                    <div class="am-modal-footer">
+                                      <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+                                      <span class="am-modal-btn" data-am-modal-confirm>确认</span>
+                                    </div>
+                                  </div>
                                 </div>
                             </div>
                         </div>
@@ -166,7 +196,9 @@ export default {
         content: '',
         fileName: '',
         message: '',
-        loading: false
+        loading: false,
+        lock: false,
+        disabled: 'disabled'
     }
   },
   mounted() {
@@ -181,57 +213,83 @@ export default {
   methods: {
     subFile: function(e) {
         var _this = this;
-
-        var file = e.target.files[0];
-        var et = '.' + file.name.split('.')[1];
-        var timestamp = new Date().getTime();
-        var fileName = timestamp + et;
-        _this.fileName = fileName;
+        var _id = _this.content.form_proposer_id;
+        _this.axios.get(_global.baseUrl + 'edu_check' + '?staff_id=' + _id).then(res=> {
+            if(res.data.status == 200) {
+                var file = e.target.files[0];
+                var et = '.' + file.name.split('.')[1];
+                var timestamp = new Date().getTime();
+                var fileName = timestamp + et;
+                _this.fileName = fileName;
         
-        if (file) {
-            if (file.size > 1024 * 1024) {
-                cos.sliceUploadFile({
-                    Bucket: config.Bucket, // Bucket 格式：test-1250000000
-                    Region: config.Region,
-                    Key: fileName,
-                    Body: file,
-                    TaskReady: function (tid) {
-                        TaskId = tid;
-                    },
-                    onHashProgress: function (progressData) {
-                        logger.log('onHashProgress', JSON.stringify(progressData));
-                    },
-                    onProgress: function (progressData) {
-                        logger.log('onProgress', JSON.stringify(progressData));
-                    },
-                }, function (err, data) {
-                    logger.log(err || data);
-                });
-            } else {
-                cos.putObject({
-                    Bucket: config.Bucket, // Bucket 格式：test-1250000000
-                    Region: config.Region,
-                    Key: fileName,
-                    Body: file,
-                    TaskReady: function (tid) {
-                        TaskId = tid;
-                    },
-                    onProgress: function (progressData) {
-                        logger.log(JSON.stringify(progressData));
-                    },
-                }, function (err, data) {
-                    logger.log(err || data);
-                    if(!err) {
-                        AMUI.dialog.alert({
-                          title: ' ',
-                          content: '上传成功',
-                          onConfirm: function() { console.log('close');
+                if (file) {
+                    if (file.size > 1024 * 1024) {
+                        cos.sliceUploadFile({
+                            Bucket: config.Bucket, // Bucket 格式：test-1250000000
+                            Region: config.Region,
+                            Key: fileName,
+                            Body: file,
+                            TaskReady: function (tid) {
+                                TaskId = tid;
+                            },
+                            onHashProgress: function (progressData) {
+                                logger.log('onHashProgress', JSON.stringify(progressData));
+                            },
+                            onProgress: function (progressData) {
+                                logger.log('onProgress', JSON.stringify(progressData));
+                            },
+                        }, function (err, data) {
+                            logger.log(err || data);
+                        });
+                    } else {
+                        cos.putObject({
+                            Bucket: config.Bucket, // Bucket 格式：test-1250000000
+                            Region: config.Region,
+                            Key: fileName,
+                            Body: file,
+                            TaskReady: function (tid) {
+                                TaskId = tid;
+                            },
+                            onProgress: function (progressData) {
+                                logger.log(JSON.stringify(progressData));
+                            },
+                        }, function (err, data) {
+                            logger.log(err || data);
+                            if(!err) {
+                                AMUI.dialog.alert({
+                                  title: ' ',
+                                  content: '上传成功',
+                                  onConfirm: function() { 
+                                    console.log('close');
+                                  }
+                                });
+                            }else {
+                                console.log(err);
+                                _this.fileName = '';
+                                AMUI.dialog.alert({
+                                  title: ' ',
+                                  content: '上传失败，请重试',
+                                  onConfirm: function() {
+                                    console.log('close');
+                                  }
+                                });
                             }
                         });
                     }
-                });
-            }
+                }
+        }else {
+            _this.message = res.data.message;
+            AMUI.dialog.alert({
+              title: ' ',
+              content: _this.message
+            });
         }
+    })
+
+        
+
+        
+        
     },
     subForm: function() {
         var _this = this;
@@ -240,7 +298,6 @@ export default {
             _this.axios.get(_global.baseUrl + 'sub_attachment?form_id=' + _this.$route.query.id + '&atta_name='+_this.fileName).then(body => {
 
             if(body.data.status == 200) {
-
                 _this.axios.get(_global.baseUrl + 'last_relayForChangeCourse?form_id=' + _this.$route.query.id).then(body => {
                 if(body.data.status == 200) {
                     _this.message = body.data.message;
@@ -249,6 +306,7 @@ export default {
                       title: ' ',
                       content: _this.message
                     });
+                    _this.$router.go(-1);
                 } else {
                     _this.message = body.data.message;
                     $loading.modal('close');
@@ -275,11 +333,32 @@ export default {
               title: ' ',
               content: '请上传附件'
             });
-}
+        }
     },
     back: function() {
         this.$router.go(-1);
+    },
+    change: function() {
+        var _this = this;
+        $('#my-prompt').modal({
+          relatedTarget: this,
+          onConfirm: function(e) {
+            var params = new URLSearchParams();
+            params.append('form_id', _this.content.form_id);
+            params.append('form_before_adjust', _this.content.form_before_adjust||'');
+            params.append('form_later_adjust', _this.content.form_later_adjust||'');
+            params.append('form_teacher', _this.content.form_teacher||'');
+            params.append('form_place', _this.content.form_place||'');
+            params.append('form_reason', _this.content.form_reason||'');
+            _this.axios.post(_global.baseUrl + 'revise_form_data', params).then(res=> {
+                _this.message = res.data.message;
+                AMUI.dialog.alert({
+                  content: _this.message
+                })
+            })
+          }
+        })
     }
-  }
+}
 };
 </script>
