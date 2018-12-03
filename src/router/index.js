@@ -26,6 +26,7 @@ import College_room from '@/pages/College/College_room'
 import College_staff from '@/pages/College/College_staff'
 import College_form from '@/pages/College/College_form'
 import College_form_detail from '@/pages/College/College_form_detail'
+import College_intelligence from '@/pages/College/College_intelligence'
 
 import AdminUser from '@/pages/Admin/AdminUser'
 import AdminCollege from '@/pages/Admin/AdminCollege'
@@ -156,6 +157,11 @@ const router = new Router({
           path: '/ladybird_cms/college-form-detail',
           name: 'College_form_detail',
           component: College_form_detail
+        },
+        {
+          path: '/ladybird_cms/college-intelligence',
+          name: 'College_intelligence',
+          component: College_intelligence
         },
         {
           path: '/ladybird_cms/admin_user',

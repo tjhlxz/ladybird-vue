@@ -17,12 +17,6 @@
                             <option value="-02-01,-08-01" name="date">第二学期</option>
                           </select>
                         </div>
-
-                          <div style="position: absolute;top:5px;left:385px;width: 100px;">
-                              <select data-am-selected="{maxHeight: 200}" @click="select_click" v-model="staff_room_select" class="am-input-sm data-am-selected">
-                                <option v-for="(room, index) in staff_room" :value="staff_room[index]" name="staff_room_select">{{room}}</option>
-                              </select>
-                          </div>
                                         <button style="position: absolute;top: 0px;left: 500px;" type="button" @click="seach_app" class="am-btn am-btn-default am-btn-success">查询</button>
 
                     <div class="tpl-echarts" id="tpl-echarts-A" style="width: 800px;height: 400px;margin-top: 40px;">
@@ -82,16 +76,7 @@ import _global from '../../components/Global'
         };
             _this.option = option;
             _this.echartsA.setOption(option);
-
-            _this.axios.get(_global.baseUrl + 'allCollege').then(res => {
-              if(res.data.status==200){
-                var staff_room = [];
-                for(var i of res.data.data) {
-                    staff_room.push(i.college);
-                }
-                _this.staff_room = staff_room;
-              }
-            })
+            _this.college = JSON.parse(sessionStorage.getItem("data")).college;
     },
     methods: {
         select_click: function(e) {
@@ -104,7 +89,7 @@ import _global from '../../components/Global'
                 //-08-01,-02-01
                 var timestart = _this.years + date[0];
                 var timeend = +_this.years + 1 + date[1];
-                _this.axios.get(_global.baseUrl + 'statistics_forCollege'+'?college='+_this.staff_room_select+'&timestart=' + timestart + '&timeend=' + timeend).then(res => {
+                _this.axios.get(_global.baseUrl + 'statistics_forCollege'+'?college='+_this.college+'&timestart=' + timestart + '&timeend=' + timeend).then(res => {
                     if(res.data.status == 200) {
                         _this.echartsA.clear();
                         _this.option.dataset.source = [];
@@ -122,7 +107,6 @@ import _global from '../../components/Global'
                             data.push({type: 'bar', seriesLayoutBy: 'row'});
                         }
 
-                        // var echartsA = echarts.init(document.getElementById('tpl-echarts-A'));
                             var option = {
                                 legend: {
                                     type: 'scroll',
@@ -154,7 +138,7 @@ import _global from '../../components/Global'
                 //-02-01,-08-01
                 var timestart = +_this.years + 1 + date[0];
                 var timeend = +_this.years + 1 + date[1];
-                _this.axios.get(_global.baseUrl + 'statistics_forCollege'+'?college='+_this.staff_room_select+'&timestart=' + timestart + '&timeend=' + timeend).then(res => {
+                _this.axios.get(_global.baseUrl + 'statistics_forCollege'+'?college='+_this.college+'&timestart=' + timestart + '&timeend=' + timeend).then(res => {
                     if(res.data.status == 200) {
                         _this.echartsA.clear();
                         _this.content = res.data.data;

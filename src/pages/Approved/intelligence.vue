@@ -29,7 +29,8 @@
                             <td>{{item.college}}</td>
                             <td>{{item.people}}</td>
                             <td>{{item.form}}</td>
-                            <td>{{item.form/item.people*100+'%'}}</td>
+                            <!-- <td>{{item.form/item.people*100+'%'}}</td> -->
+                            <td>{{item | fixed}}</td>
                         </tr>
                     </table>
                                    
@@ -117,6 +118,14 @@ import _global from '../../components/Global'
             });
           }
         })
+    },
+    filters: {
+        fixed: function(data) {
+            let form = Number(data.form);
+            let people = Number(data.people)||1;
+            let value = (form/people*100).toFixed(2)+'%';
+            return value;
+        }
     },
     methods: {
         seach_app: function() {

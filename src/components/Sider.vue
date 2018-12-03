@@ -103,6 +103,12 @@
                 <span>审批表查询</span>
               </a></router-link>
             </li>
+            <li class="tpl-left-nav-item" v-if="content.staff_level==7"><router-link to='/ladybird_cms/college-intelligence'>
+              <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
+                <i class="am-icon-table"></i>
+                <span>教研室请假率</span>
+              </a></router-link>
+            </li>
             <!-- =====超级管理员========================================== -->
             <li class="tpl-left-nav-item" v-if="content.staff_level==8"><router-link to='/ladybird_cms/admin_college'>
               <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
